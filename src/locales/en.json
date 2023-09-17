@@ -1,0 +1,375 @@
+{
+  "common": {
+    "previous": "Previous",
+    "next": "Next",
+    "yes": "Yes",
+    "no": "No",
+    "modals": {
+      "logout": {
+        "title": "Logging out",
+        "question": "Are you sure you want to disconnect?"
+      }
+    },
+    "breadcrumb": {
+      "dashboard": "Dashboard",
+      "buttons": {
+        "manage-products": "Products management",
+        "add-product": "Add new product",
+        "list-clients": "Customer list",
+        "list-transactions": "Transactions list",
+        "add-coupon": "Add new coupon"
+      }
+    }
+  },
+  "notifications": {
+    "coupons": {
+      "error-empty-form": "Please fill in all fields",
+      "create": {
+        "success": "Coupon created successfully",
+        "error": "Error creating coupon"
+      },
+      "update": {
+        "success": "Coupon updated successfully",
+        "error": "Error updating coupon"
+      },
+      "delete": {
+        "success": "Coupon '[coupon]' deleted successfully",
+        "error": "Error deleting coupon. Please try again later"
+      },
+      "suspend": {
+        "success": "Coupon '[coupon]' suspended successfully",
+        "error": "Error suspending coupon. Please try again later"
+      },
+      "unsuspend": {
+        "success": "Coupon '[coupon]' actived successfully",
+        "error": "Error unsuspend coupon. Please try again later"
+      }
+    },
+    "products": {
+      "error-empty-form": "Please fill in all fields",
+      "create": {
+        "success": "Product created successfully",
+        "error": "Error creating product"
+      },
+      "update": {
+        "success": "Product updated successfully",
+        "error": "Error updating product"
+      },
+      "delete": {
+        "success": "Product '[product]' deleted successfully",
+        "error": "Error deleting product. Please try again later"
+      },
+      "suspend": {
+        "success": "Product '[product]' suspended successfully",
+        "error": "Error suspending product. Please try again later"
+      },
+      "unsuspend": {
+        "success": "Product '[product]' actived successfully",
+        "error": "Error unsuspend product. Please try again later"
+      }
+    },
+    "contacts": {
+      "error-empty-form": "Please fill in all fields",
+      "respond": {
+        "success": "Message added successfully",
+        "error": "Error while adding response. Please try again later"
+      },
+      "read": {
+        "success": "message marked as read successfully",
+        "error": "Error while reading the message. Please try again later"
+      }
+    }
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "cycles": "Cycles",
+    "tournois": "Tournois",
+    "seances": "Séances",
+    "finances": "Finances",
+    "inscription": "Inscription",
+    "fond-de-caisse": "Fond de caisse",
+    "cotisations": "Cotisations",
+    "solde-du-compte": "Solde du compte",
+    "membres": "Membres",
+    "administration": "Administration",
+    "sanctions": "Sanctions",
+    "communication": "Communication",
+    "mailing": "Mailing",
+    "sms": "SMS",
+    "promotions": "Promotions",
+    "categories": "Categories",
+    "logout": "Logout",
+    "utilisateurs":"Users",
+    "profils":"Profiles",
+    "type-cotisation":"Type cotisation"
+  },
+  "orders": {
+    "empty": "No orders found"
+  },
+  "transactions": {
+    "properties": {
+      "article": "Product / Service",
+      "code": "Code",
+      "date": "Date",
+      "payment-method": "Payment method",
+      "status": "Status",
+      "actions": "Actions",
+      "amount": "Amount",
+      "ref": "Ref.",
+      "reason": "Reason",
+      "client": "Client",
+      "balance": "Balance",
+      "fees": "Fees"
+    },
+    "status": {
+      "processing": "Processing",
+      "canceled": "Canceled",
+      "completed": "Completed"
+    },
+    "actions": {
+      "view": "See more details",
+      "payment-details": "Payment details",
+      "cancel-payment": "Cancel payment",
+      "cancel": "Cancel order",
+      "deliver": "Deliver the order"
+    },
+    "empty": "No transactions found"
+  },
+  "home_page": {
+    "account": {
+      "balance": "Balance",
+      "blocked-balance": "Blocked balance",
+      "cash-out": "Cash Out",
+      "balance-movements": "Balance movements",
+      "show-transactions": "Show transactions"
+    },
+    "links": {
+      "new-product": "New product",
+      "new-bill-link": "New bill link",
+      "new-promo-campaign": "New promo campaign",
+      "new-ad-campaign": "New Ad campaign"
+    },
+    "kpi": {
+      "total-orders": "Orders this week",
+      "turnover": "Turnover",
+      "new-clients": "New customers",
+      "total-visits": "Total page visits"
+    },
+    "recent-transactions": {
+      "title": "Recent Transactions"
+    },
+    "submission": {
+      "submit-your-page": "SUBMIT YOUR PAGE FOR VALIDATION",
+      "you-can-submit": "By creating your products or services you can publish your page and get your domain name.",
+      "submit-now": "SUBMIT NOW"
+    }
+  },
+  "transactions_page": {
+    "title": "Transaction list",
+    "description": "Here you can view and manage all transactions (orders, purchases) made on your Business Page."
+  },
+  "transactions_pending_page": {
+    "title": "List of pending transactions",
+    "description": "Here you can view all transactions (orders, purchases) pending on your Business Page."
+  },
+  "clients_page": {
+    "title": "Customer list",
+    "description": "Here you can view and manage all customers who have made transactions on your Business Page.",
+    "empty": "No clients found",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone number",
+      "email": "Email Address",
+      "location": "Location"
+    }
+  },
+  "contacts_page": {
+    "title": "Contacts & Messages",
+    "description": "Here you can view and manage all messages sent by your customers via the contact form on your Business Page.",
+    "read": "Read",
+    "unread": "Unread",
+    "mark-as-read": "Mark as read",
+    "show-message": "Show message",
+    "add-response": "Add a response",
+    "empty": "No contact messages found",
+    "fields": {
+      "name": "Name",
+      "phone": "Phone",
+      "email": "Email Address",
+      "location": "Location",
+      "status": "Status",
+      "response": "Response",
+      "actions": "Actions"
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "yes": "Yes",
+          "no": "No",
+          "send": "Send",
+          "cancel": "Cancel"
+        }
+      },
+      "respond": {
+        "title": "Reply to the message",
+        "label": "Your response :",
+        "placeholder": "Write your message here..."
+      }
+    }
+  },
+  "products_page": {
+    "title": "Product List",
+    "description": "Please list your products and services on your Business Page to inform visitors of your product offerings.",
+    "click-to-show": "Click on a product to display it here",
+    "empty": "No products found",
+    "create-product": "Create a product",
+    "suspended-label": "Suspended",
+    "active-label": "Active",
+    "common": {
+      "description": "Description",
+      "category": "Category",
+      "price": "Price",
+      "edit": "Edit the product",
+      "suspend": "Suspend product",
+      "unsuspend": "Unsuspend Product",
+      "delete": "Delete product",
+      "status": "Status"
+    },
+    "forms": {
+      "common": {
+        "fields": {
+          "name": "Product name",
+          "category": "Category",
+          "image": "Product image",
+          "price": { "title": "Unit Price", "placeholder": "Price" },
+          "description": {
+            "title": "Product description",
+            "placeholder": "Enter a short description of your product..."
+          },
+          "type": {
+            "title": "Type of Product",
+            "options": {
+              "service": "Service",
+              "product": "Deliverable product"
+            }
+          },
+          "purchase-method": {
+            "title": "How to buy",
+            "options": {
+              "direct": "Direct Order",
+              "cart": "Shopping cart purchase"
+            }
+          }
+        },
+        "actions": {
+          "save": "Save the product",
+          "close": "Close"
+        }
+      },
+      "add-product": {
+        "title": "Adding a product / service"
+      },
+      "edit-product": {
+        "title": "Updating the product / service"
+      }
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "yes": "Yes",
+          "no": "No"
+        }
+      },
+      "delete": {
+        "title": "Delete product",
+        "question": "Are you sure you want to delete the product",
+        "note": "This action cannot be undone. Instead of deleting the product, you can suspend it."
+      },
+      "suspend": {
+        "title": "Suspend product",
+        "question": "Are you sure you want to suspend the product",
+        "note": "You can unsuspend the product at any time."
+      },
+      "unsuspend": {
+        "title": "Unsuspend product",
+        "question": "Are you sure you want to unsuspend the product",
+        "note": "The product will be visible to your customers. You can suspend at any time."
+      }
+    }
+  },
+  "coupons_page": {
+    "title": "Coupon List",
+    "description": "You can offer discounts to your customers by offering them coupons.",
+    "click-to-show": "Click on a coupon to display it here",
+    "empty": "No coupons found",
+    "create-product": "Create a coupon",
+    "suspended-label": "Suspended",
+    "active-label": "Active",
+    "common": {
+      "coupons-count": "Number of coupons",
+      "required-spend": "Required spend",
+      "current-spend": "Current spend",
+      "uses-count": "Number of times used",
+      "amount": "Amount",
+      "validity": "Validity",
+      "edit": "Edit the coupon",
+      "suspend": "Deactivate the coupon",
+      "unsuspend": "Activate the coupon",
+      "delete": "Delete coupon",
+      "status": "Status"
+    },
+    "forms": {
+      "common": {
+        "fields": {
+          "code": "Coupon code",
+          "amount": "Amount of coupon",
+          "quantity": "Quantity",
+          "start-date": "Start date",
+          "end-date": "End date"
+        },
+        "actions": {
+          "save": "Save the coupon",
+          "close": "Close"
+        },
+        "feedbacks": {
+          "code": {
+            "taken": "This code is already taken",
+            "available": "This code is available"
+          },
+          "total-amount": "This coupon will make you spend",
+          "end-date": "You must first choose a start date"
+        }
+      },
+      "add-coupon": {
+        "title": "Creating a new Coupon"
+      },
+      "edit-coupon": {
+        "title": "Update of coupon"
+      }
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "yes": "Yes",
+          "no": "No"
+        }
+      },
+      "delete": {
+        "title": "Delete coupon",
+        "question": "Are you sure you want to delete the coupon",
+        "note": "This action cannot be undone. Instead of deleting the coupon, you can suspend it."
+      },
+      "suspend": {
+        "title": "Suspend coupon",
+        "question": "Are you sure you want to suspend the coupon",
+        "note": "You can unsuspend the coupon at any time."
+      },
+      "unsuspend": {
+        "title": "Unsuspend coupon",
+        "question": "Are you sure you want to unsuspend the coupon",
+        "note": "The coupon will be visible to your customers. You can suspend at any time."
+      }
+    }
+  },
+  "footer": {}
+}

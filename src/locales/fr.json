@@ -1,0 +1,376 @@
+{
+  "common": {
+    "previous": "Précédent",
+    "next": "Suivant",
+    "yes": "Oui",
+    "no": "Non",
+    "modals": {
+      "logout": {
+        "title": "Se Déconnecter",
+        "question": "Êtes-vous sûr de vouloir vous déconnecter ?"
+      }
+    },
+    "breadcrumb": {
+      "dashboard": "Dashboard",
+      "buttons": {
+        "manage-products": "Gestion des produits",
+        "add-product": "Ajouter un produit",
+        "list-clients": "Liste des clients",
+        "list-transactions": "Liste des transactions",
+        "add-coupon": "Ajouter un coupon"
+      }
+    }
+  },
+  "notifications": {
+    "coupons": {
+      "error-empty-form": "veuillez remplir tous les champs",
+      "create": {
+        "success": "Le coupon a été créé",
+        "error": "Erreur lors de la création du coupon"
+      },
+      "update": {
+        "success": "Coupon mis à jour",
+        "error": "Erreur lors de la mise à jour du coupon"
+      },
+      "delete": {
+        "success": "Le coupon '[coupon]' a été supprimé",
+        "error": "Erreur lors de la suppression du coupon. Veuillez réessayer"
+      },
+      "suspend": {
+        "success": "Le coupon '[coupon]' a été suspendu",
+        "error": "Erreur lors de la suspension du coupon. Veuillez réessayer"
+      },
+      "unsuspend": {
+        "success": "Le coupon '[coupon]' a été réactivé",
+        "error": "Erreur lors de la réactivation du coupon. Veuillez réessayer"
+      }
+    },
+    "products": {
+      "error-empty-form": "veuillez remplir tous les champs",
+      "create": {
+        "success": "Le produit a été créé",
+        "error": "Erreur lors de la création du produit"
+      },
+      "update": {
+        "success": "Produit mis à jour",
+        "error": "Erreur lors de la mise à jour du produit"
+      },
+      "delete": {
+        "success": "Le produit '[product]' a été supprimé",
+        "error": "Erreur lors de la suppression du produit. Veuillez réessayer"
+      },
+      "suspend": {
+        "success": "Le produit '[product]' a été suspendu",
+        "error": "Erreur lors de la suspension du produit. Veuillez réessayer"
+      },
+      "unsuspend": {
+        "success": "Le produit '[product]' a été réactivé",
+        "error": "Erreur lors de la réactivation du produit. Veuillez réessayer"
+      }
+    },
+    "contacts": {
+      "error-empty-form": "Please fill in all fields",
+      "respond": {
+        "success": "Message envoyé",
+        "error": "Erreur lors de l'envoie du message. Veuillez réessayer plus tart"
+      },
+      "read": {
+        "success": "Le message a été marqué comme lu",
+        "error": "Erreur lors de la lecture du message. Veuillez réessayer plus tart"
+      }
+    }
+  },
+  "navbar": {
+    "dashboard": "Dashboard",
+    "cycles": "Cycles",
+    "tournois": "Tournois",
+    "seances": "Séances",
+    "finances": "Finances",
+    "inscription": "Inscription",
+    "fond-de-caisse": "Fond de caisse",
+    "cotisations": "Cotisations",
+    "solde-du-compte": "Solde du compte",
+    "membres": "Membres",
+    "administration": "Administration",
+    "sanctions": "Sanctions",
+    "communication": "Communication",
+    "mailing": "Mailing",
+    "sms": "SMS",
+    "promotions": "Promotions",
+    "categories": "Gestion des catégories",
+    "logout": "Déconnexion",
+    "utilisateurs":"Utilisateurs",
+    "profils":"Profils",
+    "type-cotisation":"Type de cotisation"
+
+  },
+  "orders": {
+    "empty": "Aucune commande trouvée"
+  },
+  "transactions": {
+    "properties": {
+      "article": "Article / Service",
+      "code": "Code",
+      "date": "Date",
+      "payment-method": "Mode de paiement",
+      "status": "Statut",
+      "actions": "Actions",
+      "amount": "Montant",
+      "ref": "Ref.",
+      "reason": "Motif",
+      "client": "Client",
+      "balance": "Solde",
+      "fees": "Frais"
+    },
+    "status": {
+      "processing": "En cours",
+      "canceled": "Annulé",
+      "completed": "Terminé"
+    },
+    "actions": {
+      "view": "Voir les détails",
+      "payment-details": "Détail du paiement",
+      "cancel-payment": "Annuler le paiement",
+      "cancel": "Annuler la commande",
+      "deliver": "Livrer la commande"
+    },
+    "empty": "Aucune transaction trouvée"
+  },
+  "home_page": {
+    "account": {
+      "balance": "Solde",
+      "blocked-balance": "Solde temporaire",
+      "cash-out": "Retrait d'argent",
+      "balance-movements": "Mouvements du solde",
+      "show-transactions": "Afficher les transactions"
+    },
+    "links": {
+      "new-product": "Nouveau produit",
+      "new-bill-link": "Lien de Paiement",
+      "new-promo-campaign": "Campagne de promo",
+      "new-ad-campaign": "Campagne publicitaire"
+    },
+    "kpi": {
+      "total-orders": "Commandes cette semaine",
+      "turnover": "Chiffre d'affaires",
+      "new-clients": "Nouveaux clients",
+      "total-visits": "Visites sur la page"
+    },
+    "recent-transactions": {
+      "title": "Transactions Récentes"
+    },
+    "submission": {
+      "submit-your-page": "SOUMETTEZ VOTRE PAGE POUR VALIDATION",
+      "you-can-submit": "En créant vos produits ou services vous pouvez publier votre page et obtenir votre nom de domaine.",
+      "submit-now": "SOUMETTRE MAINTENANT"
+    }
+  },
+  "transactions_page": {
+    "title": "Liste de transactions",
+    "description": "Vous pouvez ici consulter et gérer toutes les transactions (commandes, achats) effectuées sur votre Business Page. "
+  },
+  "transactions_pending_page": {
+    "title": "Liste de transactions en cours",
+    "description": "Vous pouvez ici consulter toutes les transactions (commandes, achats) en attente de validation sur votre Business Page. "
+  },
+  "clients_page": {
+    "title": "Liste de clients",
+    "description": "Vous pouvez ici consulter et gérer tous les clients qui ont effectué des transactions sur votre Business Page.",
+    "empty": "Aucun clients trouvés",
+    "fields": {
+      "name": "Nom",
+      "phone": "Numéro de téléphone",
+      "email": "Adresse Email",
+      "location": "Localisation"
+    }
+  },
+  "contacts_page": {
+    "title": "Messages de contact",
+    "description": "Vous pouvez ici consulter et gérer tous les messages envoyés par vos clients via le formulaire de contact de votre Business Page.",
+    "read": "Lu",
+    "unread": "Non lu",
+    "mark-as-read": "Marquer comme lu",
+    "show-message": "Afficher le message",
+    "add-response": "Ajouter une réponse",
+    "empty": "Vous n'avez pas de messages de contact",
+    "fields": {
+      "name": "Nom",
+      "phone": "Téléphone",
+      "email": "Adresse Email",
+      "location": "Localisation",
+      "status": "Statut",
+      "response": "Réponse",
+      "actions": "Actions"
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "send": "Envoyer",
+          "cancel": "Annuler",
+          "yes": "Oui",
+          "no": "Non"
+        }
+      },
+      "respond": {
+        "title": "Réponse au message",
+        "label": "Votre réponse :",
+        "placeholder": "Écrivez votre message ici..."
+      }
+    }
+  },
+  "products_page": {
+    "title": "Liste de produits",
+    "description": " Veuillez indiquer vos produits et services sur votre Business Page pour informer les visiteurs des offres de votre entreprise.",
+    "click-to-show": "Cliquez sur un produit pour l'afficher ici",
+    "empty": "Aucun produit trouvé",
+    "create-product": "Créer un produit",
+    "suspended-label": "Suspendu",
+    "active-label": "Actif",
+    "common": {
+      "description": "Description",
+      "category": "Catégorie",
+      "price": "Prix",
+      "edit": "Modifier",
+      "suspend": "Suspendre le produit",
+      "unsuspend": "Activer le produit",
+      "delete": "Supprimer le produit",
+      "status": "Statut"
+    },
+    "forms": {
+      "common": {
+        "fields": {
+          "name": "Nom de l'article",
+          "category": "Catégorie de l'article",
+          "image": "Image de l'article",
+          "price": { "title": "Prix Unitaire", "placeholder": "P.U" },
+          "description": {
+            "title": "Description de l'article",
+            "placeholder": "Entrez une courte description de votre article..."
+          },
+          "type": {
+            "title": "Type d'article",
+            "options": {
+              "service": "Service",
+              "product": "Produit livrable"
+            }
+          },
+          "purchase-method": {
+            "title": "Mode d'achat",
+            "options": {
+              "direct": "Achat direct",
+              "cart": "Achat via le Panier"
+            }
+          }
+        },
+        "actions": {
+          "save": "Enregistrer",
+          "close": "Fermer"
+        }
+      },
+      "add-product": {
+        "title": "Ajout d'un produit / service"
+      },
+      "edit-product": {
+        "title": " Mise à jour du produit / service "
+      }
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "yes": "Oui",
+          "no": "Non"
+        }
+      },
+      "delete": {
+        "title": "Supprimer un produit",
+        "question": "Voulez-vous vraiment supprimer le produit",
+        "note": "Cette opération est irréversible. Vous pouvez aussi suspendre (Masquer) le produit."
+      },
+      "suspend": {
+        "title": "Suspendre un produit",
+        "question": "Confirmer la suspension du produit",
+        "note": "Vous pourrez le réactiver à tout moment"
+      },
+      "unsuspend": {
+        "title": "Réactiver un produit",
+        "question": "Confirmer l'activation du produit",
+        "note": "Le produit sera de nouveau visible sur votre page. Vous pourrez le suspendre à tout moment"
+      }
+    }
+  },
+  "coupons_page": {
+    "title": "Liste de coupons",
+    "description": "Offrez des réductions à vos clients en mettant à leurs dispositions des coupons.",
+    "click-to-show": "Cliquez sur un coupon pour l'afficher ici",
+    "empty": "Aucun coupon trouvé",
+    "create-coupon": "Créer un coupon",
+    "suspended-label": "Suspendu",
+    "active-label": "Actif",
+    "common": {
+      "coupons-count": "Nombre de coupons",
+      "required-spend": "Dépenses réquises",
+      "current-spend": "Dépenses actuelles",
+      "uses-count": "Nombre d'utilisations",
+      "amount": "Montant",
+      "validity": "Validité",
+      "edit": "Modifier",
+      "suspend": "Désactiver le coupon",
+      "unsuspend": "Activer le coupon",
+      "delete": "Supprimer le coupon",
+      "status": "Statut"
+    },
+    "forms": {
+      "common": {
+        "fields": {
+          "code": "Code du coupon",
+          "amount": "Montant du coupon",
+          "quantity": "Quantité",
+          "start-date": "Date de début",
+          "end-date": "Date de fin"
+        },
+        "actions": {
+          "save": "Enregistrer",
+          "close": "Fermer"
+        },
+        "feedbacks": {
+          "code": {
+            "taken": "Ce code est déjà utilisé",
+            "available": "Ce code est disponible"
+          },
+          "total-amount": "Ce coupon vous fera dépenser",
+          "end-date": "Veuillez d'abord choisir une date de début"
+        }
+      },
+      "add-coupon": {
+        "title": "Création d'un nouveau Coupon"
+      },
+      "edit-coupon": {
+        "title": "Mise à jour du coupon"
+      }
+    },
+    "modals": {
+      "common": {
+        "actions": {
+          "yes": "Oui",
+          "no": "Non"
+        }
+      },
+      "delete": {
+        "title": "Supprimer un coupon",
+        "question": "Voulez-vous vraiment supprimer le coupon",
+        "note": "Cette opération est irréversible. Vous pouvez aussi suspendre (Masquer) le coupon."
+      },
+      "suspend": {
+        "title": "Suspendre un coupon",
+        "question": "Confirmer la suspension du coupon",
+        "note": "Vous pourrez le réactiver à tout moment"
+      },
+      "unsuspend": {
+        "title": "Réactiver un coupon",
+        "question": "Confirmer l'activation du coupon",
+        "note": "Le coupon sera de nouveau visible sur votre page. Vous pourrez le suspendre à tout moment"
+      }
+    }
+  },
+  "footer": {}
+}
