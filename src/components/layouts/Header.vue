@@ -67,12 +67,12 @@ const currentUser = computed(() => store.getters["auth/currentUser"]);
               class="text-xl font-bold flex items-center lg:ml-2.5"
             >
               <img
-                src="/favicon.png"
-                class="h-6 mr-2"
+                src="/hydrac.jpg"
+                class="h-8 mr-2"
                 alt="Faroty-Associations Logo"
               />
               <span class="self-center whitespace-nowrap font-bold"
-                >Faroty</span
+                >Hydrac</span
               >
             </router-link>
             <form action="#" method="GET" class="hidden lg:block lg:pl-32">
@@ -127,7 +127,7 @@ const currentUser = computed(() => store.getters["auth/currentUser"]);
             </button>
             <div class="hidden lg:flex items-center">
               <span class="text-base font-normal text-gray-500 mr-5"
-                >Provided by Faroty 💜 </span
+                >Appli de gestion de stock 💜 </span
               >
               <div class="-mb-1">
                 <span></span>
