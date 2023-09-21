@@ -7,15 +7,10 @@ axios.defaults.crossDomain = true;
 // Add a request interceptor
 axios.interceptors.request.use(
   function (config) {
-    // config.baseURL = `http://192.168.100.57:8080/farotyapi/index.php/api`;
-    // config.baseURL = `http://api.faroty.com/index.php/api`;
-    config.baseURL = `https://api.farotygo.com/index.php/api`
+    config.baseURL = `http://localhost:3333/api/v1`;
 
-    const token = store.getters["auth/token"] ?? null;
-    const password = store.getters["auth/password"] ?? null;
-
-    if (token) config.headers.common["username"] = `${token}`;
-    if (password) config.headers.common["password"] = `${password}`;
+    const token = localStorage.getItem("jwt");
+    config.headers.common["Authorization"] = "Bearer " + token;
 
     return config;
   },
@@ -26,4 +21,3 @@ axios.interceptors.request.use(
 );
 
 export default axios;
-

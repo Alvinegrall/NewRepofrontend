@@ -35,13 +35,8 @@ const containLoading = computed(() => store.state["containLoading"]);
         class="min-h-screen w-full bg-[#f1f4f8] relative overflow-y-auto lg:ml-64"
       >
         <main>
-          <div class="about pt-6 px-4">
-            <template v-if="containLoading">
-              <BodySkeleton />
-            </template>
-            <template v-else>
-              <slot />
-            </template>
+          <div class="about pt-8 px-4">
+            <router-view></router-view>
           </div>
         </main>
       </div>

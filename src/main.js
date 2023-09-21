@@ -23,7 +23,7 @@ import "vue3-snackbar/dist/style.css";
 import "vue3-circle-progress/dist/circle-progress.css";
 import CircleProgress from "vue3-circle-progress";
 
-import DashboardLayout from "./components/layouts/DashboardLayout.vue";
+// import DashboardLayout from "./components/layouts/DashboardLayout.vue";
 import EmptyLayout from "./components/layouts/EmptyLayout.vue";
 
 import flatPickr from 'vue-flatpickr-component';
@@ -37,7 +37,7 @@ const i18n = createI18n({
 
 const app = createApp(App);
 
-app.component("DefaultLayout", DashboardLayout);
+// app.component("DefaultLayout", DashboardLayout);
 app
   .component("EmptyLayout", EmptyLayout)
 
