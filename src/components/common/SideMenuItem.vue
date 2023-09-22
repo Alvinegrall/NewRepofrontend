@@ -1,18 +1,14 @@
 <template>
-  <component
-    :is="!isMenu ? 'router-link' : 'div'"
-    :to="{ name: link }"
-    class=""
-  >
-    <button
+  <router-link :to="{ name: link }" class="">
+    <button 
       type="button"
-      class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group"
+      class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group hover:bg-emerald-500 hover:text-white"
       aria-controls="dropdown-example"
       data-collapse-toggle="dropdown-example"
       @click="toggleSubmenu()"
     >
       <vue-feather
-        class="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 group-hover:text-gray-600"
+        class="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 group-hover:text-white"
         :type="icon ? icon : 'info'"
       ></vue-feather>
 
@@ -20,8 +16,6 @@
       <ToolingIcon />
       <EcosystemIcon />
       <CommunityIcon /> -->
-
-
 
       <span class="flex-1 ml-3 text-left whitespace-nowrap">{{ title }}</span>
       <svg
@@ -41,11 +35,7 @@
         />
       </svg>
     </button>
-    <ul
-      v-if="showSubmenu && isMenu"
-      id="dropdown-example"
-      class="py-2 space-y-2"
-    >
+    <ul v-if="isOpen && isMenu" id="dropdown-example" class="py-2 space-y-2">
       <li v-for="(memu, index) in memus" :key="index">
         <router-link
           :to="{ name: memu.link }"
@@ -54,7 +44,7 @@
         >
       </li>
     </ul>
-  </component>
+  </router-link>
 </template>
 
 <script setup>
@@ -64,34 +54,36 @@
 // import CommunityIcon from '@/components/icons/IconCommunity.vue'
 // import SupportIcon from '@/components/icons/IconSupport.vue'
 
-import { ref } from 'vue';
+import { ref } from "vue";
 
-
-defineProps ({
+const props = defineProps({
   title: {
     type: String,
-    required: true
+    required: true,
   },
+  isOpen: Boolean,
   icon: {
     type: String,
     required: true,
-    default: 'info',
+    default: "info",
   },
   isMenu: Boolean,
   link: {
     type: String,
-    default: '/',
+    default: "",
   },
   memus: {
     type: Array,
-    default: ()=>[],
+    default: () => [],
   },
 });
+
+const emit = defineEmits(["handleclick"]);
 
 const showSubmenu = ref(false);
 
 function toggleSubmenu() {
-  showSubmenu.value = !showSubmenu.value;
+  emit("handleclick");
 }
 
 // export default {
@@ -131,4 +123,12 @@ function toggleSubmenu() {
 // };
 </script>
 
-<style></style>
+<style scoped>
+
+
+.router-link-active .router-link-exact-active {
+  background-color: #f3f4f6;
+  color: black;
+  font-weight: 500;
+}
+</style>

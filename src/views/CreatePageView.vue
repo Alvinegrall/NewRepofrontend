@@ -22,17 +22,18 @@ const registerSuccess = ref(false);
 const errors = ref(false);
 
 const login = async () => {
+  console.log("dada", fields.password);
   submitted.value = true;
 
   if (fields.email == "") {
     errors.value = true;
-  } else if ((fields.password = "")) {
+  } else if ((fields.password == "")) {
     errors.value = true;
   } else {
     errors.value = false;
   }
 
-  const result = await axios.post("/auth/login", {
+  const result = await axios.post("/login", {
     email: fields.email,
     password: fields.password,
   });
@@ -68,7 +69,7 @@ const login = async () => {
           </div>
           <!-- <CircleProgress /> -->
           <div class="grid grid-cols-1 gap-x-6 gap-y-3">
-            <FormField label="Email" help="error.$message">
+            <FormField label="Email" help="exemple@gmail.com">
               <FormControl
                 v-model="fields.email"
                 icon="edit-3"
@@ -79,6 +80,7 @@ const login = async () => {
               <FormControl
                 v-model="fields.password"
                 icon="lock"
+                type="password"
                 placeholder="Password"
               />
             </FormField>

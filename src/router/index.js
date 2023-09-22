@@ -25,9 +25,67 @@ const router = createRouter({
           name: "common.home",
           component: HomeView1,
         },
+        {
+          path: "/create-article",
+          name: "create-article",
+          // component: SettingsViewVue,
+          component: () => import("@/views/CreateArticleView.vue"),
+        },
+        {
+          path: "/create-entre",
+          name: "mvt.entree",
+          // component: SettingsViewVue,
+          component: () => import("@/views/mouvements/EntreView.vue"),
+        },
+        {
+          path: "/create-sortie",
+          name: "mvt.sortie",
+          // component: SettingsViewVue,
+          component: () => import("@/views/mouvements/SortieView.vue"),
+        },
+        {
+          path: "/add-category",
+          name: "admin.addcategory",
+          // component: SettingsViewVue,
+          component: () => import("@/views/administration/AddCategoryView.vue"),
+        },
+        {
+          path: "/add-beneficiary",
+          name: "admin.addbeneficiary",
+          // component: SettingsViewVue,
+          component: () =>
+            import("@/views/administration/AddBeneficiaireView.vue"),
+        },
+        {
+          path: "/add-fournisseur",
+          name: "admin.addfournisseur",
+          // component: SettingsViewVue,
+          component: () =>
+            import("@/views/administration/AddFournisseurView.vue"),
+        },
+
+        {
+          path: "/add-magasin",
+          name: "admin.addmagasin",
+          // component: SettingsViewVue,
+          component: () =>
+            import("@/views/administration/AddMagasinView.vue"),
+        },
+
+        {
+          path: "/settings",
+          name: "settings",
+          // component: SettingsViewVue,
+          component: () => import("@/views/settings/SettingsView.vue"),
+        },
+        {
+          path: "/statistiques",
+          name: "statistiques",
+          // component: TransactionsViewVue,
+          component: () => import("@/views/StatistiquesView.vue"),
+        },
       ],
     },
-
     {
       path: "/login",
       component: EmptyLayout,
@@ -59,9 +117,10 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   // eslint-disable-next-line no-unreachable
   if (!authRequired) return next();
 
-  await axios.get("http://localhost:3333/api/v1/auth/me", {
-    headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
-  })
+  await axios
+    .post("http://localhost:3333/api/v1/login", {
+      headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
+    })
     .then(({ data }) => {
       console.log(data);
       // localStorage.setItem("userdata", JSON.stringify(data.data.user));

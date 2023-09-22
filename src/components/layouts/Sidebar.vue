@@ -5,6 +5,18 @@ import SideMenuItem from "@/components/common/SideMenuItem.vue";
 
 const { isOpen } = useSidebar();
 const { sideMenuItems } = useSidebar();
+
+const showSubMenu = (index) => {
+  const show = sideMenuItems.value[index].isOpen;
+
+  sideMenuItems.value = sideMenuItems.value.map((item) => ({
+    ...item,
+    isOpen: false,
+  }));
+  sideMenuItems.value[index].isOpen = !show;
+
+  // console.log("datas",sideMenuItems.value );
+};
 </script>
 
 <template>
@@ -70,10 +82,19 @@ const { sideMenuItems } = useSidebar();
                     :memus="item.children"
                     :icon="item.icon"
                     :link="item.link"
+                    :isOpen="item.isOpen"
+                    @handleclick="showSubMenu(index)"
                   />
                 </template>
                 <template v-else>
-                  <SideMenuItem :title="item.title" :link="item.link" :icon="item.icon" :isMenu="false" />
+                  <SideMenuItem
+                    :title="item.title"
+                    :link="item.link"
+                    :icon="item.icon"
+                    :isMenu="false"
+                    @handleclick="showSubMenu(index)"
+
+                  />
                 </template>
               </div>
             </ul>
@@ -84,3 +105,11 @@ const { sideMenuItems } = useSidebar();
     </aside>
   </div>
 </template>
+
+<style scoped>
+.router-link-active .router-link-exact-active {
+  background-color: #f3f4f6;
+  color: black;
+  font-weight: 500;
+}
+</style>
