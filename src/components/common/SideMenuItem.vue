@@ -1,15 +1,17 @@
 <template>
   <router-link :to="{ name: link }" class="">
-    <button 
+    <button
       type="button"
       class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group hover:bg-emerald-500 hover:text-white"
       aria-controls="dropdown-example"
       data-collapse-toggle="dropdown-example"
+      :class="{ 'bg-emerald-500 text-white': $route.name === link }"
       @click="toggleSubmenu()"
     >
       <vue-feather
         class="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 group-hover:text-white"
         :type="icon ? icon : 'info'"
+        :class="{ 'bg-emerald-500 text-white': $route.name === link }"
       ></vue-feather>
 
       <!-- <DocumentationIcon />
@@ -40,6 +42,7 @@
         <router-link
           :to="{ name: memu.link }"
           class="flex items-center w-full p-2 transition duration-75 rounded-lg pl-11 group dark:hover:bg-gray-100"
+          :class="{ 'bg-emerald-500 text-white': $route.name === link }"
           >{{ memu.title }}</router-link
         >
       </li>
@@ -124,8 +127,6 @@ function toggleSubmenu() {
 </script>
 
 <style scoped>
-
-
 .router-link-active .router-link-exact-active {
   background-color: #f3f4f6;
   color: black;
