@@ -89,7 +89,7 @@
       <BaseButton
         v-if="hasOneBtn"
         :icon="icons[0] ?? 'info'"
-        color="info"
+        color="success"
         iconSize="18"
         :label="btnLabel[0] ?? ''"
         @click="btnClick"

@@ -68,8 +68,7 @@ const router = createRouter({
           path: "/add-magasin",
           name: "admin.addmagasin",
           // component: SettingsViewVue,
-          component: () =>
-            import("@/views/administration/AddMagasinView.vue"),
+          component: () => import("@/views/administration/AddMagasinView.vue"),
         },
 
         {
@@ -116,21 +115,20 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
 
   // eslint-disable-next-line no-unreachable
   if (!authRequired) return next();
+  // else return next({ name: "create-page" });
 
-  await axios
-    .post("http://localhost:3333/api/v1/login", {
-      headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
-    })
-    .then(({ data }) => {
-      console.log(data);
-      // localStorage.setItem("userdata", JSON.stringify(data.data.user));
-      // localStorage.setItem("userid", data.data.user.id);
-      // localStorage.setItem("user", JSON.stringify(data.data.user));
-    })
-    .catch((e) => {
-      console.log(e);
-      next({ name: "login" });
-    });
+  // await axios
+  //   .post("http://localhost:3333/api/v1/login", {
+  //     headers: { Authorization: "Bearer " + localStorage.getItem("jwt") },
+  //   })
+  //   .then(({ data }) => {
+  //     console.log(data);
+
+  //   })
+  //   .catch((e) => {
+  //     console.log(e);
+  //     next({ name: "login" });
+  //   });
   // }
 
   return next();
