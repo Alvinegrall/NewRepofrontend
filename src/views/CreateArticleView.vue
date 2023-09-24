@@ -16,7 +16,7 @@ import BaseButtons from "@/components/common/BaseButtons.vue";
 import ShareLinkSocialNetwork from "@/components/ShareLinkSocialNetwork.vue";
 import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
-import TransactionHistoryInfo from "@/components/TransactionHistoryInfo.vue";
+import TableListArticles from "@/components/TableListArticles.vue";
 
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -32,20 +32,10 @@ const breadcrumbItems = reactive([
 ]);
 
 const fields = reactive({
-  first_name: "",
-  last_name: "",
-  first_phone: "",
-  second_phone: "",
-  email: "",
-  country: "",
-  region: "",
-  city: "",
-  type: "",
-  marital_status: "",
-  residence: "",
-  photo_profil: "",
-  date_adhesion: "",
-  beneficiaire: [],
+  name: "",
+  stock_alerte: "",
+  stock_securite: "",
+  cat_id: "",
 });
 const isCreateTournoisModalActive = ref(false);
 
@@ -63,86 +53,46 @@ const goBack = () => {
     <CardBoxModal
       v-model="isCreateTournoisModalActive"
       hasCostomWith
-      width="xl:w-6/12"
+      width="xl:w-5/12"
       hasCancel
       title="✍️ Créer un article"
     >
-      <div class="grid grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
-        <!-- <FormField label="Avatar" help="Max 500kb">
-            <FormFilePicker label="Upload" />
-          </FormField> -->
-
-        <FormField label="Nom" help="Nom du membre">
+      <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-6 gap-y-3">
+        <FormField label="Nom de l'article" help="Required">
           <FormControl
-            v-model="fields.first_name"
+            v-model="fields.name"
             icon="edit-3"
-            placeholder="Nom"
+            placeholder="Entrez le nom"
           />
         </FormField>
-        <FormField label="Prénom">
+        <FormField label="Stock de sécurité">
           <FormControl
-            v-model="fields.last_name"
+            v-model="fields.stock_securite"
             icon="edit-3"
-            placeholder="Prénom"
+            placeholder="Entrez la valeur "
           />
         </FormField>
-        <FormField label="Téléphone" help="required">
+        <FormField label="Stock d'alerte" help="required">
           <FormControl
-            v-model="fields.first_phone"
-            icon="phone"
-            placeholder="Téléphone"
+            v-model="fields.stock_alerte"
+            icon="bell"
+            placeholder="Entrez la valeur"
           />
         </FormField>
-
-        <FormField label="Autre téléphone" help="required">
+        <FormField label="Choisir le magasin">
           <FormControl
-            v-model="fields.second_phone"
-            icon="phone"
-            placeholder="Téléphone"
-          />
-        </FormField>
-        <FormField label="Type">
-          <FormControl
-            v-model="fields.type"
+            v-model="fields.code_article"
             :options="['Founder', 'Member']"
             icon="check-circle"
-            placeholder="Type"
+            placeholder="choisir"
           />
         </FormField>
-
-        <FormField label="Email" help="Optionel">
+        <FormField label="Choisir la catégorie">
           <FormControl
-            v-model="fields.email"
-            icon="mail"
-            placeholder="exemple@gmail.com"
-          />
-        </FormField>
-
-        <!-- <VueDatePicker v-model="fields.date_adhesion" /> -->
-        <!-- dhskhs -->
-
-        <FormField label="Situation matrimoniale">
-          <FormControl
-            v-model="fields.marital_status"
-            :options="['Célibataire', 'mariée', 'Divorcée', 'Veuf']"
+            v-model="fields.code_article"
+            :options="['Founder', 'Member']"
             icon="check-circle"
-            help="Your full name"
-            placeholder="Situation matrimoniale"
-          />
-        </FormField>
-        <FormField label="Lieu de résidence" help="Optionel">
-          <FormControl
-            v-model="fields.residence"
-            icon="map-pin"
-            placeholder="Lieu de résidence"
-          />
-        </FormField>
-
-        <FormField label="Date d'hadésion" help="required">
-          <FormDatePikerControl
-            @getDate="fields.date_adhesion = $event"
-            showHour
-            placeholder="Date d'hadésion"
+            placeholder="choisir"
           />
         </FormField>
       </div>
@@ -158,7 +108,7 @@ const goBack = () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TransactionHistoryInfo details="currentCompte?.payments " />
+      <TableListArticles details=" " />
     </CardBox>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">

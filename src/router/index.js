@@ -93,7 +93,7 @@ const router = createRouter({
           path: "",
           name: "create-page",
           // component: CreatePageViewVue,
-          component: () => import("@/views/CreatePageView.vue"),
+          component: () => import("@/views/LoginView.vue"),
           meta: { redirectPage: true },
           // async beforeEnter(to, from, next) {
           //   await store.dispatch("setGlobalLoading", true);
@@ -109,7 +109,6 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
 
-  console.log("dataa");
 
   const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
 

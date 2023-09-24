@@ -1,5 +1,5 @@
 import store from "..";
-import CompteService from "@/services/CompteService";
+import ArticlesService from "@/services/ArticlesService";
 
 
 const state = { 
@@ -20,7 +20,7 @@ const getters = {
 const actions = {
   async getAllComptes({ commit }) {
     const urlcode = store.getters["partners/urlcode"];
-    return CompteService.getAllComptes(urlcode).then((response) => {
+    return ArticlesService.getAllComptes(urlcode).then((response) => {
       console.log("response", response);
       if (!response.data.error) {
        commit("SET_COMPTE", response.data.data);
@@ -33,10 +33,10 @@ const actions = {
   
 
   async createCompte({  }, compte) {
-    return CompteService.createCompte(compte);
+    return ArticlesService.createCompte(compte);
   },
   async getCompte({  },code) {
-    return CompteService.getCompte(code);
+    return ArticlesService.getCompte(code);
   },
   generate_random_unique_color({ state, commit }) {
     let randomColor;

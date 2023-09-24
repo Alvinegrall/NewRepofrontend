@@ -1,24 +1,14 @@
 import { createStore } from "vuex";
 
 import auth from "./modules/auth";
-import partners from "./modules/partners";
-import products from "./modules/products";
-import coupons from "./modules/coupons";
-import clients from "./modules/clients";
-import contacts from "./modules/contacts";
-import page_categories from "./modules/page-categories";
-import payment_links from "./modules/payment-links";
-import association from "./modules/association";
-import membres from "./modules/membres";
-import comptes from "./modules/comptes";
-import cotisations from  "./modules/cotisations"
-import sanctions from  "./modules/sanctions"
+
+import articles from "./modules/articles";
 
 export default createStore({
   state: {
     globalLoading: true,
     containLoading: true,
-    lastPosition:"common.home"
+    lastPosition: "common.home",
   },
   mutations: {
     SET_GLOBAL_LOADING(state, loading) {
@@ -41,18 +31,9 @@ export default createStore({
   },
   modules: {
     auth,
-    partners,
-    products,
-    coupons,
-    clients,
-    contacts,
-    page_categories,
-    payment_links,
-    association,
-    membres,
-    comptes,
-    cotisations,
-    sanctions
+
+    articles
+    ,
   },
   strict: process.env.NODE_ENV !== "production",
 });

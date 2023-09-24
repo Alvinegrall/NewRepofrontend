@@ -11,9 +11,9 @@ const sideMenuItems = ref([
     link: "common.home",
   },
   {
-    title: "Créer un article",
+    title: "Inventaire",
     isOpen: false,
-    icon: "edit",
+    icon: "clipboard",
     isMenu: false,
     link: "create-article",
   },
@@ -35,25 +35,25 @@ const sideMenuItems = ref([
     isMenu: true,
     children: [
       {
-        title: "Ajouter une categorie",
+        title: "Categorie",
         isOpen: false,
         isMenu: false,
         link: "admin.addcategory",
       },
       {
-        title: "Ajouter un fornisseur",
+        title: "Fornisseur",
         isOpen: false,
         isMenu: false,
         link: "admin.addfournisseur",
       },
       {
-        title: "Ajouter un Beneficiaire",
+        title: "Beneficiaire",
         isOpen: false,
         isMenu: false,
         link: "admin.addbeneficiary",
       },
       {
-        title: "Ajouter un magasin",
+        title: "Magasin",
         isOpen: false,
         isMenu: false,
         link: "admin.addmagasin",

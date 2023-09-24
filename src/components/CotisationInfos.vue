@@ -5,27 +5,20 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  totalAmount: {
-    type: String,
-    default: "3000",
-  },
-  paidAmount: {
-    type: String,
-    default: "1000",
-  },
-  remainingAmount: {
-    type: String,
-    default: "2000",
-  },
   currency: {
     type: String,
     default: "XAF",
   },
   details: {
     type: Array,
-    default: () => [],
+    default: () => {},
   },
 });
+const formateDate = (date) => {
+  const newdate = new Date(date);
+  const readableDate = newdate.toLocaleString();
+  return readableDate;
+};
 </script>
 
 <template>
@@ -38,17 +31,23 @@ const props = defineProps({
         class="text-gray-500 text-sm border-r text-center p-1 rounded-tl-lg rounded-bl-lg w-full"
       >
         <div>Cotisation</div>
-        <div class="font-semibold">{{ totalAmount }} {{ currency }}</div>
+        <div class="font-semibold">
+          {{ details?.source_amount }} {{ currency }}
+        </div>
       </div>
       <div class="text-green-500 p-1 text-sm border-r text-center w-full">
         <div>Versé</div>
-        <div class="font-semibold">{{ paidAmount }} {{ currency }}</div>
+        <div class="font-semibold">
+          {{ details?.balance_after }} {{ currency }}
+        </div>
       </div>
       <div
         class="text-red-500 p-1 text-sm text-center rounded-tr-lg rounded-br-lg w-full"
       >
         <div>Restant</div>
-        <div class="font-semibold">{{ remainingAmount }} {{ currency }}</div>
+        <div class="font-semibold">
+          {{ details?.balance_remaining }} {{ currency }}
+        </div>
       </div>
     </div>
     <h5 id="defaultMembreLabel" class="modal-title text-sm mb-3 font-semibold">
@@ -82,7 +81,7 @@ const props = defineProps({
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(item, index) in 5" :key="index">
+              <tr v-for="(item, index) in details?.transanctions" :key="index">
                 <td
                   class="p-4 whitespace-nowrap text-sm font-normal text-gray-900"
                 >
@@ -91,11 +90,14 @@ const props = defineProps({
                 <td
                   class="p-4 whitespace-nowrap text-sm font-normal text-gray-500"
                 >
-                  Apr 23 ,2021
+                  {{ formateDate(item.created_at) }}
                 </td>
 
-                <BaseAmountWithArrow isColorText isTable amount="3000" />
-             
+                <BaseAmountWithArrow
+                  isColorText
+                  isTable
+                  :amount="item.amount"
+                />
               </tr>
             </tbody>
           </table>
