@@ -18,11 +18,13 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableAdministration from "@/components/TableAdministration.vue";
 
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
 const router = useRouter();
+const store = useStore();
 
 const breadcrumbItems = reactive([
   {
@@ -32,29 +34,43 @@ const breadcrumbItems = reactive([
 ]);
 
 const fields = reactive({
-  first_name: "",
-  last_name: "",
-  first_phone: "",
-  second_phone: "",
-  email: "",
-  country: "",
-  region: "",
-  city: "",
-  type: "",
-  marital_status: "",
-  residence: "",
-  photo_profil: "",
-  date_adhesion: "",
-  beneficiaire: [],
+  name: "",
 });
 const isCreateTournoisModalActive = ref(false);
+const error = ref(false);
 
 const createMembre = () => {
   isCreateTournoisModalActive.value = true;
 };
+// createCat
 
 const goBack = () => {
   console.log("ttoto");
+};
+
+const cats = computed(()=>store.getters["category/cat"]);
+
+const createCat = async () => {
+  if (fields.name === "") {
+    error.value = true;
+    isCreateTournoisModalActive.value = true;
+  }
+   store
+    .dispatch("category/createCat", { name: fields.name })
+    .then(async (response) => {
+    //   console.log("response", response);
+      if (!response.data.error) {
+        await store.dispatch("category/getAllCat");
+      }
+    })
+    .catch((error) => {
+      // this.$snackbar.add({
+      //   text: "Error" + error,
+      //   type: "error",
+      // });
+
+      console.log("error", error);
+    });
 };
 </script>
 
@@ -66,20 +82,19 @@ const goBack = () => {
       width="xl:w-4/12"
       hasCancel
       title="✍️ Créer une catégorie"
+      @confirm="createCat"
     >
-      <div class="grid grid-cols-1  gap-x-6 gap-y-3">
+      <div v-if="error" class="p-2 bg-red-200 text-red-500 rounded-lg my-4">
+        Veuillez remplir tous les champs
+      </div>
+      <div class="grid grid-cols-1 gap-x-6 gap-y-3">
         <!-- <FormField label="Avatar" help="Max 500kb">
             <FormFilePicker label="Upload" />
           </FormField> -->
 
         <FormField label="Nom" help="Nom du membre">
-          <FormControl
-            v-model="fields.first_name"
-            icon="edit-3"
-            placeholder="Nom"
-          />
+          <FormControl v-model="fields.name" icon="edit-3" placeholder="Nom" />
         </FormField>
-        
       </div>
     </CardBoxModal>
 
@@ -93,7 +108,7 @@ const goBack = () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TableAdministration details="currentCompte?.payments " />
+      <TableAdministration :details="cats" />
     </CardBox>
   </div>
 </template>

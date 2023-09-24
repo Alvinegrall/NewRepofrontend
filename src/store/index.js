@@ -3,6 +3,10 @@ import { createStore } from "vuex";
 import auth from "./modules/auth";
 
 import articles from "./modules/articles";
+import category from "./modules/category";
+import fournisseur from "./modules/fournisseur";
+import beneficiaire from "./modules/beneficiaire";
+import magasins from "./modules/magasins";
 
 export default createStore({
   state: {
@@ -32,8 +36,11 @@ export default createStore({
   modules: {
     auth,
 
-    articles
-    ,
+    articles,
+    category,
+    fournisseur,
+    beneficiaire,
+    magasins
   },
   strict: process.env.NODE_ENV !== "production",
 });

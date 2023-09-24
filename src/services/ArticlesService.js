@@ -1,36 +1,34 @@
 import axios from "@/config/axios";
 
 export default {
-  productcategories(urlcode) {
-    const data = { urlcode };
-    return axios.post("/productcategories", data);
+  getAllCat() {
+    return axios.get("/cat");
   },
 
-  listproducts(urlcode, category = false) {
-    if (category) {
-      return axios.post("/listproducts", { urlcode, category });
-    } else {
-      return axios.post("/listproducts", { urlcode });
-    }
+  createCat(category) {
+    return axios.post("/cat", category);
   },
 
-  newproduct(data) {
-    return axios.post("/newproduct", data);
+  getAllFournisseurs() {
+    return axios.get("/fournisseur");
   },
 
-  getproduct(data) {
-    return axios.post("/getproduct", data);
+  createFournisseur(data) {
+    return axios.post("/fournisseur", data);
   },
 
-  deleteproduct(data) {
-    return axios.post("/deleteproduct", data);
+  getAllBenefi() {
+    return axios.get("/beneficiaire");
   },
 
-  suspendproduct(data) {
-    return axios.post("/suspendproduct", data);
+  createBenefi(data) {
+    return axios.post("/beneficiaire", data);
   },
 
-  unsuspendproduct(data) {
-    return axios.post("/unsuspendproduct", data);
+  getAllMagasins() {
+    return axios.get("/magasin");
+  },
+  createMagasin(data) {
+    return axios.post("/magasin", data);
   },
 };

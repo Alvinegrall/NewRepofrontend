@@ -109,11 +109,15 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
 
-
   const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
 
   // eslint-disable-next-line no-unreachable
   if (!authRequired) return next();
+
+  await store.dispatch("category/getAllCat");
+  await store.dispatch("fournisseur/getAllFournisseurs");
+  await store.dispatch("beneficiaire/getAllBenefi");
+  await store.dispatch("magasins/getAllMagasins");
   // else return next({ name: "create-page" });
 
   // await axios
