@@ -1,6 +1,25 @@
 import axios from "@/config/axios";
 
 export default {
+
+  getAllSortie() {
+    return axios.get("/sortie");
+  },
+  createSortie(data) {
+    return axios.post("/sortie", data);
+  },
+  getAllArticles() {
+    return axios.get("/article");
+  },
+  createArticle(data) {
+    return axios.post("/article", data);
+  },
+  getAllEntre() {
+    return axios.get("/entre");
+  },
+  createEntre(data) {
+    return axios.post("/entre", data);
+  },
   getAllCat() {
     return axios.get("/cat");
   },

@@ -10,19 +10,22 @@ import UserProfile from "@/components/common/UserProfile.vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({
+  details: {
+    type: Array,
+    default: () => [],
+  },
   checkable: Boolean,
 });
 
 const store = useStore();
 const router = useRouter();
-const membres = computed(() => store.getters["membres/membres"]);
 
 const isModalActive = ref(false);
 
 const isModalDangerActive = ref(false);
 
-const perPage = ref(5);
+const perPage = ref(3);
 
 const currentPage = ref(0);
 
@@ -31,7 +34,7 @@ const checkedRows = ref([]);
 // new design
 
 const itemsPaginated = computed(() =>
-  membres.value?.data.slice(
+  props.details.slice(
     perPage.value * currentPage.value,
     perPage.value * (currentPage.value + 1)
   )
@@ -41,21 +44,21 @@ const itemsPaginated = computed(() =>
 
 // new mun pages
 
-// const numPages = computed(() =>
-//   Math.ceil(membres.value.data.length / perPage.value)
-// );
+const numPages = computed(() =>
+  Math.ceil(props.details.length / perPage.value)
+);
 
 const currentPageHuman = computed(() => currentPage.value + 1);
 
-// const pagesList = computed(() => {
-//   const pagesList = [];
+const pagesList = computed(() => {
+  const pagesList = [];
 
-//   for (let i = 0; i < numPages.value; i++) {
-//     pagesList.push(i);
-//   }
+  for (let i = 0; i < numPages.value; i++) {
+    pagesList.push(i);
+  }
 
-//   return pagesList;
-// });
+  return pagesList;
+});
 
 const remove = (arr, cb) => {
   const newArr = [];
@@ -85,6 +88,11 @@ const showDetails = () => {
     params: { matricule: "1234AS" },
   });
 };
+const formateDate = (date) => {
+  const newdate = new Date(date);
+  const readableDate = newdate.toLocaleString();
+  return readableDate;
+};
 </script>
 
 <template>
@@ -110,7 +118,7 @@ const showDetails = () => {
         :key="checkedRow.id"
         class="relative inline-block px-2 py-1 text-white mr-2 text-sm bg-gray-100 rounded-lg dark:bg-blue-500"
       >
-        {{ checkedRow.first_name }}
+        {{ checkedRow.name }}
         <span
           class="absolute bottom-5 right-[-5px] p-1 flex justify-center items-center bg-secondary bg-opacity-75 rounded-full w-4 h-4"
         >
@@ -128,27 +136,28 @@ const showDetails = () => {
           <th>Marque</th>
           <th>Quantité</th>
           <th>Fournisseur</th>
-
           <th />
         </tr>
       </thead>
       <tbody>
-        <tr v-for="client in 5" :key="client.id">
+        <tr v-for="client in itemsPaginated" :key="client.id">
           <TableCheckboxCell
             v-if="checkable"
             @checked="checked($event, client)"
           />
 
           <td data-label="Name">
-            {{ client.first_name }}
+            {{ formateDate(client.created_at) }}
+
           </td>
           <td data-label="matricule">
-            {{ client.matricule }}
+            {{ client.article.name }}
           </td>
           <td data-label="phone">
-            {{ client.first_phone }}
+            {{ client.marque }}
           </td>
           <td data-label="Progress" class="lg:w-32">
+            {{ client.qte }}
             <!-- <progress
             class="flex w-2/5 self-center lg:w-full "
             max="100"
@@ -158,7 +167,7 @@ const showDetails = () => {
           </td>
 
           <td data-label="Date">
-            {{ client.date_adhesion }}
+            {{ client.fournisseur.name }}
           </td>
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons type="justify-start lg:justify-end" no-wrap>

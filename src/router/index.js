@@ -118,6 +118,10 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("fournisseur/getAllFournisseurs");
   await store.dispatch("beneficiaire/getAllBenefi");
   await store.dispatch("magasins/getAllMagasins");
+  await store.dispatch("articles/getAllArticles");
+  await store.dispatch("entre/getAllEntre");
+  await store.dispatch("sortie/getAllSortie");
+
   // else return next({ name: "create-page" });
 
   // await axios

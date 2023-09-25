@@ -5,13 +5,12 @@
       class="flex items-center w-full p-2 text-base transition duration-75 rounded-lg group hover:bg-emerald-500 hover:text-white"
       aria-controls="dropdown-example"
       data-collapse-toggle="dropdown-example"
-      :class="{ 'bg-emerald-500 text-white': $route.name === link }"
+      :class="{ 'bg-[#f3f4f6] font-[500]': $route.name === link }"
       @click="toggleSubmenu()"
     >
       <vue-feather
         class="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 group-hover:text-white"
         :type="icon ? icon : 'info'"
-        :class="{ 'bg-emerald-500 text-white': $route.name === link }"
       ></vue-feather>
 
       <!-- <DocumentationIcon />

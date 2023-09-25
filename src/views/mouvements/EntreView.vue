@@ -18,12 +18,13 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableEntree from "@/components/TableEntree.vue";
 
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
 const router = useRouter();
-
+const store = useStore();
 const breadcrumbItems = reactive([
   {
     title: "Nouvelle livraison",
@@ -46,6 +47,41 @@ const createMembre = () => {
 const goBack = () => {
   console.log("ttoto");
 };
+
+const articles = computed(() => store.getters["articles/article"]);
+const fournisseur = computed(() => store.getters["fournisseur/fournisseur"]);
+const entre = computed(() => store.getters["entre/entre"]);
+
+const magasins = computed(() => store.getters["magasins/magasin"]);
+const cats = computed(() => store.getters["category/cat"]);
+
+const createEntre = () => {
+  const datas = {
+    marque: fields.marque,
+    code_article: fields.code_article,
+    fournisseur_id: fields.fournisseur_id.id,
+    qte: fields.qte,
+  };
+
+  store
+    .dispatch("entre/createEntre", datas)
+    .then(async (response) => {
+      //   console.log("response", response);f
+      if (!response.data.error) {
+        await store.dispatch("entre/getAllEntre");
+      }
+    })
+    .catch((error) => {
+      // this.$snackbar.add({
+      //   text: "Error" + error,
+      //   type: "error",
+      // });
+
+      console.log("error", error);
+    });
+
+  // console.log(datas);
+};
 </script>
 
 <template>
@@ -56,11 +92,20 @@ const goBack = () => {
       width="xl:w-6/12"
       hasCancel
       title="✍️ Créer une entrée"
+      @confirm="createEntre"
     >
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
         <!-- <FormField label="Avatar" help="Max 500kb">
             <FormFilePicker label="Upload" />
           </FormField> -->
+        <FormField label="Choisir l'article">
+          <FormControl
+            v-model="fields.code_article"
+            :options="articles"
+            icon="check-circle"
+            placeholder="choisir"
+          />
+        </FormField>
 
         <FormField label="Marque" help="Optionel">
           <FormControl
@@ -77,19 +122,10 @@ const goBack = () => {
           />
         </FormField>
 
-        <FormField label="Choisir l'article">
-          <FormControl
-            v-model="fields.code_article"
-            :options="['Founder', 'Member']"
-            icon="check-circle"
-            placeholder="choisir"
-          />
-        </FormField>
-
         <FormField label="Choisir le fornisseur">
           <FormControl
             v-model="fields.fournisseur_id"
-            :options="['Founder', 'Member']"
+            :options="fournisseur"
             icon="check-circle"
             placeholder="Type"
           />
@@ -107,7 +143,7 @@ const goBack = () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TableEntree />
+      <TableEntree :details="entre" />
     </CardBox>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">

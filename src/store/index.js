@@ -7,6 +7,8 @@ import category from "./modules/category";
 import fournisseur from "./modules/fournisseur";
 import beneficiaire from "./modules/beneficiaire";
 import magasins from "./modules/magasins";
+import entre from "./modules/entre";
+import sortie from "./modules/sortie";
 
 export default createStore({
   state: {
@@ -40,7 +42,9 @@ export default createStore({
     category,
     fournisseur,
     beneficiaire,
-    magasins
+    magasins,
+    entre,
+    sortie
   },
   strict: process.env.NODE_ENV !== "production",
 });

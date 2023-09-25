@@ -57,13 +57,7 @@ const emit = defineEmits(["update:modelValue", "setRef"]);
 const computedValue = computed({
   get: () => props.modelValue,
   set: async (value) => {
-    if (props.selection == "Pays") {
-      console.log("FSfs");
-      await store.dispatch("partners/getStateByCountry", value);
-    } else if (props.selection == "Région") {
-      console.log("vsvsvvvsvs");
-      await store.dispatch("partners/getCitiesByStates", value);
-    }
+    
     emit("update:modelValue", value);
   },
 });
@@ -72,6 +66,7 @@ const inputElClass = computed(() => {
   const base = [
     "border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus-visible:border-none  focus:ring-cyan-600 focus:border-cyan-600   block w-full p-2.5",
     "placeholder-gray-400",
+    "focus:ring-emerald-500 focus:border-emerald-500 focus-visible:border-none focus-visible:outline-none focus-visible:outline-emerald-500",
     computedType.value === "textarea" ? "h-24" : "",
     props.borderless ? "border-0" : "border",
     props.transparent ? "bg-transparent" : "bg-gray-50",
@@ -145,9 +140,9 @@ onMounted(() => {
         <option
           v-for="option in options"
           :key="option.id ?? option"
-          :value="option.label ?? option.public_ref ?? option.membre_code ?? option"
+          :value="option.code ?? option"
         >
-          {{  option.name ?? option.label ?? option.first_name ?? option  }}
+          {{  option.name ?? option.label ?? option  }}
         </option>
 
       <!-- <template v-if="isMemberSelection">

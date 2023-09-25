@@ -313,6 +313,16 @@
   resolved "https://registry.npmjs.org/@vue/shared/-/shared-3.3.4.tgz"
   integrity sha512-7OjdcV8vQ74eiz1TZLzZP4JwqM5fA94K6yntPS5Z25r9HDuGNzaGdgvwKYq6S+MxwF0TFRwe50fIR/MYnakdkQ==
 
+ag-grid-community@^30.1.0:
+  version "30.1.0"
+  resolved "https://registry.yarnpkg.com/ag-grid-community/-/ag-grid-community-30.1.0.tgz#50c532df2e6cc22596300b801651eca76459a189"
+  integrity sha512-D69e63CUALxfgLZSu1rXC8Xiyhu6+17zxzTV8cWsyvt5GeSDv2frQ3BKOqGZbUfVoOCLv2SQoHVTTqw8OjxavA==
+
+ag-grid-vue3@^30.1.0:
+  version "30.1.0"
+  resolved "https://registry.yarnpkg.com/ag-grid-vue3/-/ag-grid-vue3-30.1.0.tgz#b6c964feb336743a1f7b99548765be8f9e902f36"
+  integrity sha512-1rurhWpI2z/49AY5HDqqmVSaf2DA6CdbV1wcrAh4euRjivhk/+35I0qW8wLXKJQu2VfZHTCRaGiaILyJiCHbQg==
+
 any-promise@^1.0.0:
   version "1.3.0"
   resolved "https://registry.npmjs.org/any-promise/-/any-promise-1.3.0.tgz"

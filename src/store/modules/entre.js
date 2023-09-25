@@ -2,24 +2,24 @@ import store from "..";
 import ArticlesService from "@/services/ArticlesService";
 
 const state = {
-  article: null,
+  entre: null,
 };
 
 // getters
 const getters = {
-  article: (state) => {
-    return state.article || [];
+  entre: (state) => {
+    return state.entre || [];
   },
 };
 
 // privileges
 const actions = {
-  async getAllArticles({ commit }) {
-    return ArticlesService.getAllArticles()
+  async getAllEntre({ commit }) {
+    return ArticlesService.getAllEntre()
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
-          commit("SET_ARTICLE", response.data.data);
+          commit("SET_ENTRE", response.data.data);
         }
       })
       .catch((error) => {
@@ -27,8 +27,8 @@ const actions = {
       });
   },
 
-  async createArticle({}, data) {
-    return ArticlesService.createArticle(data);
+  async createEntre({}, data) {
+    return ArticlesService.createEntre(data);
   },
   async getCompte({}, code) {
     return ArticlesService.getCompte(code);
@@ -51,8 +51,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  SET_ARTICLE(state, val) {
-    state.article = val;
+  SET_ENTRE(state, val) {
+    state.entre = val;
   },
   ADD_COLOR(state, color) {
     state.generatedColors.add(color);

@@ -18,11 +18,13 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableSortie from "@/components/TableSortie.vue";
 
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
 const router = useRouter();
+const store = useStore();
 
 const breadcrumbItems = reactive([
   {
@@ -37,6 +39,10 @@ const fields = reactive({
   qte: "",
   date: "",
 });
+const articles = computed(() => store.getters["articles/article"]);
+const beneficiaire = computed(() => store.getters["beneficiaire/benefi"]);
+const sortie = computed(() => store.getters["sortie/sortie"]);
+
 const isCreateTournoisModalActive = ref(false);
 
 const createMembre = () => {
@@ -45,6 +51,32 @@ const createMembre = () => {
 
 const goBack = () => {
   console.log("ttoto");
+};
+
+const createSortie = () => {
+  const datas = {
+    code_article: fields.code_article,
+    beneficiaire_id: fields.beneficiaire_id.id,
+    qte: fields.qte,
+    date: fields.date,
+  };
+  store
+    .dispatch("sortie/createSortie", datas)
+    .then(async (response) => {
+      //   console.log("response", response);f
+      if (!response.data.error) {
+        await store.dispatch("sortie/getAllSortie");
+      }
+    })
+    .catch((error) => {
+      // this.$snackbar.add({
+      //   text: "Error" + error,
+      //   type: "error",
+      // });
+
+      console.log("error", error);
+    });
+  console.log(datas);
 };
 </script>
 
@@ -56,12 +88,13 @@ const goBack = () => {
       width="xl:w-6/12"
       hasCancel
       title="✍️ Créer une sortie"
+      @confirm="createSortie"
     >
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
         <FormField label="Choisir l'article" help="Required">
           <FormControl
             v-model="fields.code_article"
-            :options="['Founder', 'Member']"
+            :options="articles"
             icon="check-circle"
             placeholder="Article"
           />
@@ -69,7 +102,7 @@ const goBack = () => {
         <FormField label="Bénéficiaire">
           <FormControl
             v-model="fields.beneficiaire_id"
-            :options="['Founder', 'Member']"
+            :options="beneficiaire"
             icon="check-circle"
             placeholder="Article"
           />
@@ -105,7 +138,7 @@ const goBack = () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TableSortie />
+      <TableSortie :details="sortie" />
     </CardBox>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">

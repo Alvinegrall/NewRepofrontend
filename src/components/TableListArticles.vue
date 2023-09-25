@@ -7,22 +7,7 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  totalAmount: {
-    type: String,
-    default: "3000",
-  },
-  paidAmount: {
-    type: String,
-    default: "1000",
-  },
-  remainingAmount: {
-    type: String,
-    default: "2000",
-  },
-  currency: {
-    type: String,
-    default: "XAF",
-  },
+
   details: {
     type: Array,
     default: () => [],
@@ -49,12 +34,12 @@ const props = defineProps({
                   Nom
                 </th>
 
-                <th
+                <!-- <th
                   scope="col"
                   class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Marque
-                </th>
+                </th> -->
                 <th
                   scope="col"
                   class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -86,32 +71,25 @@ const props = defineProps({
                 >
                   Stock securité
                 </th>
-               
-              
+
                 <th />
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(item, index) in 5" :key="index">
+              <tr v-for="(item, index) in details" :key="index">
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
-                  Payment from <span class="font-semibold">Bonnie Green</span>
+                  {{ item.name }}
                 </td>
-                <td class="whitespace-nowrap text-sm font-normal text-gray-500">
+                <!-- <td class="whitespace-nowrap text-sm font-normal text-gray-500">
                   Apr 23 ,2021
-                </td>
+                </td> -->
 
-                <BaseAmountWithArrow isColorText isTable amount="3000" />
-                <td>Lorem ipsum dolor</td>
+                <!-- <BaseAmountWithArrow isColorText isTable amount="3000" /> -->
+                <td>{{ item.magasin.name }}</td>
 
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
-                  <!-- <BaseStatusButton
-                    icon="x"
-                    label="Échoué"
-                    roundedFull
-                    danger
-                  /> -->
                   <div class="flex items-center gap-3">
-                    324
+                    {{ item.category.name }}
                     <!-- <BaseStatusButton
                       icon="check-circle"
                       label="Success"
@@ -119,9 +97,12 @@ const props = defineProps({
                     /> -->
                   </div>
                 </td>
-                <td>Lorem ipsum dolor</td>
+                <td>
+                  {{ item.qte }}
+                </td>
 
-                <td>Lorem ipsum dolor</td>
+                <td>{{ item.stock_alerte }}</td>
+                <td>{{ item.stock_securite }}</td>
 
                 <td>
                   <BaseButtons type="justify-start" class="flex gap-2" no-wrap>

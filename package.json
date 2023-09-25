@@ -8,6 +8,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "ag-grid-community": "^30.1.0",
+    "ag-grid-vue3": "^30.1.0",
     "axios": "0.27.2",
     "chart.js": "2.9.4",
     "feather-icons": "^4.29.1",

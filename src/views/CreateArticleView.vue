@@ -18,12 +18,13 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableListArticles from "@/components/TableListArticles.vue";
 
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
 const router = useRouter();
-
+const store = useStore();
 const breadcrumbItems = reactive([
   {
     title: "Créer un article",
@@ -36,11 +37,45 @@ const fields = reactive({
   stock_alerte: "",
   stock_securite: "",
   cat_id: "",
+  magasin_id: "",
 });
 const isCreateTournoisModalActive = ref(false);
+const articles = computed(() => store.getters["articles/article"]);
+
+const magasins = computed(() => store.getters["magasins/magasin"]);
+const cats = computed(() => store.getters["category/cat"]);
 
 const createMembre = () => {
   isCreateTournoisModalActive.value = true;
+};
+
+const createArticles = () => {
+  const datas = {
+    name: fields.name,
+    stock_alerte: fields.stock_alerte,
+    stock_securite: fields.stock_securite,
+    cat_id: fields.cat_id.id,
+    magasin_id: fields.magasin_id.id,
+  };
+
+  store
+    .dispatch("articles/createArticle", datas)
+    .then(async (response) => {
+      //   console.log("response", response);
+      if (!response.data.error) {
+        await store.dispatch("articles/getAllArticles");
+      }
+    })
+    .catch((error) => {
+      // this.$snackbar.add({
+      //   text: "Error" + error,
+      //   type: "error",
+      // });
+
+      console.log("error", error);
+    });
+
+  // console.log(datas);
 };
 
 const goBack = () => {
@@ -56,8 +91,9 @@ const goBack = () => {
       width="xl:w-5/12"
       hasCancel
       title="✍️ Créer un article"
+      @confirm="createArticles"
     >
-      <div class="grid grid-cols-1 lg:grid-cols-2  gap-x-6 gap-y-3">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-3">
         <FormField label="Nom de l'article" help="Required">
           <FormControl
             v-model="fields.name"
@@ -81,16 +117,16 @@ const goBack = () => {
         </FormField>
         <FormField label="Choisir le magasin">
           <FormControl
-            v-model="fields.code_article"
-            :options="['Founder', 'Member']"
+            v-model="fields.magasin_id"
+            :options="magasins"
             icon="check-circle"
             placeholder="choisir"
           />
         </FormField>
         <FormField label="Choisir la catégorie">
           <FormControl
-            v-model="fields.code_article"
-            :options="['Founder', 'Member']"
+            v-model="fields.cat_id"
+            :options="cats"
             icon="check-circle"
             placeholder="choisir"
           />
@@ -108,7 +144,7 @@ const goBack = () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TableListArticles details=" " />
+      <TableListArticles :details="articles" />
     </CardBox>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
