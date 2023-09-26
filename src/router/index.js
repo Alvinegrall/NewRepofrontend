@@ -118,6 +118,7 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("fournisseur/getAllFournisseurs");
   await store.dispatch("beneficiaire/getAllBenefi");
   await store.dispatch("magasins/getAllMagasins");
+  await store.dispatch("articles/getAllLogs");
   await store.dispatch("articles/getAllArticles");
   await store.dispatch("entre/getAllEntre");
   await store.dispatch("sortie/getAllSortie");

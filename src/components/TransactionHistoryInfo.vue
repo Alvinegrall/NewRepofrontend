@@ -28,6 +28,11 @@ const props = defineProps({
     default: () => [],
   },
 });
+const formateDate = (date) => {
+  const newdate = new Date(date);
+  const readableDate = newdate.toLocaleString();
+  return readableDate;
+};
 </script>
 
 <template>
@@ -58,69 +63,40 @@ const props = defineProps({
 
                 <th
                   scope="col"
-                  class="flex items-center flex-1 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Montant
-                </th>
-                <th
-                  scope="col"
                   class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Membre
+                  Status
                 </th>
-                <th
-                  scope="col"
-                  class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                Status
-            </th>
+                <th />
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(item, index) in 5" :key="index">
+              <tr v-for="(item, index) in details" :key="index">
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
-                  Payment from <span class="font-semibold">Bonnie Green</span>
+                  <div v-html="item.description"></div>
                 </td>
                 <td class="whitespace-nowrap text-sm font-normal text-gray-500">
-                  Apr 23 ,2021
+                  {{ formateDate(item.created_at) }}
                 </td>
 
-                <BaseAmountWithArrow isColorText isTable amount="3000" />
-                <td>Lorem ipsum dolor</td>
-
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
-                  <!-- <BaseStatusButton
-                    icon="x"
-                    label="Échoué"
-                    roundedFull
-                    danger
-                  /> -->
                   <div class="flex items-center gap-3">
-                      <BaseStatusButton
-                        icon="check-circle"
-                        label="Success"
-                        success
-                      />
-                      <div class="underline text-blue-600 ">
-                        Détails
-                      </div>
-
+                    <BaseStatusButton
+                      icon="check-circle"
+                      label="Success"
+                      success
+                    />
+                    <div class="underline text-blue-600">Détails</div>
                   </div>
-                  <!-- <BaseButtons type="justify-start" no-wrap>
-                    <BaseButton
-                      color="info"
-                      :icon="'info'"
-                      small
-                      @click="isModalActive = true"
-                    />
-
-                    <BaseButton
-                      color="warning"
-                      icon="share-2"
-                      small
-                      @click="isModalDangerActive = true"
-                    />
-                  </BaseButtons> -->
+                </td>
+                <td>
+                  <BaseButton
+                    color="danger"
+                    :icon="'trash-2'"
+                    outline
+                    small
+                    @click="isModalActive = true"
+                  />
                 </td>
               </tr>
             </tbody>

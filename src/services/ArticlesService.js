@@ -1,9 +1,11 @@
 import axios from "@/config/axios";
 
 export default {
-
   getAllSortie() {
     return axios.get("/sortie");
+  },
+  getAllLogs() {
+    return axios.get("/logs");
   },
   createSortie(data) {
     return axios.post("/sortie", data);

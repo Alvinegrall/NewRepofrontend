@@ -3,12 +3,16 @@ import ArticlesService from "@/services/ArticlesService";
 
 const state = {
   article: null,
+  logs: null,
 };
 
 // getters
 const getters = {
   article: (state) => {
     return state.article || [];
+  },
+  logs: () => {
+    return state.logs || [];
   },
 };
 
@@ -20,6 +24,19 @@ const actions = {
         console.log("response", response);
         if (!response.data.error) {
           commit("SET_ARTICLE", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  },
+
+  async getAllLogs({ commit }) {
+    return ArticlesService.getAllLogs()
+      .then((response) => {
+        console.log("response", response);
+        if (!response.data.error) {
+          commit("SET_LOGS", response.data.data);
         }
       })
       .catch((error) => {
@@ -53,6 +70,9 @@ const actions = {
 const mutations = {
   SET_ARTICLE(state, val) {
     state.article = val;
+  },
+  SET_LOGS(state, val) {
+    state.logs = val;
   },
   ADD_COLOR(state, color) {
     state.generatedColors.add(color);

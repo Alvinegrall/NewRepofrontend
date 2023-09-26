@@ -67,6 +67,8 @@ const submitProfile = () => {
 };
 
 // const membresList = computed(() => store.getters["membres/membresList"]);
+const logs = computed(() => store.getters["articles/logs"]);
+
 
 const goBack = () => {
   router.push({ name: "finance.cotisations" });
@@ -273,7 +275,7 @@ const formateDate = (date) => {
       </div>
       <CardBox>
         <CompteHeader title="Historique des transactions" noicon />
-        <TransactionHistoryInfo details="currentCompte?.payments " />
+        <TransactionHistoryInfo :details="logs" />
       </CardBox>
     </div>
   </div>
