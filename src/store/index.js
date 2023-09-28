@@ -28,6 +28,16 @@ export default createStore({
     setGlobalLoading({ commit }, loading) {
       commit("SET_GLOBAL_LOADING", loading);
     },
+    setGlobalLoading({ commit }, loading) {
+      commit("SET_GLOBAL_LOADING", loading);
+      if (loading) {
+        document.body.classList.add("is-loading");
+        document.querySelector(".root-loader").style.display = "";
+      } else {
+        document.body.classList.remove("is-loading");
+        document.querySelector(".root-loader").style.display = "none";
+      }
+    },
     setContainLoading({ commit }, loading) {
       commit("SET_CONTAIN_LOADING", loading);
     },
