@@ -18,6 +18,10 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableSortie from "@/components/TableSortie.vue";
 
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
+
 import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -66,17 +70,18 @@ const createSortie = () => {
       //   console.log("response", response);f
       if (!response.data.error) {
         await store.dispatch("sortie/getAllSortie");
+        snackbar.add({
+          type: "success",
+          text: "Effectué avec success",
+        });
       }
     })
     .catch((error) => {
-      // this.$snackbar.add({
-      //   text: "Error" + error,
-      //   type: "error",
-      // });
-
-      console.log("error", error);
+      snackbar.add({
+        type: "error",
+        text: error.response.data.message,
+      });
     });
-  console.log(datas);
 };
 </script>
 

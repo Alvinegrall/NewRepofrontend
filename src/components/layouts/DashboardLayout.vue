@@ -1,7 +1,7 @@
 <script setup>
 import Sidebar from "./Sidebar.vue";
 import Header from "./Header.vue";
-import BodySkeleton from "@/components/loader/BodySkeleton.vue";
+// import BodySkeleton from "@/components/loader/BodySkeleton.vue";
 import { useStore } from "vuex";
 import { computed } from "vue";
 

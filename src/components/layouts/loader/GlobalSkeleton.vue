@@ -1,7 +1,7 @@
 <script setup>
 import SideBarSkeleton from "./SideBarSkeleton.vue";
 import HeaderSkeleton from "./HeaderSkeleton.vue";
-import BodySkeleton from "./BodySkeleton.vue";
+// import BodySkeleton from "./BodySkeleton.vue";
 </script>
 
 <template>
@@ -29,7 +29,7 @@ import BodySkeleton from "./BodySkeleton.vue";
         <main>
           <div class="about pt-6 px-4">
             <!-- <slot /> -->
-            <BodySkeleton />
+            <!-- <BodySkeleton /> -->
           </div>
         </main>
       </div>
