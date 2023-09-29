@@ -4,6 +4,7 @@ import ArticlesService from "@/services/ArticlesService";
 const state = {
   article: null,
   logs: null,
+  homePageData: null,
 };
 
 // getters
@@ -13,6 +14,9 @@ const getters = {
   },
   logs: () => {
     return state.logs || [];
+  },
+  homePageData: () => {
+    return state.homePageData;
   },
 };
 
@@ -24,6 +28,19 @@ const actions = {
         console.log("response", response);
         if (!response.data.error) {
           commit("SET_ARTICLE", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  },
+
+  async getHomepageData({ commit }) {
+    return ArticlesService.getHomepageData()
+      .then((response) => {
+        console.log("response", response);
+        if (!response.data.error) {
+          commit("SET_HOME_PAGE_DATA", response.data.data);
         }
       })
       .catch((error) => {
@@ -77,6 +94,9 @@ const mutations = {
   ADD_COLOR(state, color) {
     state.generatedColors.add(color);
     state.colors.push(color);
+  },
+  SET_HOME_PAGE_DATA(state, datas) {
+    state.homePageData = datas;
   },
 };
 

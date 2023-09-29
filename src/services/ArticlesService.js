@@ -7,6 +7,9 @@ export default {
   getAllLogs() {
     return axios.get("/logs");
   },
+  getHomepageData() {
+    return axios.get("/home-page-data");
+  },
   createSortie(data) {
     return axios.post("/sortie", data);
   },

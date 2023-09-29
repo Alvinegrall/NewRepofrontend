@@ -18,11 +18,35 @@ import Tabs from "@/components/common/Tabs.vue"; // Importez le composant Tabs
 import CompteHeader from "@/components/common/CompteHeader.vue";
 // import TableDetailNonCotisation from "@/components/TableDetailNonCotisation.vue";
 import CompteAmountAndLabel from "@/components/common/CompteAmountAndLabel.vue";
+import { Bar } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  Title,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+} from "chart.js";
 
 import { computed, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 // import PlanetChart from "@/components/PlanetChart.vue";
+
+ChartJS.register(ArcElement, Tooltip, Legend, PointElement,
+  LineElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const store = useStore();
 const route = useRoute();
@@ -68,7 +92,7 @@ const submitProfile = () => {
 
 // const membresList = computed(() => store.getters["membres/membresList"]);
 const logs = computed(() => store.getters["articles/logs"]);
-
+const homePageData = computed(() => store.getters["articles/homePageData"]);
 
 const goBack = () => {
   router.push({ name: "finance.cotisations" });
@@ -79,6 +103,25 @@ const formateDate = (date) => {
   const readableDate = newdate.toLocaleString();
   return readableDate;
 };
+
+
+const dataBand = reactive({
+  labels: null,
+  datasets: [
+    {
+      label: "Quatité",
+      backgroundColor: "#f87979",
+      data: null,
+    },
+  ],
+});
+
+dataBand.labels = homePageData.value.article_name
+dataBand.datasets[0].data = homePageData.value.article_qte
+const options = reactive({
+  responsive: true,
+  maintainAspectRatio: false,
+});
 </script>
 
 <template>
@@ -147,83 +190,68 @@ const formateDate = (date) => {
         <CardBox>
           <div class="relative">
             <CompteHeader title="Etats articles" noicon />
-            <div class="flex flex-col md:flex-row items-center gap-4">
-              <div class="flex-1">
-                <CompteAmountAndLabel
-                  isColorText
-                  amountSize="text-4xl"
-                  amount="3000"
-                  label="Montant versé"
-                  labelColor="text-gray-500"
-                  amountColor=""
-                  class="mb-5"
-                />
 
-                <CompteAmountAndLabel
-                  isColorText
-                  amountSize="text-3xl"
-                  amount="0"
-                  label="Solde Faroty"
-                  labelColor="text-gray-500"
-                  amountColor="info"
-                  class="mb-5"
-                />
-              </div>
-              <div class="flex-1 border bg-opacity-60 p-3 rounded-lg mt-5">
-                <img src="/earning.png" class="w-8" alt="" />
-
-                <div>
-                  <div>
-                    Les fonds sont transmis dans le compte
-                    <span class="font-bold text-blue-500 underline"
-                      >Épargne</span
-                    >
-                  </div>
-                  <button
-                    class="mt-5 flex items-center gap-1 hover:gap-3 transition-all duration-200 ease-out underline text-blue-500 font-[500]"
-                  >
-                    Voir le compte
-                    <vue-feather class="h-4" type="arrow-right"></vue-feather>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="absolute top-0 right-0 bg-red-200 p-2 rounded-lg">
-              <div class="text-sm flex items-center gap-1">
-                <span class="font-semibold text-red-500"
-                  ><vue-feather class="h-4" type="alert-circle"></vue-feather
-                ></span>
-                <span class="font-semibold text-red-500"
-                  >Cotisation Expiré</span
-                >
-              </div>
+            <div class="h-52">
+              <Bar :data="dataBand" :options="options" />
             </div>
 
-            <!-- <div
-              class="mt-5 flex flex-col md:flex-row items-center justify-end gap-5"
-            >
-              <BaseButton
-                color="info"
-                label="Retrait"
-                icon="arrow-up-circle"
-                @click="cashoutModal"
-              />
-
-            
-            </div> -->
+            <!-- graph here -->
           </div>
         </CardBox>
         <div class="flex flex-col gap-4">
           <div class="grid grid-cols-4 gap-4">
-            <div v-for="(item, index) in 4" :key="index">
+            <div>
+              <CardBox>
+                <div class="flex flex-col items-center justify-center">
+                  <div class="flex items-center gap-2">
+                    <img src="/earning.png" class="w-5" alt="" />
+                    <div class="font-semibold text-lg">
+                      {{ homePageData.total_article }}
+                    </div>
+                  </div>
+                  <div>Articles</div>
+                </div>
+              </CardBox>
+            </div>
+            <div>
+              <CardBox>
+                <div class="flex flex-col items-center justify-center">
+                  <div class="flex items-center gap-2">
+                    <img src="/livraison.png" class="w-5" alt="" />
+
+                    <div class="font-semibold text-lg">
+                      {{ homePageData.total_entre }}
+                    </div>
+                  </div>
+                  <div>Livraisons</div>
+                </div>
+              </CardBox>
+            </div>
+            <div>
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
                     <img src="/earning.png" class="w-5" alt="" />
 
-                    <div>12501</div>
+                    <div class="font-semibold text-lg">
+                      {{ homePageData.total_sortie }}
+                    </div>
                   </div>
-                  <div>Livraisons</div>
+                  <div>Sortie</div>
+                </div>
+              </CardBox>
+            </div>
+            <div>
+              <CardBox>
+                <div class="flex flex-col items-center justify-center">
+                  <div class="flex items-center gap-2">
+                    <img src="/alert.png" class="w-5" alt="" />
+
+                    <div class="font-semibold text-lg text-red-500">
+                      {{ homePageData.total_alerte }}
+                    </div>
+                  </div>
+                  <div>Alertes</div>
                 </div>
               </CardBox>
             </div>
@@ -264,9 +292,7 @@ const formateDate = (date) => {
                       </div>
                     </div>
                   </td>
-                  <td data-label="Date de fin">
-                    Hier
-                  </td>
+                  <td data-label="Date de fin">Hier</td>
                 </tr>
               </tbody>
             </table>

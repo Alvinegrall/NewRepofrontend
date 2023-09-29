@@ -122,6 +122,7 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("articles/getAllArticles");
   await store.dispatch("entre/getAllEntre");
   await store.dispatch("sortie/getAllSortie");
+  await store.dispatch("articles/getHomepageData");
 
   // else return next({ name: "create-page" });
 

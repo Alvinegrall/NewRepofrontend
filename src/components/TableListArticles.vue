@@ -98,7 +98,16 @@ const props = defineProps({
                   </div>
                 </td>
                 <td>
-                  {{ item.qte }}
+                  <div class="flex items-center gap-3">
+                    <div>
+                      {{ item.qte }}
+                    </div>
+                    <vue-feather
+                      v-if="item.is_alert"
+                      type="info"
+                      class="text-red-500 h-5"
+                    ></vue-feather>
+                  </div>
                 </td>
 
                 <td>{{ item.stock_alerte }}</td>
