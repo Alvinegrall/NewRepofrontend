@@ -4,9 +4,38 @@ export default {
   getAllSortie() {
     return axios.get("/sortie");
   },
+
   getAllLogs() {
     return axios.get("/logs");
   },
+  deleteLogs(params) {
+    return axios.delete(`logs/${params}/delete`);
+  },
+  deleteSortie(params) {
+    return axios.delete(`sortie/${params}/delete`);
+  },
+  deleteArticle(params) {
+    return axios.delete(`article/${params}/delete`);
+  },
+  deleteCat(params) {
+    return axios.delete(`cat/${params}/delete`);
+  },
+
+  deleteFournisseur(params) {
+    return axios.delete(`fournisseur/${params}/delete`);
+  },
+
+  deleteEntre(params) {
+    return axios.delete(`entre/${params}/delete`);
+  },
+
+  deleteBeneficiaire(params) {
+    return axios.delete(`beneficiaire/${params}/delete`);
+  },
+  deleteMagasin(params) {
+    return axios.delete(`magasin/${params}/delete`);
+  },
+
   getHomepageData() {
     return axios.get("/home-page-data");
   },

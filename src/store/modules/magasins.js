@@ -27,6 +27,10 @@ const actions = {
       });
   },
 
+  async deleteMagasin({}, data) {
+    return ArticlesService.deleteMagasin(data);
+  },
+
   async createMagasin({}, cat) {
     return ArticlesService.createMagasin(cat);
   },

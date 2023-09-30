@@ -135,6 +135,8 @@ const options = reactive({
   responsive: true,
   maintainAspectRatio: false,
 });
+
+
 </script>
 
 <template>

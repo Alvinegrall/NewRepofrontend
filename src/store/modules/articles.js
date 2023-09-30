@@ -64,6 +64,9 @@ const actions = {
   async createArticle({}, data) {
     return ArticlesService.createArticle(data);
   },
+  async deleteLogs({}, data) {
+    return ArticlesService.deleteLogs(data);
+  },
   async getCompte({}, code) {
     return ArticlesService.getCompte(code);
   },

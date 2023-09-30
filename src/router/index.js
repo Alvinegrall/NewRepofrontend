@@ -24,6 +24,12 @@ const router = createRouter({
           path: "/",
           name: "common.home",
           component: HomeView1,
+          async beforeEnter(to, from, next) {
+            await store.dispatch("articles/getHomepageData");
+            await store.dispatch("articles/getAllLogs");
+
+            next();
+          },
         },
         {
           path: "/create-article",

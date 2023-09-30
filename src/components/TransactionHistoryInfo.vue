@@ -2,6 +2,13 @@
 import BaseAmountWithArrow from "@/components/common/BaseAmountWithArrow.vue";
 import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
+import CardBoxModal from "@/components/common/CardBoxModal.vue";
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
+
 const props = defineProps({
   title: {
     type: String,
@@ -33,6 +40,40 @@ const formateDate = (date) => {
   const readableDate = newdate.toLocaleString();
   return readableDate;
 };
+
+const store = useStore();
+
+const current_item = ref("");
+const isModalDangerActive = ref(false);
+
+const onDelete = (value) => {
+  isModalDangerActive.value = true;
+  current_item.value = value;
+};
+
+const handleDelete = async () => {
+  console.log(current_item.value);
+  await store
+    .dispatch("articles/deleteLogs", current_item.value)
+    .then(async (response) => {
+      console.log("response add ", response);
+      if (!response.data.error) {
+        await store.dispatch("articles/getAllLogs");
+        snackbar.add({
+          text: "Supprimé avec success",
+          type: "success",
+        });
+        isModalDangerActive.value = false;
+      }
+    })
+    .catch((error) => {
+      snackbar.add({
+        text: "Erreur lors de la creation",
+        type: "error",
+      });
+    });
+};
+
 </script>
 
 <template>
@@ -40,6 +81,17 @@ const formateDate = (date) => {
     <!-- <h5 id="defaultMembreLabel" class="modal-title text-sm mb-3 font-semibold">
       Détails
     </h5> -->
+
+    <CardBoxModal
+      v-model="isModalDangerActive"
+      title="Confirmer la suppression"
+      button="danger"
+      buttonLabel="Supprimer"
+      has-cancel
+      @confirm="handleDelete"
+    >
+      <p>Voulez-vous vraiment effectuer cette action?</p>
+    </CardBoxModal>
 
     <div class="overflow-x-auto rounded-lg">
       <div class="align-middle inline-block min-w-full">
@@ -95,7 +147,7 @@ const formateDate = (date) => {
                     :icon="'trash-2'"
                     outline
                     small
-                    @click="isModalActive = true"
+                    @click="onDelete(item.id)"
                   />
                 </td>
               </tr>
