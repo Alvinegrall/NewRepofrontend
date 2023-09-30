@@ -2,6 +2,8 @@
 import BaseAmountWithArrow from "@/components/common/BaseAmountWithArrow.vue";
 import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
+import BaseButtons from "@/components/common/BaseButtons.vue";
+
 import CardBoxModal from "@/components/common/CardBoxModal.vue";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";

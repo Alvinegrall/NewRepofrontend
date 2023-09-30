@@ -2,6 +2,16 @@
 import BaseAmountWithArrow from "@/components/common/BaseAmountWithArrow.vue";
 import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
+import BaseButtons from "@/components/common/BaseButtons.vue";
+
+import CardBoxModal from "@/components/common/CardBoxModal.vue";
+
+import { useSnackbar } from "vue3-snackbar";
+import { ref } from "vue";
+import { useStore } from "vuex";
+
+const snackbar = useSnackbar();
+
 const props = defineProps({
   title: {
     type: String,
@@ -13,14 +23,53 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const store = useStore();
+
+const current_item = ref("");
+const isModalDangerActive = ref(false);
+
+const onDelete = (value) => {
+  isModalDangerActive.value = true;
+  current_item.value = value;
+};
+
+const handleDelete = async () => {
+  console.log(current_item.value);
+  await store
+    .dispatch("articles/deleteArticle", current_item.value)
+    .then(async (response) => {
+      console.log("response add ", response);
+      if (!response.data.error) {
+        await store.dispatch("articles/getAllArticles");
+        snackbar.add({
+          text: "Supprimé avec success",
+          type: "success",
+        });
+        isModalDangerActive.value = false;
+      }
+    })
+    .catch((error) => {
+      snackbar.add({
+        text: "Erreur lors de la creation",
+        type: "error",
+      });
+    });
+};
 </script>
 
 <template>
   <div>
-    <!-- <h5 id="defaultMembreLabel" class="modal-title text-sm mb-3 font-semibold">
-      Détails
-    </h5> -->
-
+    <CardBoxModal
+      v-model="isModalDangerActive"
+      title="Confirmer la suppression"
+      button="danger"
+      buttonLabel="Supprimer"
+      has-cancel
+      @confirm="handleDelete"
+    >
+      <p>Voulez-vous vraiment effectuer cette action?</p>
+    </CardBoxModal>
     <div class="overflow-x-auto rounded-lg">
       <div class="align-middle inline-block min-w-full">
         <div class="shadow overflow-hidden sm:rounded-lg">
@@ -85,11 +134,11 @@ const props = defineProps({
                 </td> -->
 
                 <!-- <BaseAmountWithArrow isColorText isTable amount="3000" /> -->
-                <td>{{ item.magasin.name }}</td>
+                <td>{{ item?.magasin?.name }}</td>
 
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
                   <div class="flex items-center gap-3">
-                    {{ item.category.name }}
+                    {{ item?.category?.name }}
                     <!-- <BaseStatusButton
                       icon="check-circle"
                       label="Success"
@@ -126,7 +175,8 @@ const props = defineProps({
                       color="danger"
                       icon="trash-2"
                       small
-                      @click="isModalDangerActive = true"
+                      @click="onDelete(item.id)"
+
                     />
                   </BaseButtons>
                 </td>

@@ -67,6 +67,12 @@ const actions = {
   async deleteLogs({}, data) {
     return ArticlesService.deleteLogs(data);
   },
+  async deleteArticle({}, data) {
+    return ArticlesService.deleteArticle(data);
+  },
+  // async getAllArticles({}, data) {
+  //   return ArticlesService.getAllArticles(data);
+  // },
   async getCompte({}, code) {
     return ArticlesService.getCompte(code);
   },
