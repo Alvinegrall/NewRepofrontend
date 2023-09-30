@@ -22,7 +22,7 @@ import { useSnackbar } from "vue3-snackbar";
 
 const snackbar = useSnackbar();
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
@@ -83,6 +83,13 @@ const createSortie = () => {
       });
     });
 };
+const current_datas = ref(null)
+const checkQte = () => {
+   current_datas.value = articles.value.find(
+    (elt) => elt.code == fields.code_article
+  );
+
+};
 </script>
 
 <template>
@@ -102,6 +109,7 @@ const createSortie = () => {
             :options="articles"
             icon="check-circle"
             placeholder="Article"
+            @change="checkQte"
           />
         </FormField>
         <FormField label="Bénéficiaire">
@@ -112,7 +120,13 @@ const createSortie = () => {
             placeholder="Article"
           />
         </FormField>
-        <FormField label="Quantité" help="required">
+        <FormField v-if="current_datas?.qte <=0" label="Vous n'avez pas cette article en stock" >
+         <div class="text-red-500">
+          Effectuez une recharge
+         </div>
+        </FormField>
+        
+        <FormField v-else :label="current_datas?.qte ? 'Quantité ( ' + current_datas?.qte +'  ) ' : 'Quantité' " help="required">
           <FormControl
             v-model="fields.qte"
             icon="phone"

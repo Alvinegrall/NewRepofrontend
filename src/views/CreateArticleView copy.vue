@@ -10,7 +10,7 @@ import FormControl from "@/components/common/FormControl.vue";
 import CardBoxModal from "@/components/common/CardBoxModal.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
 import BaseButtons from "@/components/common/BaseButtons.vue";
-import { reactive, ref, computed } from "vue";
+import { reactive, ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useStore } from "vuex";
 // import VueDatePicker from '@mathieustan/vue-datepicker';
@@ -24,8 +24,15 @@ const breadcrumbItems = reactive([
   {
     title: "Créer un article",
     link: "create-article",
-  }
+  },
 ]);
+
+onMounted(async () => {
+  await store.dispatch("magasins/getAllMagasins");
+  await store.dispatch("articles/getAllArticles");
+    await store.dispatch("articles/getAllArticles");
+
+});
 const typeBeneficiary = reactive([
   { value: "child", label: "Enfant" },
   { value: "woman", label: "Femme" },
@@ -131,7 +138,7 @@ const currentCities = computed(() => store.getters["partners/currentCities"]);
       <p>This is sample modal lorem*10</p>
     </CardBoxModal>
 
-    <HeaderBreadcrumbs :links="breadcrumbItems"  />
+    <HeaderBreadcrumbs :links="breadcrumbItems" />
 
     <!-- <HeaderWithOptions
       :btnLabel="['Enregistrer', 'Retour']"
@@ -296,10 +303,7 @@ const currentCities = computed(() => store.getters["partners/currentCities"]);
             </FormField>
           </div>
         </div>
-
-   
       </CardBox>
-
     </div>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">

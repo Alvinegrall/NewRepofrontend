@@ -94,7 +94,6 @@ const router = createRouter({
           name: "create-page",
           // component: CreatePageViewVue,
           component: () => import("@/views/LoginView.vue"),
-          meta: { redirectPage: true },
           // async beforeEnter(to, from, next) {
           //   await store.dispatch("setGlobalLoading", true);
           //   next();
@@ -113,16 +112,25 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
 
   // eslint-disable-next-line no-unreachable
   if (!authRequired) return next();
+  if(authRequired){
+    authGuard(routeTo, routeFrom, next)
 
-  await store.dispatch("category/getAllCat");
+  }
+
+
+  await store.dispatch("category/getAllCat")
   await store.dispatch("fournisseur/getAllFournisseurs");
   await store.dispatch("beneficiaire/getAllBenefi");
-  await store.dispatch("magasins/getAllMagasins");
   await store.dispatch("articles/getAllLogs");
+  await store.dispatch("magasins/getAllMagasins");
   await store.dispatch("articles/getAllArticles");
   await store.dispatch("entre/getAllEntre");
   await store.dispatch("sortie/getAllSortie");
   await store.dispatch("articles/getHomepageData");
+
+
+  
+
 
   // else return next({ name: "create-page" });
 
@@ -139,6 +147,8 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   //     next({ name: "login" });
   //   });
   // }
+  // if (routeTo.meta.requireAuth)   authGuard(to, from, next);
+
 
   return next();
 });

@@ -78,7 +78,6 @@ const dateTimeConfig = computed(() => {
   if (props.showHour) {
     base = {
       dateFormat: "d/m/Y H:i",
-      minDate: "today",
       enableTime: true,
     };
   }

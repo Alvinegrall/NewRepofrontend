@@ -18,10 +18,13 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableEntree from "@/components/TableEntree.vue";
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
 
 const router = useRouter();
 const store = useStore();
@@ -69,6 +72,10 @@ const createEntre = () => {
       //   console.log("response", response);f
       if (!response.data.error) {
         await store.dispatch("entre/getAllEntre");
+        snackbar.add({
+          type: "success",
+          text: "Effectué avec success",
+        });
       }
     })
     .catch((error) => {
@@ -76,6 +83,10 @@ const createEntre = () => {
       //   text: "Error" + error,
       //   type: "error",
       // });
+      snackbar.add({
+          type: "error",
+          text: "Une erreur s'est produite",
+        });
 
       console.log("error", error);
     });

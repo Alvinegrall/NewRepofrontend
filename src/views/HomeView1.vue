@@ -63,6 +63,19 @@ const tabs = reactive([
 
 const router = useRouter();
 
+onMounted(async()=>{
+  // await store.dispatch("articles/getHomepageData");
+
+  // await store.dispatch("category/getAllCat")
+  // await store.dispatch("fournisseur/getAllFournisseurs");
+  // await store.dispatch("beneficiaire/getAllBenefi");
+  // await store.dispatch("magasins/getAllMagasins");
+  // await store.dispatch("articles/getAllLogs");
+  // await store.dispatch("articles/getAllArticles");
+  // await store.dispatch("entre/getAllEntre");
+  // await store.dispatch("sortie/getAllSortie");
+  // await store.dispatch("articles/getHomepageData");
+})
 const breadcrumbItems = reactive([
   {
     title: "",
@@ -116,8 +129,8 @@ const dataBand = reactive({
   ],
 });
 
-dataBand.labels = homePageData.value.article_name
-dataBand.datasets[0].data = homePageData.value.article_qte
+dataBand.labels = homePageData?.value.article_name
+dataBand.datasets[0].data = homePageData?.value.article_qte
 const options = reactive({
   responsive: true,
   maintainAspectRatio: false,
@@ -243,7 +256,7 @@ const options = reactive({
             </div>
             <div>
               <CardBox>
-                <div class="flex flex-col items-center justify-center">
+                <div class="flex flex-col items-center justify-center cursor-pointer" @click="$router.push({name:'create-article'})">
                   <div class="flex items-center gap-2">
                     <img src="/alert.png" class="w-5" alt="" />
 
@@ -251,7 +264,7 @@ const options = reactive({
                       {{ homePageData.total_alerte }}
                     </div>
                   </div>
-                  <div>Alertes</div>
+                  <div class="underline">Alertes</div>
                 </div>
               </CardBox>
             </div>

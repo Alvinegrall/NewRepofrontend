@@ -6,9 +6,12 @@ import CardBoxHeader from "@/components/common/CardBoxHeader.vue";
 import FormField from "@/components/common/FormField.vue";
 import FormControl from "@/components/common/FormControl.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "@/config/axios";
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
 
 const fields = reactive({
   email: "",
@@ -21,37 +24,44 @@ const isRegisterError = ref(false);
 const registerSuccess = ref(false);
 const errors = ref(false);
 
+onMounted(() => {
+  localStorage.removeItem("jwt");
+});
+
 const login = async () => {
   console.log("dada", fields.password);
   submitted.value = true;
 
   if (fields.email == "") {
     errors.value = true;
-  } else if ((fields.password == "")) {
+  } else if (fields.password == "") {
     errors.value = true;
   } else {
     errors.value = false;
   }
 
-  const result = await axios.post("/login", {
-    email: fields.email,
-    password: fields.password,
-  });
+  await axios
+    .post("/login", {
+      email: fields.email,
+      password: fields.password,
+    })
+    .then((response) => {
+      localStorage.setItem("jwt", response.data.token);
+      router.push({ name: "common.home" });
+    })
+    .catch((error) => {
+      snackbar.add({
+        type: "error",
+        text: "Identifiants de connection invalide",
+      });
+    });
 
   submitted.value = false;
-
-  if (result.data.error) {
-    isRegisterError.value = true;
-
-    return (authError.value = result.data.message);
-  }
-
-  localStorage.setItem("jwt", result.data.token);
 
   // this.$router.push({
   //   path: this.$route.query.redirectFrom ?? "/",
   // });
-  router.push({ name: "common.home" });
+
 };
 </script>
 

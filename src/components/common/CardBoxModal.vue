@@ -45,7 +45,7 @@ const value = computed({
 
 const cartElClass = computed(() => {
   const base = [
-    "shadow-lg max-h-modal w-11/12 md:w-3/5 lg:w-2/5 z-50",
+    "shadow-lg max-h-modal w-11/12 md:w-3/5 lg:w-2/5 z-50 ",
     props.hasCostomWith ? props.width : " xl:w-4/12 ",
   ];
 

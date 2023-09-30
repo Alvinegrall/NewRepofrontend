@@ -18,7 +18,7 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableFournisseurs from "@/components/TableFournisseurs.vue";
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
@@ -44,21 +44,24 @@ const createMembre = () => {
 };
 // createCat
 
+onMounted(async () => {
+  // await store.dispatch("fournisseur/getAllFournisseurs");
+});
 const goBack = () => {
   console.log("ttoto");
 };
 
-const fournisseur = computed(()=>store.getters["fournisseur/fournisseur"]);
+const fournisseur = computed(() => store.getters["fournisseur/fournisseur"]);
 
 const createCat = async () => {
   if (fields.name === "") {
     error.value = true;
     isCreateTournoisModalActive.value = true;
   }
-   store
+  store
     .dispatch("fournisseur/createFournisseur", { name: fields.name })
     .then(async (response) => {
-    //   console.log("response", response);
+      //   console.log("response", response);
       if (!response.data.error) {
         await store.dispatch("fournisseur/getAllFournisseurs");
       }

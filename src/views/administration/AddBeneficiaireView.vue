@@ -18,14 +18,18 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableFournisseurs from "@/components/TableFournisseurs.vue";
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
 const router = useRouter();
 const store = useStore();
+onMounted(async()=>{
+  // await store.dispatch("articles/getHomepageData");
+  // await store.dispatch("beneficiaire/getAllBenefi");
 
+})
 const breadcrumbItems = reactive([
   {
     title: "Bénéficiaire",

@@ -18,7 +18,7 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableAdministration from "@/components/TableAdministration.vue";
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
@@ -47,6 +47,11 @@ const createMembre = () => {
 const goBack = () => {
   console.log("ttoto");
 };
+
+onMounted(async()=>{
+  // await store.dispatch("category/getAllCat")
+  
+})
 
 const cats = computed(()=>store.getters["category/cat"]);
 

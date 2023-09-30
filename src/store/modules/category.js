@@ -1,5 +1,6 @@
 import store from "..";
 import ArticlesService from "@/services/ArticlesService";
+import { useRouter } from "vue-router";
 
 const state = {
   cat: null,
@@ -23,7 +24,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        console.log("error", error);
+        if(error.request.status == 401){
+          location.href = "/login"
+        }
       });
   },
 

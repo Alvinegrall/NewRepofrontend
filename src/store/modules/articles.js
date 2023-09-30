@@ -16,7 +16,7 @@ const getters = {
     return state.logs || [];
   },
   homePageData: () => {
-    return state.homePageData;
+    return state.homePageData || {};
   },
 };
 
@@ -36,7 +36,7 @@ const actions = {
   },
 
   async getHomepageData({ commit }) {
-    return ArticlesService.getHomepageData()
+    return  ArticlesService.getHomepageData()
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {

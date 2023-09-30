@@ -18,7 +18,7 @@ import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
 import TableListArticles from "@/components/TableListArticles.vue";
 
-import { computed, reactive, ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
@@ -31,7 +31,13 @@ const breadcrumbItems = reactive([
     link: "create-article",
   },
 ]);
+onMounted(async () => {
+  // await store.dispatch("magasins/getAllMagasins");
+  // await store.dispatch("articles/getAllArticles");
+  // await store.dispatch("articles/getAllArticles");
+  //   await store.dispatch("category/getAllCat")
 
+});
 const fields = reactive({
   name: "",
   stock_alerte: "",
