@@ -1,7 +1,13 @@
 <script setup>
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref, computed } from "vue";
 import axios from "@/config/axios";
+import TableStats from "@/components/TableStats.vue";
+import CardBox from "@/components/common/CardBox.vue";
+import CardBoxHeader from "@/components/common/CardBoxHeader.vue";
+import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
+
+const store = useStore();
 
 import {
   Chart as ChartJS,
@@ -20,8 +26,7 @@ import { Bar } from "vue-chartjs";
 import { Pie } from "vue-chartjs";
 import { Line } from "vue-chartjs";
 
-ChartJS.register(ArcElement, Tooltip, Legend, PointElement,
-  LineElement);
+ChartJS.register(ArcElement, Tooltip, Legend, PointElement, LineElement);
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -33,6 +38,7 @@ ChartJS.register(
 
 import "ag-grid-community/styles/ag-grid.css"; // Core grid CSS, always needed
 import "ag-grid-community/styles/ag-theme-alpine.css"; // Optional theme CSS
+import { useStore } from "vuex";
 
 const gridApi = ref(null); // Optional - for accessing Grid's API
 
@@ -40,6 +46,8 @@ const gridApi = ref(null); // Optional - for accessing Grid's API
 const onGridReady = (params) => {
   gridApi.value = params.api;
 };
+
+const allStats = computed(() => store.getters["articles/allStats"]);
 
 const rowData = reactive({}); // Set rowData to Array of Objects, one Object per Row
 
@@ -56,7 +64,7 @@ const defaultColDef = {
 };
 
 // Example load data from server
-onMounted(async() => {
+onMounted(async () => {
   await axios
     .get("/article/stats/all")
     .then((remoteRowData) => (rowData.value = remoteRowData.data.data));
@@ -142,9 +150,8 @@ const options = reactive({
     <div class="h-52">
       <Line :data="dataLine" :options="options" />
     </div>
-    <button @click="deselectRows">deselect rows</button>
 
-    <ag-grid-vue
+    <!-- <ag-grid-vue
       class="ag-theme-alpine"
       style="height: 500px"
       :columnDefs="columnDefs.value"
@@ -155,12 +162,26 @@ const options = reactive({
       @cell-clicked="cellWasClicked"
       @grid-ready="onGridReady"
     >
-    </ag-grid-vue>
+    </ag-grid-vue> -->
 
-    <div>
-      <div>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, aliquid! Suscipit accusantium saepe beatae quae in doloribus praesentium perferendis error eligendi, molestiae unde voluptates vel, velit sint voluptatibus cum reprehenderit!
+    <CardBox>
+      <div v-for="(item, index) in allStats" :key="index" >
+        <div v-if="item.sortie.length" class="p-3 border-t">
+          <div  class="p-1 font-bold text-xl border border-emerald-400">
+            {{ item.name }}
+          </div>
+          <div v-if="item.sortie.length">
+            <TableStats :details="item.sortie" />
+          </div>
+
+        </div>
+        <!-- <div v-if="!item.sortie.length" class="flex items-center justify-center text-gray-400">
+          <vue-feather type="search"></vue-feather>
+          <div>Aucune sortie</div>
+        </div> -->
       </div>
-    </div>
+
+    </CardBox>
+
   </div>
 </template>

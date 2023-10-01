@@ -28,6 +28,7 @@ const router = createRouter({
             await store.dispatch("articles/getHomepageData");
             await store.dispatch("articles/getAllLogs");
 
+
             next();
           },
         },
@@ -88,6 +89,14 @@ const router = createRouter({
           name: "statistiques",
           // component: TransactionsViewVue,
           component: () => import("@/views/StatistiquesView.vue"),
+          async beforeEnter(to, from, next) {
+            // await store.dispatch("articles/getHomepageData");
+            // await store.dispatch("articles/getAllLogs");
+            await store.dispatch("articles/getAllStatique");
+
+
+            next();
+          },
         },
       ],
     },
@@ -133,7 +142,6 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("entre/getAllEntre");
   await store.dispatch("sortie/getAllSortie");
   await store.dispatch("articles/getHomepageData");
-  await store.dispatch("articles/getAllStatique");
 
 
   

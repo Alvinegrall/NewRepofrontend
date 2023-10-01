@@ -23,6 +23,9 @@ const getters = {
   statisque: () => {
     return state.statisque;
   },
+  allStats: () => {
+    return state.allStats;
+  },
 };
 
 // privileges
