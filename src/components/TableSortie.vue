@@ -135,7 +135,7 @@ const formateDate = (date) => {
           <th>Article</th>
           <th>Marque</th>
           <th>Quantité</th>
-          <th>Fournisseur</th>
+          <th>Bénéficiaire</th>
           <th />
         </tr>
       </thead>

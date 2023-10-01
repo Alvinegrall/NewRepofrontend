@@ -140,7 +140,7 @@ const handleDelete = async () => {
                       label="Success"
                       success
                     />
-                    <div class="underline text-blue-600">Détails</div>
+                    <!-- <div class="underline text-blue-600">Détails</div> -->
                   </div>
                 </td>
                 <td>

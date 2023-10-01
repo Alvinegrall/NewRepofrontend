@@ -1,6 +1,7 @@
 <script setup>
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
 import { reactive, onMounted, ref } from "vue";
+import axios from "@/config/axios";
 
 import {
   Chart as ChartJS,
@@ -44,7 +45,7 @@ const rowData = reactive({}); // Set rowData to Array of Objects, one Object per
 
 // Each Column Definition results in one Column.
 const columnDefs = reactive({
-  value: [{ field: "make" }, { field: "model" }, { field: "price" }],
+  value: [{ field: "name" }, { field: "sortie" }, { field: "price" }],
 });
 
 // DefaultColDef sets props common to all Columns
@@ -55,10 +56,10 @@ const defaultColDef = {
 };
 
 // Example load data from server
-onMounted(() => {
-  fetch("https://www.ag-grid.com/example-assets/row-data.json")
-    .then((result) => result.json())
-    .then((remoteRowData) => (rowData.value = remoteRowData));
+onMounted(async() => {
+  await axios
+    .get("/article/stats/all")
+    .then((remoteRowData) => (rowData.value = remoteRowData.data.data));
 });
 const deselectRows = () => {
   gridApi.value.deselectAll();
@@ -142,6 +143,7 @@ const options = reactive({
       <Line :data="dataLine" :options="options" />
     </div>
     <button @click="deselectRows">deselect rows</button>
+
     <ag-grid-vue
       class="ag-theme-alpine"
       style="height: 500px"
@@ -154,5 +156,11 @@ const options = reactive({
       @grid-ready="onGridReady"
     >
     </ag-grid-vue>
+
+    <div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, aliquid! Suscipit accusantium saepe beatae quae in doloribus praesentium perferendis error eligendi, molestiae unde voluptates vel, velit sint voluptatibus cum reprehenderit!
+      </div>
+    </div>
   </div>
 </template>

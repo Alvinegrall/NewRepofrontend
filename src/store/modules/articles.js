@@ -5,6 +5,8 @@ const state = {
   article: null,
   logs: null,
   homePageData: null,
+  statisque: null,
+  allStats:null
 };
 
 // getters
@@ -17,6 +19,9 @@ const getters = {
   },
   homePageData: () => {
     return state.homePageData || {};
+  },
+  statisque: () => {
+    return state.statisque;
   },
 };
 
@@ -36,7 +41,7 @@ const actions = {
   },
 
   async getHomepageData({ commit }) {
-    return  ArticlesService.getHomepageData()
+    return ArticlesService.getHomepageData()
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
@@ -60,6 +65,31 @@ const actions = {
         console.log("error", error);
       });
   },
+  
+  async getAllStatique({ commit }) {
+    return ArticlesService.getAllStatique()
+      .then((response) => {
+        console.log("response", response);
+        if (!response.data.error) {
+          commit("SET_ALL_STATS", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  },
+  async getStatique({ commit }) {
+    return ArticlesService.getStatique()
+      .then((response) => {
+        console.log("response", response);
+        if (!response.data.error) {
+          commit("SET_STATS", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  },
 
   async createArticle({}, data) {
     return ArticlesService.createArticle(data);
@@ -70,9 +100,11 @@ const actions = {
   async deleteArticle({}, data) {
     return ArticlesService.deleteArticle(data);
   },
+
   // async getAllArticles({}, data) {
   //   return ArticlesService.getAllArticles(data);
   // },
+
   async getCompte({}, code) {
     return ArticlesService.getCompte(code);
   },
@@ -94,6 +126,12 @@ const actions = {
 
 // mutations
 const mutations = {
+  SET_STATS(state, val) {
+    state.statisque = val;
+  },
+  SET_ALL_STATS(state,val){
+    state.allStats = val;
+  },
   SET_ARTICLE(state, val) {
     state.article = val;
   },

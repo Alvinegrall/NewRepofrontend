@@ -74,6 +74,11 @@ const createSortie = () => {
           type: "success",
           text: "Effectué avec success",
         });
+
+        (fields.beneficiaire_id = ""),
+          (fields.code_article = ""),
+          (fields.date = ""),
+          (fields.qte = "");
       }
     })
     .catch((error) => {
@@ -83,12 +88,11 @@ const createSortie = () => {
       });
     });
 };
-const current_datas = ref(null)
+const current_datas = ref(null);
 const checkQte = () => {
-   current_datas.value = articles.value.find(
+  current_datas.value = articles.value.find(
     (elt) => elt.code == fields.code_article
   );
-
 };
 </script>
 
@@ -120,13 +124,22 @@ const checkQte = () => {
             placeholder="Article"
           />
         </FormField>
-        <FormField v-if="current_datas?.qte <=0" label="Vous n'avez pas cette article en stock" >
-         <div class="text-red-500">
-          Effectuez une recharge
-         </div>
+        <FormField
+          v-if="current_datas?.qte <= 0"
+          label="Vous n'avez pas cette article en stock"
+        >
+          <div class="text-red-500">Effectuez une recharge</div>
         </FormField>
-        
-        <FormField v-else :label="current_datas?.qte ? 'Quantité ( ' + current_datas?.qte +'  ) ' : 'Quantité' " help="required">
+
+        <FormField
+          v-else
+          :label="
+            current_datas?.qte
+              ? 'Quantité ( ' + current_datas?.qte + '  ) '
+              : 'Quantité'
+          "
+          help="required"
+        >
           <FormControl
             v-model="fields.qte"
             icon="phone"

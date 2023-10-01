@@ -34,12 +34,12 @@ const props = defineProps({
                   Nom
                 </th>
 
-                <th
+                <!-- <th
                   scope="col"
                   class="text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Status
-                </th>
+                </th> -->
                 <th />
               </tr>
             </thead>
@@ -48,9 +48,9 @@ const props = defineProps({
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
                   {{ item.name }}
                 </td>
-                <td class="whitespace-nowrap text-sm font-normal text-gray-500">
+                <!-- <td class="whitespace-nowrap text-sm font-normal text-gray-500">
                   Apr 23 ,2021
-                </td>
+                </td> -->
 
                 <td class="flex justify-center items-center">
                   <BaseButtons type="justify-start" no-wrap class="flex gap-3">
@@ -66,12 +66,7 @@ const props = defineProps({
                       small
                       @click="isModalDangerActive = true"
                     />
-                    <BaseButton
-                      color="info"
-                      :icon="'eye'"
-                      small
-                      @click="isModalActive = true"
-                    />
+                
                   </BaseButtons>
                 </td>
               </tr>

@@ -219,7 +219,7 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/earning.png" class="w-5" alt="" />
+                    <img src="/box_close.png" class="w-5" alt="" />
                     <div class="font-semibold text-lg">
                       {{ homePageData.total_article }}
                     </div>
@@ -272,7 +272,7 @@ const options = reactive({
             </div>
           </div>
           <CardBox class="flex-1">
-            <CompteHeader title="Département avec le plus le demandes" noicon />
+            <CompteHeader title="Département avec le plus de demandes" noicon />
             <table>
               <thead>
                 <tr>
@@ -315,7 +315,7 @@ const options = reactive({
         </div>
       </div>
       <CardBox>
-        <CompteHeader title="Historique des transactions" noicon />
+        <CompteHeader title="Transactions récentes" noicon />
         <TransactionHistoryInfo :details="logs" />
       </CardBox>
     </div>

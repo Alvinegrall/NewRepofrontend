@@ -70,7 +70,7 @@ const login = async () => {
     <div class="h-screen flex justify-center items-center">
       <div class="w-full md:w-1/2 lg:w-1/3">
         <CardBox is-form @submit.prevent="login">
-          <CardBoxHeader title="🔐 Login admin" btnlabel="See all" />
+          <CardBoxHeader title="🔐 Login admin"  />
           <div
             v-if="errors"
             class="p-2 bg-red-200 text-red-500 rounded-lg my-4"
@@ -97,7 +97,7 @@ const login = async () => {
           </div>
           <div class="mt-5 flex justify-end">
             <BaseButtons>
-              <BaseButton color="info" type="submit" label="Login" />
+              <BaseButton color="success" type="submit" label="Login" />
               <!-- <BaseButton color="info" label="En cour" outline /> -->
             </BaseButtons>
           </div>

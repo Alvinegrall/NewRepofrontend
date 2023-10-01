@@ -39,6 +39,12 @@ export default {
   getHomepageData() {
     return axios.get("/home-page-data");
   },
+  getStatique() {
+    return axios.post("/article/stats");
+  },
+  getAllStatique() {
+    return axios.get("/article/stats/all");
+  },
   createSortie(data) {
     return axios.post("/sortie", data);
   },

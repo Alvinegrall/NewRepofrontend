@@ -133,6 +133,7 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("entre/getAllEntre");
   await store.dispatch("sortie/getAllSortie");
   await store.dispatch("articles/getHomepageData");
+  await store.dispatch("articles/getAllStatique");
 
 
   

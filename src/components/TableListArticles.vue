@@ -39,7 +39,6 @@ const handleDelete = async () => {
   await store
     .dispatch("articles/deleteArticle", current_item.value)
     .then(async (response) => {
-      console.log("response add ", response);
       if (!response.data.error) {
         await store.dispatch("articles/getAllArticles");
         snackbar.add({
