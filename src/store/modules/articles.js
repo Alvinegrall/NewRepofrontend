@@ -44,7 +44,9 @@ const actions = {
   },
 
   async getHomepageData({ commit }) {
-    return ArticlesService.getHomepageData()
+    const cycle_code = store.getters["cycles/cycle_code"];
+
+    return ArticlesService.getHomepageData(cycle_code)
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
@@ -57,7 +59,8 @@ const actions = {
   },
 
   async getAllLogs({ commit }) {
-    return ArticlesService.getAllLogs()
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return ArticlesService.getAllLogs(cycle_code)
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {

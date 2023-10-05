@@ -9,6 +9,7 @@ import beneficiaire from "./modules/beneficiaire";
 import magasins from "./modules/magasins";
 import entre from "./modules/entre";
 import sortie from "./modules/sortie";
+import cycles from "./modules/cycles";
 
 export default createStore({
   state: {
@@ -54,7 +55,8 @@ export default createStore({
     beneficiaire,
     magasins,
     entre,
-    sortie
+    sortie,
+    cycles,
   },
   strict: process.env.NODE_ENV !== "production",
 });

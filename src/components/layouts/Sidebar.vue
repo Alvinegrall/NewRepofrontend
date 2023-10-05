@@ -1,10 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useSidebar } from "@/composables/useSidebar";
 import SideMenuItem from "@/components/common/SideMenuItem.vue";
+import { useStore } from "vuex";
+import FormateDate from "@/helpers/FormateDate";
+
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
 
 const { isOpen } = useSidebar();
 const { sideMenuItems } = useSidebar();
+const store = useStore();
 
 const showSubMenu = (index) => {
   const show = sideMenuItems.value[index].isOpen;
@@ -16,6 +23,32 @@ const showSubMenu = (index) => {
   sideMenuItems.value[index].isOpen = !show;
 
   // console.log("datas",sideMenuItems.value );
+};
+const current_cycle = computed(() => store.getters["cycles/current_cycle"]);
+const cycles = computed(() => store.getters["cycles/cycles"]);
+const isMenuAssociationsOpen = ref(false);
+const showAssociations = () => {
+  isMenuAssociationsOpen.value = !isMenuAssociationsOpen.value;
+};
+
+const handleSelectPage = async (item) => {
+  await store
+    .dispatch("cycles/getCurrentCycle", item)
+    .then((response) => {
+      if (!response.data.error) {
+        window.location.reload();
+      }
+    })
+    .catch((error) => {
+      snackbar.add({
+        type: "error",
+        text: "Une erreur s'est produite",
+      });
+
+      console.log("error", error);
+    });
+
+  // isMenuAssociationsOpen.value = false;
 };
 </script>
 
@@ -42,6 +75,48 @@ const showSubMenu = (index) => {
       <div
         class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0 h-full"
       >
+        <div
+          class="flex items-center gap-2 w-64 cursor-pointer overflow-ellipsis my-2 px-4 max-h-24 p-3 border-b pb-2"
+          @click="showAssociations"
+        >
+          <div class="p-1 text-sm w-64 overflow-hidden font-[500]">
+            {{ current_cycle.code }}
+          </div>
+          <div class="">
+            <vue-feather class="h-3" type="chevron-right"></vue-feather>
+          </div>
+        </div>
+
+        <div
+          v-if="isMenuAssociationsOpen"
+          class="absolute w-64 -right-[268px] top-5 bg-white z-50 shadow-lg rounded-lg p-2"
+        >
+          <div
+            v-for="(item, index) of cycles"
+            :key="index"
+            @click="handleSelectPage(item.code)"
+            class="relative flex items-center cursor-pointer gap-2 w-full overflow-hidden mt-2 max-h-24 p-3 border-t pb-2"
+          >
+            <div
+              class="p-1 text-sm w-full overflow-hidden font-[500] flex items-center gap-2"
+            >
+              <div>
+                {{ FormateDate(item.date_debut) }}
+              </div>
+              <div class="text-gray-500 font-bold text-xl">|</div>
+              <div>
+                {{ FormateDate(item.date_fin) }}
+              </div>
+            </div>
+            <div
+              v-if="current_cycle.id === item.id"
+              class="absolute top-0 right-0 text-emerald-500 text-center text-[8px] w-fit p-1 bg-emerald-200 rounded-bl-lg"
+            >
+              Default
+            </div>
+          </div>
+        </div>
+
         <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
           <div class="flex-1 px-3 bg-white divide-y space-y-1">
             <ul class="space-y-2 pb-2">
@@ -93,12 +168,10 @@ const showSubMenu = (index) => {
                     :icon="item.icon"
                     :isMenu="false"
                     @handleclick="showSubMenu(index)"
-
                   />
                 </template>
               </div>
             </ul>
-          
           </div>
         </div>
       </div>

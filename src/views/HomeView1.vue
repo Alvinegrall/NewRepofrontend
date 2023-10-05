@@ -37,8 +37,7 @@ import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
-ChartJS.register(ArcElement, Tooltip, Legend, PointElement,
-  LineElement);
+ChartJS.register(ArcElement, Tooltip, Legend, PointElement, LineElement);
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -63,9 +62,8 @@ const tabs = reactive([
 
 const router = useRouter();
 
-onMounted(async()=>{
+onMounted(async () => {
   // await store.dispatch("articles/getHomepageData");
-
   // await store.dispatch("category/getAllCat")
   // await store.dispatch("fournisseur/getAllFournisseurs");
   // await store.dispatch("beneficiaire/getAllBenefi");
@@ -75,7 +73,10 @@ onMounted(async()=>{
   // await store.dispatch("entre/getAllEntre");
   // await store.dispatch("sortie/getAllSortie");
   // await store.dispatch("articles/getHomepageData");
-})
+});
+const entre = computed(() => store.getters["cycles/entres"]);
+const sortie = computed(() => store.getters["cycles/sortie"]);
+
 const breadcrumbItems = reactive([
   {
     title: "",
@@ -117,7 +118,6 @@ const formateDate = (date) => {
   return readableDate;
 };
 
-
 const dataBand = reactive({
   labels: null,
   datasets: [
@@ -129,14 +129,12 @@ const dataBand = reactive({
   ],
 });
 
-dataBand.labels = homePageData?.value.article_name
-dataBand.datasets[0].data = homePageData?.value.article_qte
+dataBand.labels = homePageData?.value.article_name;
+dataBand.datasets[0].data = homePageData?.value.article_qte;
 const options = reactive({
   responsive: true,
   maintainAspectRatio: false,
 });
-
-
 </script>
 
 <template>
@@ -258,7 +256,10 @@ const options = reactive({
             </div>
             <div>
               <CardBox>
-                <div class="flex flex-col items-center justify-center cursor-pointer" @click="$router.push({name:'create-article'})">
+                <div
+                  class="flex flex-col items-center justify-center cursor-pointer"
+                  @click="$router.push({ name: 'create-article' })"
+                >
                   <div class="flex items-center gap-2">
                     <img src="/alert.png" class="w-5" alt="" />
 
@@ -272,14 +273,14 @@ const options = reactive({
             </div>
           </div>
           <CardBox class="flex-1">
-            <CompteHeader title="Département avec le plus de demandes" noicon />
+            <CompteHeader title="Informations sur le cycle courant" noicon />
             <table>
               <thead>
                 <tr>
-                  <th>Nom</th>
-                  <th>Nombre</th>
+                  <th>Livraisons</th>
+                  <th>Sortie</th>
                   <th>Type</th>
-                  <th>Dernière</th>
+                  <!-- <th>Dernière</th> -->
                 </tr>
               </thead>
               <tbody>
@@ -288,10 +289,10 @@ const options = reactive({
                     data-label="Nom"
                     class="md:max-w-[300px] max-h-[50px] overflow-hidden"
                   >
-                    tsague
+                    {{ entre.length }}
                   </td>
                   <td data-label="Montant">
-                    <span class="font-[500]"> 1000</span>
+                    <span class="font-[500]"> {{ sortie.length }}</span>
                   </td>
                   <td data-label="Type">
                     <div
@@ -307,7 +308,6 @@ const options = reactive({
                       </div>
                     </div>
                   </td>
-                  <td data-label="Date de fin">Hier</td>
                 </tr>
               </tbody>
             </table>

@@ -15,7 +15,8 @@ const getters = {
 // privileges
 const actions = {
   async getAllSortie({ commit }) {
-    return ArticlesService.getAllSortie()
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return ArticlesService.getAllSortie(cycle_code)
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
@@ -28,6 +29,8 @@ const actions = {
   },
 
   async createSortie({}, data) {
+    const cycle_code = store.getters["cycles/cycle_code"];
+    data.cycle_code = cycle_code;
     return ArticlesService.createSortie(data);
   },
   async getCompte({}, code) {

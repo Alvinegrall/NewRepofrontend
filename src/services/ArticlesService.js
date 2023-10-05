@@ -1,12 +1,12 @@
 import axios from "@/config/axios";
 
 export default {
-  getAllSortie() {
-    return axios.get("/sortie");
+  getAllSortie(cycle_code) {
+    return axios.get(`/sortie/${cycle_code}/all`);
   },
 
-  getAllLogs() {
-    return axios.get("/logs");
+  getAllLogs(cycle_code) {
+    return axios.get(`/logs/${cycle_code}/all`);
   },
   deleteLogs(params) {
     return axios.delete(`logs/${params}/delete`);
@@ -36,8 +36,8 @@ export default {
     return axios.delete(`magasin/${params}/delete`);
   },
 
-  getHomepageData() {
-    return axios.get("/home-page-data");
+  getHomepageData(cycle_code) {
+    return axios.get(`/home-page-data/${cycle_code}`);
   },
   getStatique() {
     return axios.post("/article/stats");
@@ -54,8 +54,8 @@ export default {
   createArticle(data) {
     return axios.post("/article", data);
   },
-  getAllEntre() {
-    return axios.get("/entre");
+  getAllEntre(cycle_code) {
+    return axios.get(`/entre/${cycle_code}/all`);
   },
   createEntre(data) {
     return axios.post("/entre", data);
@@ -89,5 +89,16 @@ export default {
   },
   createMagasin(data) {
     return axios.post("/magasin", data);
+  },
+
+  getAllCycle() {
+    return axios.get(`/cycles`);
+  },
+
+  getCurrentCycle(cycle_code) {
+    return axios.get(`/cycles/${cycle_code}/show`);
+  },
+  getActiveCycle() {
+    return axios.get(`/cycles/active`);
   },
 };

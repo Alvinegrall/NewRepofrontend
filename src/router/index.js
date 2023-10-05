@@ -25,9 +25,9 @@ const router = createRouter({
           name: "common.home",
           component: HomeView1,
           async beforeEnter(to, from, next) {
+            await store.dispatch("cycles/getActiveCycle");
             await store.dispatch("articles/getHomepageData");
             await store.dispatch("articles/getAllLogs");
-
 
             next();
           },
@@ -37,24 +37,52 @@ const router = createRouter({
           name: "create-article",
           // component: SettingsViewVue,
           component: () => import("@/views/CreateArticleView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("category/getAllCat");
+            store.dispatch("magasins/getAllMagasins");
+            store.dispatch("articles/getAllArticles");
+
+
+            next();
+          },
         },
         {
           path: "/create-entre",
           name: "mvt.entree",
           // component: SettingsViewVue,
           component: () => import("@/views/mouvements/EntreView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("fournisseur/getAllFournisseurs");
+            store.dispatch("articles/getAllArticles");
+            //  store.dispatch("sortie/getAllSortie");
+            store.dispatch("entre/getAllEntre");
+
+            next();
+          },
         },
         {
           path: "/create-sortie",
           name: "mvt.sortie",
           // component: SettingsViewVue,
           component: () => import("@/views/mouvements/SortieView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("articles/getAllArticles");
+            store.dispatch("sortie/getAllSortie");
+            store.dispatch("beneficiaire/getAllBenefi");
+
+            next();
+          },
         },
         {
           path: "/add-category",
           name: "admin.addcategory",
           // component: SettingsViewVue,
           component: () => import("@/views/administration/AddCategoryView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("category/getAllCat");
+
+            next();
+          },
         },
         {
           path: "/add-beneficiary",
@@ -62,6 +90,10 @@ const router = createRouter({
           // component: SettingsViewVue,
           component: () =>
             import("@/views/administration/AddBeneficiaireView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("beneficiaire/getAllBenefi");
+            next();
+          },
         },
         {
           path: "/add-fournisseur",
@@ -69,6 +101,10 @@ const router = createRouter({
           // component: SettingsViewVue,
           component: () =>
             import("@/views/administration/AddFournisseurView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("fournisseur/getAllFournisseurs");
+            next();
+          },
         },
 
         {
@@ -76,6 +112,11 @@ const router = createRouter({
           name: "admin.addmagasin",
           // component: SettingsViewVue,
           component: () => import("@/views/administration/AddMagasinView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("magasins/getAllMagasins");
+
+            next();
+          },
         },
 
         {
@@ -83,6 +124,12 @@ const router = createRouter({
           name: "settings",
           // component: SettingsViewVue,
           component: () => import("@/views/settings/SettingsView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("articles/getHomepageData");
+            store.dispatch("articles/getAllLogs");
+
+            next();
+          },
         },
         {
           path: "/statistiques",
@@ -90,10 +137,7 @@ const router = createRouter({
           // component: TransactionsViewVue,
           component: () => import("@/views/StatistiquesView.vue"),
           async beforeEnter(to, from, next) {
-            // await store.dispatch("articles/getHomepageData");
-            // await store.dispatch("articles/getAllLogs");
-            await store.dispatch("articles/getAllStatique");
-
+            store.dispatch("articles/getAllStatique");
 
             next();
           },
@@ -127,25 +171,21 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
 
   // eslint-disable-next-line no-unreachable
   if (!authRequired) return next();
-  if(authRequired){
-    authGuard(routeTo, routeFrom, next)
-
+  if (authRequired) {
+    authGuard(routeTo, routeFrom, next);
   }
 
+  await store.dispatch("cycles/getAllCycle");
+  await store.dispatch("cycles/getActiveCycle");
 
-  await store.dispatch("category/getAllCat")
-  await store.dispatch("fournisseur/getAllFournisseurs");
-  await store.dispatch("beneficiaire/getAllBenefi");
-  await store.dispatch("articles/getAllLogs");
-  await store.dispatch("magasins/getAllMagasins");
-  await store.dispatch("articles/getAllArticles");
-  await store.dispatch("entre/getAllEntre");
-  await store.dispatch("sortie/getAllSortie");
-  await store.dispatch("articles/getHomepageData");
-
-
-  
-
+  // await store.dispatch("fournisseur/getAllFournisseurs");
+  // await store.dispatch("category/getAllCat");
+  // await store.dispatch("magasins/getAllMagasins");
+  // await store.dispatch("beneficiaire/getAllBenefi");
+  // await store.dispatch("articles/getAllLogs");
+  // await store.dispatch("entre/getAllEntre");
+  // await store.dispatch("sortie/getAllSortie");
+  // await store.dispatch("articles/getHomepageData");
 
   // else return next({ name: "create-page" });
 
@@ -163,7 +203,6 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   //   });
   // }
   // if (routeTo.meta.requireAuth)   authGuard(to, from, next);
-
 
   return next();
 });

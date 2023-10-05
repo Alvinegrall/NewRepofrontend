@@ -165,23 +165,20 @@ const options = reactive({
     </ag-grid-vue> -->
 
     <CardBox>
-      <div v-for="(item, index) in allStats" :key="index" >
+      <div v-for="(item, index) in allStats" :key="index">
         <div v-if="item.sortie.length" class="p-3 border-t">
-          <div  class="p-1 font-bold text-xl border border-emerald-400">
+          <div class="p-1 font-bold text-xl border border-emerald-400">
             {{ item.name }}
           </div>
           <div v-if="item.sortie.length">
             <TableStats :details="item.sortie" />
           </div>
-
         </div>
         <!-- <div v-if="!item.sortie.length" class="flex items-center justify-center text-gray-400">
           <vue-feather type="search"></vue-feather>
           <div>Aucune sortie</div>
         </div> -->
       </div>
-
     </CardBox>
-
   </div>
 </template>

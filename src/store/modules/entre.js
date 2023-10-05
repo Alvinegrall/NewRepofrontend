@@ -15,7 +15,8 @@ const getters = {
 // privileges
 const actions = {
   async getAllEntre({ commit }) {
-    return ArticlesService.getAllEntre()
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return ArticlesService.getAllEntre(cycle_code)
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
@@ -28,6 +29,8 @@ const actions = {
   },
 
   async createEntre({}, data) {
+    const cycle_code = store.getters["cycles/cycle_code"];
+    data.cycle_code = cycle_code;
     return ArticlesService.createEntre(data);
   },
   async getCompte({}, code) {
