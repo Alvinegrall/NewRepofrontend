@@ -28,7 +28,6 @@ const router = createRouter({
             await store.dispatch("cycles/getActiveCycle");
             await store.dispatch("articles/getHomepageData");
             await store.dispatch("articles/getAllLogs");
-
             next();
           },
         },

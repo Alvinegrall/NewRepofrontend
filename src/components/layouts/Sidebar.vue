@@ -34,8 +34,10 @@ const showAssociations = () => {
 const handleSelectPage = async (item) => {
   await store
     .dispatch("cycles/getCurrentCycle", item)
-    .then((response) => {
+    .then(async (response) => {
       if (!response.data.error) {
+        await store.dispatch("cycles/getActiveCycle");
+        await store.dispatch("articles/getHomepageData");
         window.location.reload();
       }
     })
@@ -62,9 +64,19 @@ const handleSelectPage = async (item) => {
     <div
       :class="isOpen ? 'block' : 'hidden'"
       class="fixed inset-0 z-20 transition-opacity bg-black opacity-30 lg:hidden"
-      @click="isOpen = false"
+      @click="
+        {
+          isOpen = false;
+          isMenuAssociationsOpen = false;
+        }
+      "
     />
 
+    <div
+      v-if="isMenuAssociationsOpen"
+      class="w-full h-screen z-10 fixed"
+      @click="isMenuAssociationsOpen = false"
+    ></div>
     <aside
       id="sidebar"
       class="fixed z-20 h-full top-0 left-0 pt-16 lg:translate-x-0 flex-shrink-0 flex-col w-64 transition-width duration-75"
@@ -89,7 +101,7 @@ const handleSelectPage = async (item) => {
 
         <div
           v-if="isMenuAssociationsOpen"
-          class="absolute w-64 -right-[268px] top-5 bg-white z-50 shadow-lg rounded-lg p-2"
+          class="absolute w-64 -right-[268px] h-[80vh]   overflow-y-auto top-5 bg-white z-50 shadow-lg rounded-lg p-2"
         >
           <div
             v-for="(item, index) of cycles"
@@ -117,7 +129,7 @@ const handleSelectPage = async (item) => {
           </div>
         </div>
 
-        <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
+        <div class="flex-1 flex flex-col pb-4 overflow-y-auto">
           <div class="flex-1 px-3 bg-white divide-y space-y-1">
             <ul class="space-y-2 pb-2">
               <li>

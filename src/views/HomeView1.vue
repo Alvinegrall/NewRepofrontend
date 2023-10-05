@@ -139,7 +139,7 @@ const options = reactive({
 
 <template>
   <div>
-    <CardBoxModal
+    <!-- <CardBoxModal
       v-model="isCreateTournoisModalActive"
       hasCostomWith
       width="xl:w-6/12"
@@ -182,7 +182,7 @@ const options = reactive({
           />
         </div>
       </CardBox>
-    </CardBoxModal>
+    </CardBoxModal> -->
 
     <!-- <HeaderBreadcrumbs
       :links="breadcrumbItems"
