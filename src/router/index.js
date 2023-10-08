@@ -137,6 +137,7 @@ const router = createRouter({
           component: () => import("@/views/StatistiquesView.vue"),
           async beforeEnter(to, from, next) {
             store.dispatch("articles/getAllStatique");
+            await store.dispatch("articles/getArchives");
 
             next();
           },

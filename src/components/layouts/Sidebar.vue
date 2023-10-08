@@ -36,8 +36,8 @@ const handleSelectPage = async (item) => {
     .dispatch("cycles/getCurrentCycle", item)
     .then(async (response) => {
       if (!response.data.error) {
-        await store.dispatch("cycles/getActiveCycle");
-        await store.dispatch("articles/getHomepageData");
+        // await store.dispatch("cycles/getActiveCycle");
+        // await store.dispatch("articles/getHomepageData");
         window.location.reload();
       }
     })
@@ -101,7 +101,7 @@ const handleSelectPage = async (item) => {
 
         <div
           v-if="isMenuAssociationsOpen"
-          class="absolute w-64 -right-[268px] h-[80vh]   overflow-y-auto top-5 bg-white z-50 shadow-lg rounded-lg p-2"
+          class="absolute w-64 -right-[268px] h-[80vh] overflow-y-auto top-5 bg-white z-50 shadow-lg rounded-lg p-2"
         >
           <div
             v-for="(item, index) of cycles"
@@ -125,6 +125,18 @@ const handleSelectPage = async (item) => {
               class="absolute top-0 right-0 text-emerald-500 text-center text-[8px] w-fit p-1 bg-emerald-200 rounded-bl-lg"
             >
               Default
+            </div>
+            <div
+              v-if="item.is_passed == 1"
+              class="absolute top-0 left-0 text-red-500 text-center text-[8px] w-fit p-1 bg-red-200 rounded-bl-lg"
+            >
+              Archivé
+            </div>
+            <div
+              v-else
+              class="absolute top-0 left-0 text-emerald-500 text-center text-[8px] w-fit p-1 bg-emerald-200 rounded-bl-lg"
+            >
+              En cours
             </div>
           </div>
         </div>

@@ -6,7 +6,8 @@ const state = {
   logs: null,
   homePageData: null,
   statisque: null,
-  allStats:null
+  allStats: null,
+  archives: null,
 };
 
 // getters
@@ -25,6 +26,9 @@ const getters = {
   },
   allStats: () => {
     return state.allStats;
+  },
+  archives: () => {
+    return state.archives;
   },
 };
 
@@ -71,13 +75,26 @@ const actions = {
         console.log("error", error);
       });
   },
-  
+
   async getAllStatique({ commit }) {
     return ArticlesService.getAllStatique()
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
           commit("SET_ALL_STATS", response.data.data);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  },
+
+  async getArchives({ commit }) {
+    return ArticlesService.getArchives()
+      .then((response) => {
+        console.log("response", response);
+        if (!response.data.error) {
+          commit("SET_ARCHIVE", response.data.data);
         }
       })
       .catch((error) => {
@@ -135,7 +152,7 @@ const mutations = {
   SET_STATS(state, val) {
     state.statisque = val;
   },
-  SET_ALL_STATS(state,val){
+  SET_ALL_STATS(state, val) {
     state.allStats = val;
   },
   SET_ARTICLE(state, val) {
@@ -150,6 +167,9 @@ const mutations = {
   },
   SET_HOME_PAGE_DATA(state, datas) {
     state.homePageData = datas;
+  },
+  SET_ARCHIVE(state, datas) {
+    state.archives = datas;
   },
 };
 

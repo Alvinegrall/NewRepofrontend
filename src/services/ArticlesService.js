@@ -97,8 +97,12 @@ export default {
 
   getCurrentCycle(cycle_code) {
     return axios.get(`/cycles/${cycle_code}/show`);
-  },
+  }, 
+  
   getActiveCycle() {
     return axios.get(`/cycles/active`);
+  },
+  getArchives() {
+    return axios.get(`/archives`);
   },
 };
