@@ -126,7 +126,6 @@ const router = createRouter({
           beforeEnter(to, from, next) {
             store.dispatch("articles/getHomepageData");
             store.dispatch("articles/getAllLogs");
-
             next();
           },
         },
