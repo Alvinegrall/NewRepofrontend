@@ -207,7 +207,7 @@ const options = reactive({
                   :label="'Rapport'"
                   outline
                   target="_blank"
-                  :href="'http://localhost:3333' + elt.rapport"
+                  :href="'http://api.kelon.adoobin.com' + elt.rapport"
                 />
               </div>
             </div>
