@@ -21,7 +21,7 @@ const props = defineProps({
   },
   buttonLabel: {
     type: String,
-    default: "Done",
+    default: "Valider",
   },
   cancelBtnLabel:{
     type: String,
