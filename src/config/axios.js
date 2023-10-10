@@ -1,8 +1,7 @@
 import axios from "axios";
-import store from "../store";
 
-axios.defaults.headers.common["Content-Type"] = "application/json";
-axios.defaults.crossDomain = true;
+// axios.defaults.headers.common["Content-Type"] = "application/json";
+// axios.defaults.crossDomain = true;
 
 // Add a request interceptor
 axios.interceptors.request.use(
