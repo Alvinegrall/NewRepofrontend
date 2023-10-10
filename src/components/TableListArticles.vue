@@ -147,7 +147,7 @@ const handleDelete = async () => {
                 </td>
                 <td>
                   <div class="flex items-center gap-3">
-                    <div>
+                    <div class="text-red-500 font-semibold">
                       {{ item.qte }}
                     </div>
                     <vue-feather
@@ -163,19 +163,18 @@ const handleDelete = async () => {
 
                 <td>
                   <BaseButtons type="justify-start" class="flex gap-2" no-wrap>
-                    <BaseButton
+                    <!-- <BaseButton
                       color="info"
                       :icon="'edit'"
                       small
                       @click="isModalActive = true"
-                    />
+                    /> -->
 
                     <BaseButton
                       color="danger"
                       icon="trash-2"
                       small
                       @click="onDelete(item.id)"
-
                     />
                   </BaseButtons>
                 </td>
