@@ -5,8 +5,8 @@ import BaseButton from "@/components/common/BaseButton.vue";
 import BaseButtons from "@/components/common/BaseButtons.vue";
 import CardBoxModal from "@/components/common/CardBoxModal.vue";
 import { ref } from "vue";
-import { useSnackbar } from "vue3-snackbar";
 import { useStore } from "vuex";
+import { useSnackbar } from "vue3-snackbar";
 
 const snackbar = useSnackbar();
 const props = defineProps({

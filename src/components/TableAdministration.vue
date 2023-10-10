@@ -1,7 +1,16 @@
 <script setup>
 import BaseAmountWithArrow from "@/components/common/BaseAmountWithArrow.vue";
 import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
+import CardBoxModal from "@/components/common/CardBoxModal.vue";
+
 import BaseButton from "@/components/common/BaseButton.vue";
+import { useSnackbar } from "vue3-snackbar";
+import { useStore } from "vuex";
+import { ref } from "vue";
+
+const snackbar = useSnackbar();
+const store = useStore()
+
 const props = defineProps({
   title: {
     type: String,
@@ -13,6 +22,37 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const isModalDangerActive = ref(false);
+const current_item = ref("")
+
+const onDelete = (value) => {
+  isModalDangerActive.value = true;
+  current_item.value = value;
+};
+
+const handleDelete = async () => {
+  console.log(current_item.value);
+  await store
+    .dispatch("articles/deleteCat", current_item.value)
+    .then(async (response) => {
+      console.log("response add ", response);
+      if (!response.data.error) {
+        await store.dispatch("category/getAllCat");
+        snackbar.add({
+          text: "Supprimé avec success",
+          type: "success",
+        });
+        isModalDangerActive.value = false;
+      }
+    })
+    .catch((error) => {
+      snackbar.add({
+        text: "Erreur lors de la creation",
+        type: "error",
+      });
+    });
+};
 </script>
 
 <template>
@@ -20,6 +60,17 @@ const props = defineProps({
     <!-- <h5 id="defaultMembreLabel" class="modal-title text-sm mb-3 font-semibold">
       Détails
     </h5> -->
+
+    <CardBoxModal
+      v-model="isModalDangerActive"
+      title="Confirmer la suppression"
+      button="danger"
+      buttonLabel="Supprimer"
+      has-cancel
+      @confirm="handleDelete"
+    >
+      <p>Voulez-vous vraiment effectuer cette action?</p>
+    </CardBoxModal>
 
     <div class="overflow-x-auto rounded-lg">
       <div class="align-middle inline-block min-w-full">
@@ -54,17 +105,17 @@ const props = defineProps({
 
                 <td class="flex justify-center items-center">
                   <BaseButtons type="justify-start" no-wrap class="flex gap-3">
-                    <BaseButton
+                    <!-- <BaseButton
                       color="info"
                       :icon="'edit'"
                       small
                       @click="isModalActive = true"
-                    />
+                    /> -->
                     <BaseButton
                       color="danger"
                       icon="trash-2"
                       small
-                      @click="isModalDangerActive = true"
+                      @click="onDelete(item.id)"
                     />
                   </BaseButtons>
                 </td>

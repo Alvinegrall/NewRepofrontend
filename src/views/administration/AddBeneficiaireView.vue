@@ -16,7 +16,7 @@ import BaseButtons from "@/components/common/BaseButtons.vue";
 import ShareLinkSocialNetwork from "@/components/ShareLinkSocialNetwork.vue";
 import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
 
-import TableFournisseurs from "@/components/TableFournisseurs.vue";
+import TableBeneficiaire from "@/components/TableBeneficiaire.vue";
 
 import { computed, onMounted, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -112,7 +112,7 @@ const createCat = async () => {
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>
-      <TableFournisseurs :details="beneficiaire" />
+      <TableBeneficiaire :details="beneficiaire" />
     </CardBox>
   </div>
 </template>

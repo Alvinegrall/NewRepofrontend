@@ -187,10 +187,22 @@ const options = reactive({
       @grid-ready="onGridReady"
     >
     </ag-grid-vue> -->
+    <CardBox  class="mb-10">
+      <CompteHeader title="Consomation des Bénéficiaires" noicon />
 
+      <div v-for="(item, index) in allStats" :key="index">
+        <div v-if="item.sortie.length" class="p-3 border-t">
+          <div class="p-1 font-bold text-xl border border-emerald-400">
+            {{ item.name }}
+          </div>
+          <div v-if="item.sortie.length">
+            <TableStats :details="item.sortie" />
+          </div>
+        </div>
+      </div>
+    </CardBox>
     <CardBox class="mb-10">
       <CompteHeader title="Mouvements par cycles" noicon />
-
       <div v-for="(item, index) in archives" :key="index">
         <div v-for="(elt, index1) in item" :key="index1">
           <div class="p-1 border border-emerald-400">
@@ -220,25 +232,11 @@ const options = reactive({
           <div class="my-5">
             <h2 class="text-lg">Les entres</h2>
             <TableEntree :details="item.entres" />
-
           </div>
         </div>
       </div>
     </CardBox>
 
-    <CardBox>
-      <CompteHeader title="Consomation des Bénéficiaires" noicon />
 
-      <div v-for="(item, index) in allStats" :key="index">
-        <div v-if="item.sortie.length" class="p-3 border-t">
-          <div class="p-1 font-bold text-xl border border-emerald-400">
-            {{ item.name }}
-          </div>
-          <div v-if="item.sortie.length">
-            <TableStats :details="item.sortie" />
-          </div>
-        </div>
-      </div>
-    </CardBox>
   </div>
 </template>

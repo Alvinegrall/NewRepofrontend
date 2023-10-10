@@ -120,9 +120,25 @@ const actions = {
   async deleteLogs({}, data) {
     return ArticlesService.deleteLogs(data);
   },
-  async deleteArticle({}, data) {
-    return ArticlesService.deleteArticle(data);
+  async deleteSortie({}, data) {
+    return ArticlesService.deleteSortie(data);
   },
+  async deleteCat({}, data) {
+    return ArticlesService.deleteCat(data);
+  },
+  async deleteFournisseur({}, data) {
+    return ArticlesService.deleteFournisseur(data);
+  },
+  async deleteMagasin({}, data) {
+    return ArticlesService.deleteMagasin(data);
+  },
+  async deleteBeneficiaire({}, data) {
+    return ArticlesService.deleteBeneficiaire(data);
+  },
+  // async deleteBeneficiaire({}, data) {
+  //   return ArticlesService.deleteBeneficiaire(data);
+  // },
+  
 
   // async getAllArticles({}, data) {
   //   return ArticlesService.getAllArticles(data);

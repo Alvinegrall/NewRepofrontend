@@ -34,11 +34,11 @@ const onDelete = (value) => {
 const handleDelete = async () => {
   console.log(current_item.value);
   await store
-    .dispatch("articles/deleteFournisseur", current_item.value)
+    .dispatch("articles/deleteBeneficiaire", current_item.value)
     .then(async (response) => {
       console.log("response add ", response);
       if (!response.data.error) {
-        await store.dispatch("fournisseur/getAllFournisseurs");
+        await store.dispatch("beneficiaire/getAllBenefi");
         snackbar.add({
           text: "Supprimé avec success",
           type: "success",

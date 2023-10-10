@@ -42,7 +42,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        console.log("error", error);
+        if(error.request.status == 401){
+          location.href = "/login"
+        }
       });
   },
 
@@ -68,6 +70,9 @@ const actions = {
         }
       })
       .catch((error) => {
+        if(error.request.status == 401){
+          location.href = "/login"
+        }
         console.log("error", error);
       });
   },
