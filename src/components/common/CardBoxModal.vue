@@ -73,8 +73,8 @@ window.addEventListener("keydown", (e) => {
 </script>
 
 <template>
-  <OverlayLayer v-show="value" @overlay-click="cancel">
-    <CardBox v-show="value" :class="cartElClass" is-modal>
+  <OverlayLayer v-if="value" @overlay-click="cancel">
+    <CardBox v-if="value" :class="cartElClass" is-modal>
       <CardBoxComponentTitle :title="title">
         <!-- <BaseButton
           v-if="hasCancel"

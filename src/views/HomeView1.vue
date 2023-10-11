@@ -199,19 +199,48 @@ const options = reactive({
     </div> -->
 
     <div class="flex flex-col gap-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <CardBox>
-          <div class="relative">
-            <CompteHeader title="Etats articles" noicon />
-
-            <div class="h-52">
-              <Bar :data="dataBand" :options="options" />
-            </div>
-
-            <!-- graph here -->
-          </div>
-        </CardBox>
-        <div class="flex flex-col gap-4">
+      <div class="grid grid-cols-1 gap-4">
+        <div class="grid grid-cols-2  gap-4">
+          <CardBox class="flex-1">
+            <CompteHeader title="Informations sur le cycle courant" noicon />
+            <table>
+              <thead>
+                <tr>
+                  <th>Livraisons</th>
+                  <th>Sortie</th>
+                  <th>Type</th>
+                  <!-- <th>Dernière</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td
+                    data-label="Nom"
+                    class="md:max-w-[300px] max-h-[50px] overflow-hidden"
+                  >
+                    {{ entre.length }}
+                  </td>
+                  <td data-label="Montant">
+                    <span class="font-[500]"> {{ sortie.length }}</span>
+                  </td>
+                  <td data-label="Type">
+                    <div
+                      class="bg-emerald-500 bg-opacity-10 text-emerald-500 flex justify-center p-1 rounded-lg"
+                    >
+                      <div class="text-sm">
+                        <!-- {{
+                          currentCotisation?.data?.type == 1
+                            ? "Fixe"
+                            : "Volontaire"
+                        }} -->
+                        <span class="font-semibold">Tout type</span>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </CardBox>
           <div class="grid grid-cols-4 gap-4">
             <div>
               <CardBox>
@@ -272,47 +301,20 @@ const options = reactive({
               </CardBox>
             </div>
           </div>
-          <CardBox class="flex-1">
-            <CompteHeader title="Informations sur le cycle courant" noicon />
-            <table>
-              <thead>
-                <tr>
-                  <th>Livraisons</th>
-                  <th>Sortie</th>
-                  <th>Type</th>
-                  <!-- <th>Dernière</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td
-                    data-label="Nom"
-                    class="md:max-w-[300px] max-h-[50px] overflow-hidden"
-                  >
-                    {{ entre.length }}
-                  </td>
-                  <td data-label="Montant">
-                    <span class="font-[500]"> {{ sortie.length }}</span>
-                  </td>
-                  <td data-label="Type">
-                    <div
-                      class="bg-emerald-500 bg-opacity-10 text-emerald-500 flex justify-center p-1 rounded-lg"
-                    >
-                      <div class="text-sm">
-                        <!-- {{
-                          currentCotisation?.data?.type == 1
-                            ? "Fixe"
-                            : "Volontaire"
-                        }} -->
-                        <span class="font-semibold">Tout type</span>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </CardBox>
+       
         </div>
+        <CardBox>
+          <div class="relative">
+            <CompteHeader title="Etats articles" noicon />
+
+            <div class="h-52">
+              <Bar :data="dataBand" :options="options" />
+            </div>
+
+            <!-- graph here -->
+          </div>
+        </CardBox>
+      
       </div>
       <CardBox>
         <CompteHeader title="Transactions récentes" noicon />

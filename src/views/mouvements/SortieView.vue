@@ -32,7 +32,7 @@ const store = useStore();
 
 const breadcrumbItems = reactive([
   {
-    title: "Créer un article",
+    title: "Toutes les sorties",
     link: "create-article",
   },
 ]);

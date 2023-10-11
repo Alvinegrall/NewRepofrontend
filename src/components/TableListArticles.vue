@@ -4,10 +4,22 @@ import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
 import BaseButtons from "@/components/common/BaseButtons.vue";
 
+import CotisationInfos from "@/components/CotisationInfos.vue";
+import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
+
+// import BaseSkeleton from "@/components/common/BaseSkeleton.vue";
+import HeaderBreadcrumbs from "@/components/common/HeaderBreadcrumbs.vue";
+import HeaderWithOptions from "@/components/common/HeaderWithOptions.vue";
+import FormField from "@/components/common/FormField.vue";
+import FormControl from "@/components/common/FormControl.vue";
+import TableSampleFondCaisse from "@/components/TableSampleFondCaisse.vue";
 import CardBoxModal from "@/components/common/CardBoxModal.vue";
 
+import ShareLinkSocialNetwork from "@/components/ShareLinkSocialNetwork.vue";
+import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
+
 import { useSnackbar } from "vue3-snackbar";
-import { ref } from "vue";
+import { computed, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
 
 const snackbar = useSnackbar();
@@ -28,12 +40,52 @@ const store = useStore();
 
 const current_item = ref("");
 const isModalDangerActive = ref(false);
+const isUpdateModalActive = ref(false);
 
 const onDelete = (value) => {
   isModalDangerActive.value = true;
   current_item.value = value;
 };
+const fields = reactive({
+  name: "",
+  stock_alerte: "",
+  stock_securite: "",
+  cat_id: "",
+  magasin_id: "",
+});
+const searchText = computed(() => store.getters["searchQuery"]);
+console.log(searchText.value);
 
+onMounted(() => {
+  filterData();
+});
+
+const searchQuery = computed(() => filterData());
+
+const filterData = () => {
+  // If searchQuery is empty, show all data
+  if (searchText.value == "") {
+    return props.details;
+  }
+
+  // If searchQuery is not empty, filter data based on the query
+  const searchTerm = searchText.value.toLowerCase();
+  return props.details.filter((item) => {
+    // Customize the fields you want to search for here
+    const searchableFields = [
+      item?.name.toString(),
+      item?.category?.name.toString(),
+      item?.qte.toString(),
+      item?.stock_alerte.toString(),
+      item?.stock_securite.toString(),
+    ];
+    return searchableFields.some((field) =>
+      field.toLowerCase().includes(searchTerm)
+    );
+  });
+};
+const magasins = computed(() => store.getters["magasins/magasin"]);
+const cats = computed(() => store.getters["category/cat"]);
 const handleDelete = async () => {
   console.log(current_item.value);
   await store
@@ -46,6 +98,41 @@ const handleDelete = async () => {
           type: "success",
         });
         isModalDangerActive.value = false;
+      }
+    })
+    .catch((error) => {
+      snackbar.add({
+        text: "Erreur lors de la creation",
+        type: "error",
+      });
+    });
+};
+
+const updateClick = (value) => {
+  console.log(value);
+  isUpdateModalActive.value = true;
+  current_item.value = value;
+  fields.name = value.name;
+  fields.stock_alerte = value.stock_alerte;
+  fields.stock_securite = value.stock_securite;
+  fields.cat_id = value.category_id;
+  fields.magasin_id = value.magasin_id;
+};
+
+const handleUpdateArticles = async () => {
+  await store
+    .dispatch("articles/updateArticle", {
+      id: current_item.value.id,
+      data: fields,
+    })
+    .then(async (response) => {
+      if (!response.data.error) {
+        await store.dispatch("articles/getAllArticles");
+        snackbar.add({
+          text: "Modifié avec success",
+          type: "success",
+        });
+        isUpdateModalActive.value = false;
       }
     })
     .catch((error) => {
@@ -69,6 +156,56 @@ const handleDelete = async () => {
     >
       <p>Voulez-vous vraiment effectuer cette action?</p>
     </CardBoxModal>
+
+    <CardBoxModal
+      v-model="isUpdateModalActive"
+      hasCostomWith
+      width="xl:w-5/12"
+      hasCancel
+      title="✍️ Créer un article"
+      @confirm="handleUpdateArticles"
+    >
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-3">
+        <FormField label="Nom de l'article">
+          <FormControl
+            v-model="fields.name"
+            icon="edit-3"
+            placeholder="Entrez le nom"
+          />
+        </FormField>
+        <FormField label="Stock de sécurité">
+          <FormControl
+            v-model="fields.stock_securite"
+            icon="edit-3"
+            placeholder="Entrez la valeur "
+          />
+        </FormField>
+        <FormField label="Stock d'alerte">
+          <FormControl
+            v-model="fields.stock_alerte"
+            icon="bell"
+            placeholder="Entrez la valeur"
+          />
+        </FormField>
+        <FormField label="Choisir le magasin" help="Optionnel">
+          <FormControl
+            v-model="fields.magasin_id"
+            :options="magasins"
+            icon="check-circle"
+            placeholder="choisir"
+          />
+        </FormField>
+        <FormField label="Choisir la catégorie" help="Optionnel">
+          <FormControl
+            v-model="fields.cat_id"
+            :options="cats"
+            icon="check-circle"
+            placeholder="choisir"
+          />
+        </FormField>
+      </div>
+    </CardBoxModal>
+
     <div class="overflow-x-auto rounded-lg">
       <div class="align-middle inline-block min-w-full">
         <div class="shadow overflow-hidden sm:rounded-lg">
@@ -124,7 +261,7 @@ const handleDelete = async () => {
               </tr>
             </thead>
             <tbody class="bg-white">
-              <tr v-for="(item, index) in details" :key="index">
+              <tr v-for="(item, index) in searchQuery" :key="index">
                 <td class="whitespace-nowrap text-sm font-normal text-gray-900">
                   {{ item.name }}
                 </td>
@@ -147,7 +284,10 @@ const handleDelete = async () => {
                 </td>
                 <td>
                   <div class="flex items-center gap-3">
-                    <div class="text-red-500 font-semibold">
+                    <div
+                      class="font-semibold"
+                      :class="item.is_alert ? 'text-red-500' : ''"
+                    >
                       {{ item.qte }}
                     </div>
                     <vue-feather
@@ -163,12 +303,12 @@ const handleDelete = async () => {
 
                 <td>
                   <BaseButtons type="justify-start" class="flex gap-2" no-wrap>
-                    <!-- <BaseButton
+                    <BaseButton
                       color="info"
                       :icon="'edit'"
                       small
-                      @click="isModalActive = true"
-                    /> -->
+                      @click="updateClick(item)"
+                    />
 
                     <BaseButton
                       color="danger"

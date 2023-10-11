@@ -30,7 +30,7 @@ const router = useRouter();
 const store = useStore();
 const breadcrumbItems = reactive([
   {
-    title: "Nouvelle livraison",
+    title: "Toutes les entrées",
     link: "create-article",
   },
 ]);

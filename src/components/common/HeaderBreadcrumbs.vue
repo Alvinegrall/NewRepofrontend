@@ -18,7 +18,7 @@
               ></path>
             </svg>
             <span class="text-gray-700 hover:text-gray-900 text-sm font-medium"
-              >Dashboard</span
+              >Tableau de bord</span
             >
           </router-link>
         </li>

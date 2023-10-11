@@ -188,7 +188,7 @@ const options = reactive({
     >
     </ag-grid-vue> -->
     <CardBox  class="mb-10">
-      <CompteHeader title="Consomation des Bénéficiaires" noicon />
+      <CompteHeader title="Consommation des Bénéficiaires" noicon />
 
       <div v-for="(item, index) in allStats" :key="index">
         <div v-if="item.sortie.length" class="p-3 border-t">
@@ -202,7 +202,7 @@ const options = reactive({
       </div>
     </CardBox>
     <CardBox class="mb-10">
-      <CompteHeader title="Mouvements par cycles" noicon />
+      <CompteHeader title="Rapport de la consommation des unités par mois" noicon />
       <div v-for="(item, index) in archives" :key="index">
         <div v-for="(elt, index1) in item" :key="index1">
           <div class="p-1 border border-emerald-400">

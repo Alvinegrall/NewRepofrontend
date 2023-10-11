@@ -27,7 +27,7 @@ const router = useRouter();
 const store = useStore();
 const breadcrumbItems = reactive([
   {
-    title: "Créer un article",
+    title: "États des articles",
     link: "create-article",
   },
 ]);
@@ -69,6 +69,14 @@ const createArticles = () => {
     .then(async (response) => {
       //   console.log("response", response);
       if (!response.data.error) {
+        // empty fields
+        fields.name = "";
+        fields.stock_alerte = "";
+        fields.stock_securite = "";
+        fields.cat_id = "";
+        fields.magasin_id = "";
+        isCreateTournoisModalActive.value = false;
+        
         await store.dispatch("articles/getAllArticles");
       }
     })
@@ -86,6 +94,9 @@ const createArticles = () => {
 
 const goBack = () => {
   console.log("ttoto");
+};
+const searchQuery = (query) => {
+  store.dispatch("searchQuery", query);
 };
 </script>
 
@@ -146,7 +157,7 @@ const goBack = () => {
       :btnLabel="['Créer un articles']"
       :icons="['plus-circle', 'success']"
       hasOneBtn
-      @makeResearch="searchTournois($event.target.value)"
+      @makeResearch="searchQuery($event.target.value)"
       @btnClick="createMembre"
     />
     <CardBox class="mb-6" has-table>

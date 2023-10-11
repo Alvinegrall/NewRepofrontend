@@ -4,14 +4,14 @@ const isOpen = ref(false);
 
 const sideMenuItems = ref([
   {
-    title: "Dashboard",
+    title: "Tableau de bord",
     icon: "pie-chart",
     isOpen: false,
     isMenu: false,
     link: "common.home",
   },
   {
-    title: "Inventaire",
+    title: "Inventaires",
     isOpen: false,
     icon: "clipboard",
     isMenu: false,
@@ -24,8 +24,8 @@ const sideMenuItems = ref([
     icon: "database",
     isMenu: true,
     children: [
-      { title: "Entrée", isOpen: false, isMenu: false, link: "mvt.entree" },
-      { title: "Sortie", isOpen: false, isMenu: false, link: "mvt.sortie" },
+      { title: "Entrées", isOpen: false, isMenu: false, link: "mvt.entree" },
+      { title: "Sorties", isOpen: false, isMenu: false, link: "mvt.sortie" },
     ],
   },
   {

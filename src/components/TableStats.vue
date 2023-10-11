@@ -149,7 +149,7 @@ const formateDate = (date) => {
 
           </td>
           <td data-label="matricule">
-            {{ client.article.name }}
+            {{ client?.article?.name }}
           </td>
           <td data-label="phone">
             {{ client.marque }}

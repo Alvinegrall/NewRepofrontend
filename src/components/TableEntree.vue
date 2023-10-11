@@ -151,7 +151,7 @@ const formateDate = (date) => {
 
           </td>
           <td data-label="matricule">
-            {{ client.article.name }}
+            {{ client?.article?.name }}
           </td>
           <td data-label="phone">
             {{ client.marque }}
@@ -167,7 +167,7 @@ const formateDate = (date) => {
           </td>
 
           <td data-label="Date">
-            {{ client.fournisseur.name }}
+            {{ client?.fournisseur?.name }}
           </td>
           <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons type="justify-start lg:justify-end" no-wrap>

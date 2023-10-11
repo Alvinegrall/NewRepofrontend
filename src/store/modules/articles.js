@@ -8,6 +8,7 @@ const state = {
   statisque: null,
   allStats: null,
   archives: null,
+
 };
 
 // getters
@@ -135,9 +136,15 @@ const actions = {
   async deleteBeneficiaire({}, data) {
     return ArticlesService.deleteBeneficiaire(data);
   },
-  // async deleteBeneficiaire({}, data) {
-  //   return ArticlesService.deleteBeneficiaire(data);
-  // },
+  async deleteArticle({}, data) {
+    return ArticlesService.deleteArticle(data);
+  },
+  async updateArticle({}, {data, id}) {
+
+    return ArticlesService.updateArticle(data, id);
+  },
+
+ 
   
 
   // async getAllArticles({}, data) {

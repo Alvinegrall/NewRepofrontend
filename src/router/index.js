@@ -163,6 +163,8 @@ const router = createRouter({
 });
 
 router.beforeEach(async (routeTo, routeFrom, next) => {
+  await store.dispatch("cycles/getAllCycle");
+  await store.dispatch("cycles/getActiveCycle");
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
 
@@ -174,8 +176,7 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
     authGuard(routeTo, routeFrom, next);
   }
 
-  await store.dispatch("cycles/getAllCycle");
-  await store.dispatch("cycles/getActiveCycle");
+
 
   // await store.dispatch("fournisseur/getAllFournisseurs");
   // await store.dispatch("category/getAllCat");

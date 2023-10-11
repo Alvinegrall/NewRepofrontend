@@ -18,7 +18,7 @@ const getters = {
     return state.current_cycle || {};
   },
   cycle_code: (state) => {
-    return state.current_cycle ? state.current_cycle.code : "";
+    return state.current_cycle ? state?.current_cycle?.code : "";
   },
   entres: (state) => {
     return state?.current_cycle?.entres || [];
@@ -34,7 +34,7 @@ const getters = {
 // privileges
 const actions = {
   async getAllCycle({ commit }) {
-    return ArticlesService.getAllCycle()
+    return await ArticlesService.getAllCycle()
       .then((response) => {
         console.log("response", response);
         if (!response.data.error) {
@@ -49,7 +49,7 @@ const actions = {
   },
 
   async getCurrentCycle({ commit }, cycle_code) {
-    return ArticlesService.getCurrentCycle(cycle_code);
+    return await ArticlesService.getCurrentCycle(cycle_code);
     // .then((response) => {
     //   if (!response.data.error) {
     //     console.log("response", response.data.data);
