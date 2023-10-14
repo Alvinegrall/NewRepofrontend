@@ -9,8 +9,7 @@ axios.interceptors.request.use(
     // config.baseURL = `http://localhost:3333/api/v1`;
     config.baseURL = `https://api.kelon.adoobin.com/api/v1`;
     const token = localStorage.getItem("jwt");
-    if (token) config.headers.Authorization = `Bearer ${token}`;
-
+    config.headers.common["Authorization"] = "Bearer " + token;
     return config;
   },
   function (error) {
