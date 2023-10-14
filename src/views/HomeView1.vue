@@ -246,12 +246,12 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/box_close.png" class="w-5" alt="" />
-                    <div class="font-semibold text-lg">
+                    <img src="/box_close.png" class="w-5 hidden s901:block" alt="" />
+                    <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_article }}
                     </div>
                   </div>
-                  <div>Articles</div>
+                  <div class=" text-[10px] md:text-sm">Articles</div>
                 </div>
               </CardBox>
             </div>
@@ -259,13 +259,13 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/livraison.png" class="w-5" alt="" />
+                    <img src="/livraison.png" class="w-5 hidden s901:block" alt="" />
 
-                    <div class="font-semibold text-lg">
+                    <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_entre }}
                     </div>
                   </div>
-                  <div>Livraisons</div>
+                  <div class=" text-[10px] md:text-sm">Livraisons</div>
                 </div>
               </CardBox>
             </div>
@@ -273,13 +273,13 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/earning.png" class="w-5" alt="" />
+                    <img src="/earning.png" class="w-5 hidden s901:block" alt="" />
 
-                    <div class="font-semibold text-lg">
+                    <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_sortie }}
                     </div>
                   </div>
-                  <div>Sortie</div>
+                  <div class=" text-[10px] md:text-sm">Sortie</div>
                 </div>
               </CardBox>
             </div>
@@ -290,13 +290,13 @@ const options = reactive({
                   @click="$router.push({ name: 'create-article' })"
                 >
                   <div class="flex items-center gap-2">
-                    <img src="/alert.png" class="w-5" alt="" />
+                    <img src="/alert.png" class="w-5 hidden s901:block" alt="" />
 
-                    <div class="font-semibold text-lg text-red-500">
+                    <div class="font-semibold text-sm md:text-lg text-red-500">
                       {{ homePageData.total_alerte }}
                     </div>
                   </div>
-                  <div class="underline">Alertes</div>
+                  <div class="underline text-[10px] md:text-sm">Alertes</div>
                 </div>
               </CardBox>
             </div>

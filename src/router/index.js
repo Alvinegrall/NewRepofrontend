@@ -26,6 +26,7 @@ const router = createRouter({
           component: HomeView1,
           async beforeEnter(to, from, next) {
             await store.dispatch("cycles/getActiveCycle");
+            await store.dispatch("cycles/getAllCycle");
             await store.dispatch("articles/getHomepageData");
             await store.dispatch("articles/getAllLogs");
             next();
@@ -163,8 +164,7 @@ const router = createRouter({
 });
 
 router.beforeEach(async (routeTo, routeFrom, next) => {
-  await store.dispatch("cycles/getAllCycle");
-  await store.dispatch("cycles/getActiveCycle");
+
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
 
