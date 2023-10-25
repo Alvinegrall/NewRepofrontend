@@ -89,9 +89,11 @@ const defaultColDef = {
 
 // Example load data from server
 onMounted(async () => {
+  // await store.dispatch("setContainLoading", true);
   await axios
     .get("/article/stats/all")
     .then((remoteRowData) => (rowData.value = remoteRowData.data.data));
+    // await store.dispatch("setContainLoading", false);
 });
 const deselectRows = () => {
   gridApi.value.deselectAll();

@@ -28,10 +28,11 @@ const breadcrumbItems = reactive([
 ]);
 
 onMounted(async () => {
+  await store.dispatch("setContainLoading", true);
   await store.dispatch("magasins/getAllMagasins");
   await store.dispatch("articles/getAllArticles");
-    await store.dispatch("articles/getAllArticles");
-
+  await store.dispatch("articles/getAllArticles");
+  await store.dispatch("setContainLoading", false);
 });
 const typeBeneficiary = reactive([
   { value: "child", label: "Enfant" },

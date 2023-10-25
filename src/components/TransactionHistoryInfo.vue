@@ -3,7 +3,7 @@ import BaseAmountWithArrow from "@/components/common/BaseAmountWithArrow.vue";
 import BaseStatusButton from "@/components/common/BaseStatusButton.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
 import BaseButtons from "@/components/common/BaseButtons.vue";
-import ArticlesService from "@/services/ArticlesService.js"
+import ArticlesService from "@/services/ArticlesService.js";
 
 import CardBoxModal from "@/components/common/CardBoxModal.vue";
 import { computed, ref } from "vue";
@@ -76,7 +76,6 @@ const handleDelete = async () => {
       });
     });
 };
-
 </script>
 
 <template>
@@ -127,14 +126,20 @@ const handleDelete = async () => {
             </thead>
             <tbody class="bg-white">
               <tr v-for="(item, index) in details" :key="index">
-                <td class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td
+                  data-label="Opération"
+                  class="whitespace-nowrap text-sm font-normal text-gray-900"
+                >
                   <div v-html="item.description"></div>
                 </td>
                 <td class="whitespace-nowrap text-sm font-normal text-gray-500">
                   {{ formateDate(item.created_at) }}
                 </td>
 
-                <td class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td
+                  data-label=" Date &amp; Time"
+                  class="whitespace-nowrap text-sm font-normal text-gray-900"
+                >
                   <div class="flex items-center gap-3">
                     <BaseStatusButton
                       icon="check-circle"
@@ -144,7 +149,7 @@ const handleDelete = async () => {
                     <!-- <div class="underline text-blue-600">Détails</div> -->
                   </div>
                 </td>
-                <td>
+                <td data-label="Status">
                   <BaseButton
                     color="danger"
                     :icon="'trash-2'"

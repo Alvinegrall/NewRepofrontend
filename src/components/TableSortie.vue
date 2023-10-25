@@ -146,17 +146,17 @@ const formateDate = (date) => {
             @checked="checked($event, client)"
           />
 
-          <td data-label="Name">
+          <td data-label="Date">
             {{ formateDate(client.date) }}
 
           </td>
-          <td data-label="matricule">
+          <td data-label="Article">
             {{ client?.article?.name }}
           </td>
-          <td data-label="phone">
+          <td data-label="Marque">
             {{ client.marque }}
           </td>
-          <td data-label="Progress" class="lg:w-32">
+          <td data-label="Quantité" class="lg:w-32">
             {{ client.qte }}
             <!-- <progress
             class="flex w-2/5 self-center lg:w-full "
@@ -166,7 +166,7 @@ const formateDate = (date) => {
         </progress> -->
           </td>
 
-          <td data-label="Date">
+          <td data-label="Bénéficiaire">
             {{ client?.beneficiaire?.name }}
           </td>
           <td class="before:hidden lg:w-1 whitespace-nowrap">

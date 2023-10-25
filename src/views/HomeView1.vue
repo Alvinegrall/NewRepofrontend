@@ -215,7 +215,7 @@ const options = reactive({
               <tbody>
                 <tr>
                   <td
-                    data-label="Nom"
+                    data-label="Livraisons"
                     class="md:max-w-[300px] max-h-[50px] overflow-hidden"
                   >
                     {{ entre.length }}
@@ -223,7 +223,7 @@ const options = reactive({
                   <td data-label="Montant">
                     <span class="font-[500]"> {{ sortie.length }}</span>
                   </td>
-                  <td data-label="Type">
+                  <td data-label="Sortie">
                     <div
                       class="bg-emerald-500 bg-opacity-10 text-emerald-500 flex justify-center p-1 rounded-lg"
                     >

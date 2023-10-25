@@ -262,7 +262,7 @@ const handleUpdateArticles = async () => {
             </thead>
             <tbody class="bg-white">
               <tr v-for="(item, index) in searchQuery" :key="index">
-                <td class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td  data-label="Nom" class="whitespace-nowrap text-sm font-normal text-gray-900">
                   {{ item.name }}
                 </td>
                 <!-- <td class="whitespace-nowrap text-sm font-normal text-gray-500">
@@ -270,9 +270,9 @@ const handleUpdateArticles = async () => {
                 </td> -->
 
                 <!-- <BaseAmountWithArrow isColorText isTable amount="3000" /> -->
-                <td>{{ item?.magasin?.name }}</td>
+                <td  data-label="Magasins">{{ item?.magasin?.name }}</td>
 
-                <td class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td   data-label="Catégories" class="whitespace-nowrap text-sm font-normal text-gray-900">
                   <div class="flex items-center gap-3">
                     {{ item?.category?.name }}
                     <!-- <BaseStatusButton
@@ -282,7 +282,7 @@ const handleUpdateArticles = async () => {
                     /> -->
                   </div>
                 </td>
-                <td>
+                <td  data-label="Quantité">
                   <div class="flex items-center gap-3">
                     <div
                       class="font-semibold"
@@ -298,10 +298,10 @@ const handleUpdateArticles = async () => {
                   </div>
                 </td>
 
-                <td>{{ item.stock_alerte }}</td>
-                <td>{{ item.stock_securite }}</td>
+                <td  data-label="Stock d'alerte">{{ item.stock_alerte }}</td>
+                <td  data-label="Stock securité">{{ item.stock_securite }}</td>
 
-                <td>
+                <td  data-label="">
                   <BaseButtons type="justify-start" class="flex gap-2" no-wrap>
                     <BaseButton
                       color="info"
