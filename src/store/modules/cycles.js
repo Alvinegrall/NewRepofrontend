@@ -42,9 +42,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        // if(error.request.status == 401){
-        //   location.href = "/login"
-        // }
+        if (error.request.status == 401) {
+          localStorage.removeItem("jwt");
+        }
       });
   },
 
@@ -70,10 +70,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        // if(error.request.status == 401){
-        //   location.href = "/login"
-        // }
-        console.log("error", error);
+        if (error.request.status == 401) {
+          localStorage.removeItem("jwt");
+        }
       });
   },
 };
