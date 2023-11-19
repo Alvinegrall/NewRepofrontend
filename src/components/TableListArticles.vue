@@ -262,7 +262,10 @@ const handleUpdateArticles = async () => {
             </thead>
             <tbody class="bg-white">
               <tr v-for="(item, index) in searchQuery" :key="index">
-                <td  data-label="Nom" class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td
+                  data-label="Nom"
+                  class="whitespace-nowrap text-sm font-normal text-gray-900"
+                >
                   {{ item.name }}
                 </td>
                 <!-- <td class="whitespace-nowrap text-sm font-normal text-gray-500">
@@ -270,9 +273,12 @@ const handleUpdateArticles = async () => {
                 </td> -->
 
                 <!-- <BaseAmountWithArrow isColorText isTable amount="3000" /> -->
-                <td  data-label="Magasins">{{ item?.magasin?.name }}</td>
+                <td data-label="Magasins">{{ item?.magasin?.name }}</td>
 
-                <td   data-label="Catégories" class="whitespace-nowrap text-sm font-normal text-gray-900">
+                <td
+                  data-label="Catégories"
+                  class="whitespace-nowrap text-sm font-normal text-gray-900"
+                >
                   <div class="flex items-center gap-3">
                     {{ item?.category?.name }}
                     <!-- <BaseStatusButton
@@ -282,8 +288,11 @@ const handleUpdateArticles = async () => {
                     /> -->
                   </div>
                 </td>
-                <td  data-label="Quantité">
-                  <div class="flex items-center gap-3">
+                <td data-label="Quantité">
+                  <div
+                    v-if="item.is_alert"
+                    class="flex items-center gap-3 bg-red-500 bg-opacity-25 p-2"
+                  >
                     <div
                       class="font-semibold"
                       :class="item.is_alert ? 'text-red-500' : ''"
@@ -291,17 +300,21 @@ const handleUpdateArticles = async () => {
                       {{ item.qte }}
                     </div>
                     <vue-feather
-                      v-if="item.is_alert"
                       type="info"
                       class="text-red-500 h-5"
                     ></vue-feather>
                   </div>
+                  <div v-else class="flex items-center gap-3 p-2">
+                    <div class="font-semibold">
+                      {{ item.qte }}
+                    </div>
+                  </div>
                 </td>
 
-                <td  data-label="Stock d'alerte">{{ item.stock_alerte }}</td>
-                <td  data-label="Stock securité">{{ item.stock_securite }}</td>
+                <td data-label="Stock d'alerte">{{ item.stock_alerte }}</td>
+                <td data-label="Stock securité">{{ item.stock_securite }}</td>
 
-                <td  data-label="">
+                <td data-label="">
                   <BaseButtons type="justify-start" class="flex gap-2" no-wrap>
                     <BaseButton
                       color="info"

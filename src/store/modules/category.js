@@ -24,9 +24,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        if(error.request.status == 401){
-          location.href = "/login"
-        }
+        // if(error.request.status == 401){
+        //   location.href = "/login"
+        // }
       });
   },
 

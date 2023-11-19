@@ -25,8 +25,6 @@ const router = createRouter({
           name: "common.home",
           component: HomeView1,
           async beforeEnter(to, from, next) {
-            await store.dispatch("cycles/getActiveCycle");
-            await store.dispatch("cycles/getAllCycle");
             await store.dispatch("articles/getHomepageData");
             await store.dispatch("articles/getAllLogs");
             next();
@@ -41,7 +39,6 @@ const router = createRouter({
             store.dispatch("category/getAllCat");
             store.dispatch("magasins/getAllMagasins");
             store.dispatch("articles/getAllArticles");
-
 
             next();
           },
@@ -164,19 +161,26 @@ const router = createRouter({
 });
 
 router.beforeEach(async (routeTo, routeFrom, next) => {
-
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
 
-  const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
-
-  // eslint-disable-next-line no-unreachable
-  if (!authRequired) return next();
-  if (authRequired) {
-    authGuard(routeTo, routeFrom, next);
+  if (JSON.stringify(store.getters["cycles/current_cycle"]) === "{}") {
+    console.log("teste");
+    await store.dispatch("cycles/getActiveCycle");
+  } else {
+    console.log("merde");
+    store.dispatch("cycles/getActiveCycle");
   }
 
+  store.dispatch("cycles/getAllCycle");
 
+  // const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
+
+  // // eslint-disable-next-line no-unreachable
+  // if (!authRequired) return next();
+  // if (authRequired) {
+  //   authGuard(routeTo, routeFrom, next);
+  // }
 
   // await store.dispatch("fournisseur/getAllFournisseurs");
   // await store.dispatch("category/getAllCat");
@@ -203,6 +207,7 @@ router.beforeEach(async (routeTo, routeFrom, next) => {
   //   });
   // }
   // if (routeTo.meta.requireAuth)   authGuard(to, from, next);
+  if (routeTo.meta.authRequired) authGuard(routeTo, routeFrom, next);
 
   return next();
 });

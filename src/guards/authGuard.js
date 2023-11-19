@@ -1,9 +1,15 @@
-import store from "../store";
-
-export default (to, from, next) => {
-  if (localStorage.getItem("jwt")) {
-    next();
+function authGuard(to, from, next) {
+  if (to.matched.some((record) => record.meta.authRequired)) {
+    console.log("authRequired +++++");
+    if (localStorage.getItem("jwt")) {
+      next();
+    } else {
+      next({ name: "create-page" });
+    }
   } else {
-    next({ name: "create-page" });
+    // La route ne nécessite pas d'authentification, continuez.
+    next();
   }
-};
+}
+
+export default authGuard;

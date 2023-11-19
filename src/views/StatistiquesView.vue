@@ -1,8 +1,9 @@
 <script setup>
 import { AgGridVue } from "ag-grid-vue3"; // the AG Grid Vue Component
 import { reactive, onMounted, ref, computed } from "vue";
-import axios from "@/config/axios";
+import axios from "@/config/axios"; 
 import TableStats from "@/components/TableStats.vue";
+import TableEntree from "@/components/TableEntree.vue";
 import CardBox from "@/components/common/CardBox.vue";
 import CardBoxHeader from "@/components/common/CardBoxHeader.vue";
 import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
@@ -52,6 +53,7 @@ const onGridReady = (params) => {
 
 const allStats = computed(() => store.getters["articles/allStats"]);
 const archives = computed(() => store.getters["articles/archives"]);
+
 
 const rowData = reactive({}); // Set rowData to Array of Objects, one Object per Row
 
@@ -210,8 +212,8 @@ const options = reactive({
           <div class="p-1 border border-emerald-400">
             <div class="flex justify-between items-center">
               <div class="font-bold text-sm">
-                {{ new Date(elt.date_debut).toLocaleDateString() }} ----
-                {{ new Date(elt.date_fin).toLocaleDateString() }}
+                {{ new Date(elt?.date_debut).toLocaleDateString() }} ----
+                {{ new Date(elt?.date_fin).toLocaleDateString() }}
               </div>
               <div>
                 <BaseButton
@@ -226,14 +228,15 @@ const options = reactive({
               </div>
             </div>
           </div>
-          <!-- {{ elt.sortie }}} -->
           <div>
             <h2 class="text-lg">Les Sortie</h2>
             <TableStats :details="elt.sortie" />
           </div>
           <div class="my-5">
             <h2 class="text-lg">Les entres</h2>
-            <TableEntree :details="item.entres" />
+            <!-- {{elt.entres}} -->
+            <TableEntree :details="elt.entres" />
+
           </div>
         </div>
       </div>

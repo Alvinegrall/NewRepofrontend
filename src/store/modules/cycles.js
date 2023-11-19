@@ -3,7 +3,7 @@ import ArticlesService from "@/services/ArticlesService";
 
 const state = {
   cycles: null,
-  current_cycle: null,
+  current_cycle: {},
   entres: null,
   logs: null,
   sortie: null,
@@ -18,7 +18,7 @@ const getters = {
     return state.current_cycle || {};
   },
   cycle_code: (state) => {
-    return state.current_cycle ? state?.current_cycle?.code : "";
+    return state?.current_cycle?.code;
   },
   entres: (state) => {
     return state?.current_cycle?.entres || [];
@@ -42,9 +42,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        if(error.request.status == 401){
-          location.href = "/login"
-        }
+        // if(error.request.status == 401){
+        //   location.href = "/login"
+        // }
       });
   },
 
@@ -70,9 +70,9 @@ const actions = {
         }
       })
       .catch((error) => {
-        if(error.request.status == 401){
-          location.href = "/login"
-        }
+        // if(error.request.status == 401){
+        //   location.href = "/login"
+        // }
         console.log("error", error);
       });
   },
