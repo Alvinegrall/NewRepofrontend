@@ -58,7 +58,8 @@ const entre = computed(() => store.getters["entre/entre"]);
 const magasins = computed(() => store.getters["magasins/magasin"]);
 const cats = computed(() => store.getters["category/cat"]);
 
-const createEntre = () => {
+const createEntre = async () => {
+  store.dispatch("setLoadingSpinner", true);
   const datas = {
     marque: fields.marque,
     code_article: fields.code_article,
@@ -66,12 +67,30 @@ const createEntre = () => {
     qte: fields.qte,
   };
 
-  store
+  // check fields
+  if (
+    fields.marque == "" ||
+    fields.code_article == "" ||
+    fields.fournisseur_id == "" ||
+    fields.qte == ""
+  ) {
+    isCreateTournoisModalActive.value = true;
+    store.dispatch("setLoadingSpinner", false);
+    snackbar.add({
+      type: "error",
+      text: "Veuillez remplir tous les champs",
+    });
+    return;
+  }
+
+  await store
     .dispatch("entre/createEntre", datas)
     .then(async (response) => {
       //   console.log("response", response);f
       if (!response.data.error) {
         await store.dispatch("entre/getAllEntre");
+        isCreateTournoisModalActive.value = false;
+        store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           type: "success",
           text: "Effectué avec success",
@@ -79,16 +98,12 @@ const createEntre = () => {
       }
     })
     .catch((error) => {
-      // this.$snackbar.add({
-      //   text: "Error" + error,
-      //   type: "error",
-      // });
+      store.dispatch("setLoadingSpinner", false);
+      isCreateTournoisModalActive.value = true;
       snackbar.add({
-          type: "error",
-          text: "Une erreur s'est produite",
-        });
-
-      console.log("error", error);
+        type: "error",
+        text: "Une erreur s'est produite",
+      });
     });
 
   // console.log(datas);
@@ -128,6 +143,7 @@ const createEntre = () => {
         <FormField label="Quantité">
           <FormControl
             v-model="fields.qte"
+            type="number"
             icon="edit-3"
             placeholder="Quantité"
           />

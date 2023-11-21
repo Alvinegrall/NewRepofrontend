@@ -17,6 +17,7 @@ export default createStore({
     containLoading: true,
     lastPosition: "common.home",
     searchQuery: "",
+    loadingSpinner: false,
   },
   mutations: {
     SET_GLOBAL_LOADING(state, loading) {
@@ -27,7 +28,10 @@ export default createStore({
     },
     SET_SEARCH_QUERY(state, data) {
       state.searchQuery = data;
-    }
+    },
+    SET_LOADING_SPINNER(state, status) {
+      state.loadingSpinner = status;
+    },
   },
   getters: {
     searchQuery: (state) => state.searchQuery,
@@ -36,6 +40,9 @@ export default createStore({
   actions: {
     setGlobalLoading({ commit }, loading) {
       commit("SET_GLOBAL_LOADING", loading);
+    },
+    setLoadingSpinner({ commit }, loading) {
+      commit("SET_LOADING_SPINNER", loading);
     },
     setGlobalLoading({ commit }, loading) {
       commit("SET_GLOBAL_LOADING", loading);
@@ -53,7 +60,7 @@ export default createStore({
     setLastPosition({ commit }, position) {
       commit("SET_LAST_POSITION", position);
     },
-    searchQuery({commit}, data) {
+    searchQuery({ commit }, data) {
       commit("SET_SEARCH_QUERY", data);
     },
   },

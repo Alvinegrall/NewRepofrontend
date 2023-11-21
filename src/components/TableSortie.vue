@@ -136,7 +136,7 @@ const formateDate = (date) => {
           <th>Marque</th>
           <th>Quantité</th>
           <th>Bénéficiaire</th>
-          <th />
+          <!-- <th /> -->
         </tr>
       </thead>
       <tbody>
@@ -169,7 +169,7 @@ const formateDate = (date) => {
           <td data-label="Bénéficiaire">
             {{ client?.beneficiaire?.name }}
           </td>
-          <td class="before:hidden lg:w-1 whitespace-nowrap">
+          <!-- <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons type="justify-start lg:justify-end" no-wrap>
               <BaseButton
                 color="danger"
@@ -178,7 +178,7 @@ const formateDate = (date) => {
                 @click="isModalDangerActive = true"
               />
             </BaseButtons>
-          </td>
+          </td> -->
         </tr>
       </tbody>
     </table>

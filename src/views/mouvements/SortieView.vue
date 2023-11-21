@@ -57,19 +57,38 @@ const goBack = () => {
   console.log("ttoto");
 };
 
-const createSortie = () => {
+const createSortie = async () => {
+  store.dispatch("setLoadingSpinner", true);
   const datas = {
     code_article: fields.code_article,
     beneficiaire_id: fields.beneficiaire_id.id,
     qte: fields.qte,
     date: fields.date,
   };
-  store
+
+  // check fields
+  if (
+    fields.code_article == "" ||
+    fields.beneficiaire_id == "" ||
+    fields.qte == "" ||
+    fields.date == ""
+  ) {
+    isCreateTournoisModalActive.value = true;
+    store.dispatch("setLoadingSpinner", false);
+    snackbar.add({
+      type: "error",
+      text: "Veuillez remplir tous les champs",
+    });
+    return;
+  }
+
+  await store
     .dispatch("sortie/createSortie", datas)
     .then(async (response) => {
       //   console.log("response", response);f
       if (!response.data.error) {
         await store.dispatch("sortie/getAllSortie");
+        store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           type: "success",
           text: "Effectué avec success",
@@ -82,6 +101,8 @@ const createSortie = () => {
       }
     })
     .catch((error) => {
+      store.dispatch("setLoadingSpinner", false);
+      isCreateTournoisModalActive.value = true;
       snackbar.add({
         type: "error",
         text: error.response.data.message,
@@ -142,6 +163,7 @@ const checkQte = () => {
         >
           <FormControl
             v-model="fields.qte"
+            type="number"
             icon="phone"
             placeholder="Entrez la quantité"
           />

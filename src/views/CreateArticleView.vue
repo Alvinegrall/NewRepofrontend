@@ -23,6 +23,10 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
+
 const router = useRouter();
 const store = useStore();
 const breadcrumbItems = reactive([
@@ -36,7 +40,6 @@ onMounted(async () => {
   // await store.dispatch("articles/getAllArticles");
   // await store.dispatch("articles/getAllArticles");
   //   await store.dispatch("category/getAllCat")
-
 });
 const fields = reactive({
   name: "",
@@ -56,6 +59,7 @@ const createMembre = () => {
 };
 
 const createArticles = () => {
+  store.dispatch("setLoadingSpinner", true);
   const datas = {
     name: fields.name,
     stock_alerte: fields.stock_alerte,
@@ -63,6 +67,23 @@ const createArticles = () => {
     cat_id: fields.cat_id.id,
     magasin_id: fields.magasin_id.id,
   };
+
+  // check fields
+  if (
+    fields.name == "" ||
+    fields.stock_alerte == "" ||
+    fields.stock_securite == "" ||
+    fields.cat_id == "" ||
+    fields.magasin_id == ""
+  ) {
+    store.dispatch("setLoadingSpinner", false);
+    isCreateTournoisModalActive.value = true;
+    snackbar.add({
+      type: "error",
+      text: "Veuillez remplir tous les champs",
+    });
+    return;
+  }
 
   store
     .dispatch("articles/createArticle", datas)
@@ -75,16 +96,18 @@ const createArticles = () => {
         fields.stock_securite = "";
         fields.cat_id = "";
         fields.magasin_id = "";
-        isCreateTournoisModalActive.value = false;
-        
         await store.dispatch("articles/getAllArticles");
+        isCreateTournoisModalActive.value = false;
+        store.dispatch("setLoadingSpinner", false);
       }
     })
     .catch((error) => {
-      // this.$snackbar.add({
-      //   text: "Error" + error,
-      //   type: "error",
-      // });
+      store.dispatch("setLoadingSpinner", false);
+      isCreateTournoisModalActive.value = true;
+      snackbar.add({
+        type: "error",
+        text: "Une erreur est survenue",
+      });
 
       console.log("error", error);
     });
@@ -121,6 +144,7 @@ const searchQuery = (query) => {
         <FormField label="Stock de sécurité">
           <FormControl
             v-model="fields.stock_securite"
+            type="number"
             icon="edit-3"
             placeholder="Entrez la valeur "
           />
@@ -128,6 +152,7 @@ const searchQuery = (query) => {
         <FormField label="Stock d'alerte" help="required">
           <FormControl
             v-model="fields.stock_alerte"
+            type="number"
             icon="bell"
             placeholder="Entrez la valeur"
           />

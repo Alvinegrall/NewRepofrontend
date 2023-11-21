@@ -87,12 +87,13 @@ const filterData = () => {
 const magasins = computed(() => store.getters["magasins/magasin"]);
 const cats = computed(() => store.getters["category/cat"]);
 const handleDelete = async () => {
-  console.log(current_item.value);
+  store.dispatch("setLoadingSpinner", true);
   await store
     .dispatch("articles/deleteArticle", current_item.value)
     .then(async (response) => {
       if (!response.data.error) {
         await store.dispatch("articles/getAllArticles");
+        store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           text: "Supprimé avec success",
           type: "success",
@@ -101,6 +102,8 @@ const handleDelete = async () => {
       }
     })
     .catch((error) => {
+      store.dispatch("setLoadingSpinner", false);
+      // isModalDangerActive.value = true;
       snackbar.add({
         text: "Erreur lors de la creation",
         type: "error",
@@ -120,6 +123,7 @@ const updateClick = (value) => {
 };
 
 const handleUpdateArticles = async () => {
+  store.dispatch("setLoadingSpinner", true);
   await store
     .dispatch("articles/updateArticle", {
       id: current_item.value.id,
@@ -128,6 +132,7 @@ const handleUpdateArticles = async () => {
     .then(async (response) => {
       if (!response.data.error) {
         await store.dispatch("articles/getAllArticles");
+        store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           text: "Modifié avec success",
           type: "success",
@@ -136,8 +141,10 @@ const handleUpdateArticles = async () => {
       }
     })
     .catch((error) => {
+      store.dispatch("setLoadingSpinner", false);
+      isUpdateModalActive.value = true;
       snackbar.add({
-        text: "Erreur lors de la creation",
+        text: "Erreur est survenue",
         type: "error",
       });
     });
@@ -176,6 +183,7 @@ const handleUpdateArticles = async () => {
         <FormField label="Stock de sécurité">
           <FormControl
             v-model="fields.stock_securite"
+            type="number"
             icon="edit-3"
             placeholder="Entrez la valeur "
           />
@@ -183,6 +191,7 @@ const handleUpdateArticles = async () => {
         <FormField label="Stock d'alerte">
           <FormControl
             v-model="fields.stock_alerte"
+            type="number"
             icon="bell"
             placeholder="Entrez la valeur"
           />
