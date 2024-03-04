@@ -5,7 +5,7 @@ import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
 import EmptyContain from "@/components/common/EmptyContain.vue";
 // import TableDetailCotisation from "@/components/TableDetailCotisation.vue";
 import TransactionHistoryInfo from "@/components/TransactionHistoryInfo.vue";
-
+import AuthService from "@/services/AuthService";
 import HeaderBreadcrumbs from "@/components/common/HeaderBreadcrumbs.vue";
 import HeaderWithOptions from "@/components/common/HeaderWithOptions.vue";
 import FormField from "@/components/common/FormField.vue";
@@ -200,7 +200,7 @@ const options = reactive({
 
     <div class="flex flex-col gap-6">
       <div class="grid grid-cols-1 gap-4">
-        <div class=" flex flex-col md:grid md:grid-cols-2  gap-4">
+        <div class="flex flex-col md:grid md:grid-cols-2 gap-4">
           <CardBox class="flex-1">
             <CompteHeader title="Informations sur le cycle courant" noicon />
             <table>
@@ -246,12 +246,16 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/box_close.png" class="w-5 hidden s901:block" alt="" />
+                    <img
+                      src="/box_close.png"
+                      class="w-5 hidden s901:block"
+                      alt=""
+                    />
                     <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_article }}
                     </div>
                   </div>
-                  <div class=" text-[10px] md:text-sm">Articles</div>
+                  <div class="text-[10px] md:text-sm">Articles</div>
                 </div>
               </CardBox>
             </div>
@@ -259,13 +263,17 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/livraison.png" class="w-5 hidden s901:block" alt="" />
+                    <img
+                      src="/livraison.png"
+                      class="w-5 hidden s901:block"
+                      alt=""
+                    />
 
                     <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_entre }}
                     </div>
                   </div>
-                  <div class=" text-[10px] md:text-sm">Livraisons</div>
+                  <div class="text-[10px] md:text-sm">Livraisons</div>
                 </div>
               </CardBox>
             </div>
@@ -273,13 +281,17 @@ const options = reactive({
               <CardBox>
                 <div class="flex flex-col items-center justify-center">
                   <div class="flex items-center gap-2">
-                    <img src="/earning.png" class="w-5 hidden s901:block" alt="" />
+                    <img
+                      src="/earning.png"
+                      class="w-5 hidden s901:block"
+                      alt=""
+                    />
 
                     <div class="font-semibold text-sm md:text-lg">
                       {{ homePageData.total_sortie }}
                     </div>
                   </div>
-                  <div class=" text-[10px] md:text-sm">Sortie</div>
+                  <div class="text-[10px] md:text-sm">Sortie</div>
                 </div>
               </CardBox>
             </div>
@@ -290,7 +302,11 @@ const options = reactive({
                   @click="$router.push({ name: 'create-article' })"
                 >
                   <div class="flex items-center gap-2">
-                    <img src="/alert.png" class="w-5 hidden s901:block" alt="" />
+                    <img
+                      src="/alert.png"
+                      class="w-5 hidden s901:block"
+                      alt=""
+                    />
 
                     <div class="font-semibold text-sm md:text-lg text-red-500">
                       {{ homePageData.total_alerte }}
@@ -301,7 +317,6 @@ const options = reactive({
               </CardBox>
             </div>
           </div>
-       
         </div>
         <CardBox>
           <div class="relative">
@@ -314,7 +329,6 @@ const options = reactive({
             <!-- graph here -->
           </div>
         </CardBox>
-      
       </div>
       <CardBox>
         <CompteHeader title="Transactions récentes" noicon />

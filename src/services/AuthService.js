@@ -68,4 +68,16 @@ export default {
     const data = { uid: hash_id };
     return axios.post("/getuid", JSON.stringify(data));
   },
+  profile() {
+    return axios.get("/profile");
+  },
+  createUser(data) {
+    return axios.post("/user/create-user",data);
+  },
+  getAllUsers() {
+    return axios.get("/users/get-all");
+  },
+  deleteUser(id) {
+    return axios.delete(`/users/${id}/delete`);
+  },
 };

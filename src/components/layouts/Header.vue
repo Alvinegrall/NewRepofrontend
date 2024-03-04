@@ -75,13 +75,15 @@ const currentUser = computed(() => store.getters["auth/currentUser"]);
                 >Hydrac</span
               >
             </router-link>
-         
           </div>
           <div class="flex items-center">
-      
             <div class="hidden lg:flex items-center">
               <span class="text-base font-normal text-gray-500 mr-5"
-                >Appli de gestion de stock 💜
+                >Bienvenu
+                <span class="text-black font-semibold">{{
+                  currentUser.name
+                }}</span>
+                💜
               </span>
               <div class="-mb-1">
                 <span></span>
@@ -114,10 +116,11 @@ const currentUser = computed(() => store.getters["auth/currentUser"]);
                   v-show="dropdownOpen"
                   class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl"
                 >
-                  <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-200"
-                    >Paramètres</a
+                  <router-link
+                    to="/settings"
+                    class="block px-4 py-2 text-sm hover:bg-gray-200"
+                    >Paramètres</router-link
                   >
-
                   <router-link
                     to="/login"
                     class="block px-4 py-2 text-sm hover:bg-gray-200"

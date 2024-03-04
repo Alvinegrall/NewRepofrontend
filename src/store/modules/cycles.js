@@ -14,6 +14,7 @@ const getters = {
   cycles: (state) => {
     return state.cycles || [];
   },
+
   current_cycle: (state) => {
     return state.current_cycle || {};
   },

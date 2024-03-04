@@ -115,7 +115,6 @@ const router = createRouter({
             next();
           },
         },
-
         {
           path: "/settings",
           name: "settings",
@@ -163,16 +162,15 @@ const router = createRouter({
 router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
-
+// getCurrentUser
   if (JSON.stringify(store.getters["cycles/current_cycle"]) === "{}") {
-    console.log("teste");
     await store.dispatch("cycles/getActiveCycle");
   } else {
-    console.log("merde");
     store.dispatch("cycles/getActiveCycle");
   }
 
   store.dispatch("cycles/getAllCycle");
+  store.dispatch("auth/getCurrentUser");
 
   // const authRequired = routeTo.matched.some((route) => route.meta.authRequired);
 
