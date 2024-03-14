@@ -64,8 +64,22 @@ const router = createRouter({
           component: () => import("@/views/mouvements/SortieView.vue"),
           beforeEnter(to, from, next) {
             store.dispatch("articles/getAllArticles");
-            store.dispatch("sortie/getAllSortie");
+            // store.dispatch("sortie/getAllSortie");
             store.dispatch("beneficiaire/getAllBenefi");
+
+            next();
+          },
+        },
+        {
+          path: "/confromite",
+          name: "mvt.conformite",
+          // component: SettingsViewVue,
+          component: () => import("@/views/mouvements/ConformiteView.vue"),
+          beforeEnter(to, from, next) {
+            store.dispatch("fournisseur/getAllFournisseurs");
+            store.dispatch("articles/getAllArticles");
+            //  store.dispatch("sortie/getAllSortie");
+            store.dispatch("entre/getAllEntre");
 
             next();
           },
@@ -162,7 +176,7 @@ const router = createRouter({
 router.beforeEach(async (routeTo, routeFrom, next) => {
   await store.dispatch("setGlobalLoading", true);
   await store.dispatch("setContainLoading", true);
-// getCurrentUser
+  // getCurrentUser
   if (JSON.stringify(store.getters["cycles/current_cycle"]) === "{}") {
     await store.dispatch("cycles/getActiveCycle");
   } else {

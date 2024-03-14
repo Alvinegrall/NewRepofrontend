@@ -1,8 +1,37 @@
 import axios from "@/config/axios";
-
+import store from "../store";
 export default {
   getAllSortie(cycle_code) {
     return axios.get(`/sortie/${cycle_code}/all`);
+  },
+
+  handleGetAllSortie({
+    page,
+    per_page,
+    category = null,
+    start = null,
+    end = null,
+    limit_date,
+    type,
+    start_date,
+    end_date,
+    beneficiaire_id,
+    article_id,
+   
+
+    // source_name,
+    // source_ref,
+    mode,
+    search_value,
+  }) {
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return axios.get(
+      `/sortie/${cycle_code}/all?page=${page}&per_page=${per_page}&category=${
+        category ?? ""
+      }&start_date=${start_date ?? ""}&end_date=${end_date ?? ""}&start=${start ?? ""}&end=${end ?? ""}&beneficiaire_id=${beneficiaire_id ?? ""}&article_id=${article_id ?? ""}&limit_date=${limit_date}&type=${
+        type ?? ""
+      }&search_value=${search_value}`
+    );
   },
 
   getAllLogs(cycle_code) {
@@ -48,14 +77,40 @@ export default {
   createSortie(data) {
     return axios.post("/sortie", data);
   },
+  getAllArticles_pagination({
+    page,
+    per_page,
+    category = null,
+    start = null,
+    end = null,
+    limit_date,
+    type,
+    // source_name,
+    // source_ref,
+    mode,
+    search_value,
+  }) {
+    return axios.get(
+      `/article?page=${page}&per_page=${per_page}&category=${
+        category ?? ""
+      }&start=${start ?? ""}&end=${end ?? ""}&limit_date=${limit_date}&type=${
+        type ?? ""
+      }&search_value=${search_value}`
+    );
+  },
+
   getAllArticles() {
-    return axios.get("/article");
+    return axios.get(`/article-no-pagination`);
   },
   createArticle(data) {
     return axios.post("/article", data);
   },
   getAllEntre(cycle_code) {
     return axios.get(`/entre/${cycle_code}/all`);
+  },
+  getAllEntreNonConforme() {
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return axios.get(`/entre/${cycle_code}/all-non-conforme`);
   },
   createEntre(data) {
     return axios.post("/entre", data);
@@ -104,6 +159,9 @@ export default {
   },
   getArchives() {
     return axios.get(`/archives`);
+  },
+  genaratePdf(item) {
+    return axios.get(`/genaratePdf/${item}`);
   },
   updateArticle(data, id) {
     return axios.put(`/article/${id}/update`, data);

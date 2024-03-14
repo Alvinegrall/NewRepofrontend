@@ -17,7 +17,6 @@ const sideMenuItems = ref([
     isMenu: false,
     link: "create-article",
   },
-
   {
     title: "Mouvements",
     isOpen: false,
@@ -26,6 +25,12 @@ const sideMenuItems = ref([
     children: [
       { title: "Entrées", isOpen: false, isMenu: false, link: "mvt.entree" },
       { title: "Sorties", isOpen: false, isMenu: false, link: "mvt.sortie" },
+      {
+        title: "Non conforme",
+        isOpen: false,
+        isMenu: false,
+        link: "mvt.conformite"
+      },
     ],
   },
   {

@@ -8,6 +8,7 @@ import BaseButtons from "@/components/common/BaseButtons.vue";
 import BaseButton from "@/components/common/BaseButton.vue";
 import UserProfile from "@/components/common/UserProfile.vue";
 import FormateDate from "@/helpers/FormateDate";
+import ArticlesService from "@/services/ArticlesService";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 
@@ -21,7 +22,7 @@ const props = defineProps({
 
 const store = useStore();
 const router = useRouter();
-
+const emit = defineEmits(["reload"]);
 const isModalActive = ref(false);
 
 const isModalDangerActive = ref(false);
@@ -94,6 +95,22 @@ const formateDate = (date) => {
   const readableDate = newdate.toLocaleString();
   return readableDate;
 };
+
+const selected_value = ref([]);
+
+const deleteAction = (value) => {
+  selected_value.value = value;
+  isModalDangerActive.value = true;
+  
+};
+
+const handleDelete = async() =>{
+await ArticlesService.deleteEntre(selected_value.value.id).then((elt)=>{
+  if(!elt.data.error){
+    emit("reload")
+  }
+})
+}
 </script>
 
 <template>
@@ -105,12 +122,12 @@ const formateDate = (date) => {
 
     <CardBoxModal
       v-model="isModalDangerActive"
-      title="Please confirm"
+      title="Confirmez l'action"
       button="danger"
       has-cancel
+      @confirm="handleDelete"
     >
-      <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-      <p>This is sample modal</p>
+      <p>Voulez-vous vraiment supprimer cette entree non conforme ?</p>
     </CardBoxModal>
 
     <div v-if="checkedRows.length" class="p-3 bg-gray-100/50 dark:bg-slate-300">
@@ -139,21 +156,21 @@ const formateDate = (date) => {
           <th>Quantité</th>
           <th>Fournisseur</th>
           <!-- <th>Conforme</th> -->
-          <!-- <th /> -->
+          <th />
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(client,index) in itemsPaginated" :key="client.id">
+        <tr v-for="(client,index) in itemsPaginated" :key="index">
           <TableCheckboxCell
             v-if="checkable"
             @checked="checked($event, client)"
           />
 
           <td data-label="No">
-            {{ index + 1 }}
+            {{ index +1   }}
           </td>
           <td data-label="Date">
-            {{ FormateDate(client.date) }}
+            {{ FormateDate(client.created_at) }}
           </td>
           <td data-label="Article">
             {{ client?.article?.name }}
@@ -183,16 +200,16 @@ const formateDate = (date) => {
             {{ client?.is_conforme ? "Conforme" : "Non conforme" }}
            </div>
           </td> -->
-          <!-- <td class="before:hidden lg:w-1 whitespace-nowrap">
+          <td class="before:hidden lg:w-1 whitespace-nowrap">
             <BaseButtons type="justify-start lg:justify-end" no-wrap>
               <BaseButton
                 color="danger"
                 icon="trash-2"
                 small
-                @click="isModalDangerActive = true"
+                @click="deleteAction(client)"
               />
             </BaseButtons>
-          </td> -->
+          </td>
         </tr>
       </tbody>
     </table>

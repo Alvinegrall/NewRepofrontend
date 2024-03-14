@@ -3,6 +3,7 @@ import CardBox from "@/components/common/CardBox.vue";
 import CardBoxHeader from "@/components/common/CardBoxHeader.vue";
 import CotisationInfos from "@/components/CotisationInfos.vue";
 import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
+import CheckBoxWithLabel from "@/components/common/CheckBoxWithLabel.vue";
 
 // import BaseSkeleton from "@/components/common/BaseSkeleton.vue";
 import HeaderBreadcrumbs from "@/components/common/HeaderBreadcrumbs.vue";
@@ -40,6 +41,8 @@ const fields = reactive({
   code_article: "",
   fournisseur_id: "",
   qte: "",
+  is_conforme: false,
+  date: "",
 });
 const isCreateTournoisModalActive = ref(false);
 
@@ -65,6 +68,8 @@ const createEntre = async () => {
     code_article: fields.code_article,
     fournisseur_id: fields.fournisseur_id.id,
     qte: fields.qte,
+    is_conforme: true,
+    date: fields.date,
   };
 
   // check fields
@@ -157,6 +162,22 @@ const createEntre = async () => {
             placeholder="Type"
           />
         </FormField>
+
+        <FormField label="Date" help="required">
+          <FormDatePikerControl
+            @getDate="fields.date = $event"
+            showHour
+            placeholder="Date de l'opération"
+          />
+        </FormField>
+        <!-- <div class="mt-5">
+  <CheckBoxWithLabel
+    id="is_conforme"
+    label="Artiles conformes"
+    v-model="fields.is_conforme"
+  />
+
+</div> -->
       </div>
     </CardBoxModal>
 

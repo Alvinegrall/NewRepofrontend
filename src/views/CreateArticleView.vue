@@ -58,6 +58,8 @@ const createMembre = () => {
   isCreateTournoisModalActive.value = true;
 };
 
+
+
 const createArticles = () => {
   store.dispatch("setLoadingSpinner", true);
   const datas = {
@@ -96,7 +98,8 @@ const createArticles = () => {
         fields.stock_securite = "";
         fields.cat_id = "";
         fields.magasin_id = "";
-        await store.dispatch("articles/getAllArticles");
+        store.dispatch("setReloading", Math.random());
+        // await store.dispatch("articles/getAllArticles");
         isCreateTournoisModalActive.value = false;
         store.dispatch("setLoadingSpinner", false);
       }
@@ -185,8 +188,8 @@ const searchQuery = (query) => {
       @makeResearch="searchQuery($event.target.value)"
       @btnClick="createMembre"
     />
-    <CardBox class="mb-6" has-table>
-      <TableListArticles :details="articles" />
+    <CardBox class="mb-6">
+      <TableListArticles />
     </CardBox>
 
     <!-- <div class="grid grid-cols-2 lg:grid-cols-3 gap-6">
