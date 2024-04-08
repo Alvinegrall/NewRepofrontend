@@ -61,6 +61,9 @@ const entre = computed(() => store.getters["entre/entre"]);
 const magasins = computed(() => store.getters["magasins/magasin"]);
 const cats = computed(() => store.getters["category/cat"]);
 
+const searchTournois = (event) => {
+  store.dispatch("searchQuery", event);
+};
 const createEntre = async () => {
   store.dispatch("setLoadingSpinner", true);
   const datas = {
@@ -71,6 +74,7 @@ const createEntre = async () => {
     is_conforme: true,
     date: fields.date,
   };
+
 
   // check fields
   if (

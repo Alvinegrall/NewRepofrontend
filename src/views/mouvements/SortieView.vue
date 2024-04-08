@@ -58,6 +58,10 @@ const goBack = () => {
   console.log("ttoto");
 };
 
+const searchTournois = (event) => {
+  store.dispatch("searchQuery", event);
+};
+
 const createSortie = async () => {
   store.dispatch("setLoadingSpinner", true);
   const datas = {

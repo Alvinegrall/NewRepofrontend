@@ -72,6 +72,11 @@ watch(reload, (ret, sfs) => {
   handleGetSortie();
 });
 
+const searchText = computed(() => store.getters["searchQuery"]);
+
+watch(searchText, (newTxs, oldTxs) => {
+  handleGetSortie();
+});
 
 const isModalActive = ref(false);
 
@@ -165,8 +170,8 @@ const handleGetSortie = async () => {
     beneficiaire_id: paginationState.beneficiaire_id?.id ?? null,
     article_id: paginationState.article_id?.id ?? null,
     // source_ref: props.source_ref ?? "",
+    search_value: searchText.value,
     mode: paginationState.mode ?? "",
-    // search_key: searchQuerry.value.search_key ?? "",
     end: paginationState.end,
   })
     .then((res) => {

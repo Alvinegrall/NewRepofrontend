@@ -123,6 +123,7 @@ const goBack = () => {
 };
 const searchQuery = (query) => {
   store.dispatch("searchQuery", query);
+  // store.dispatch("membres/makeResearch", event);
 };
 </script>
 

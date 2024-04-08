@@ -43,6 +43,9 @@ const isModalDangerActive = ref(false);
 const isUpdateModalActive = ref(false);
 const loading = ref(false);
 
+const searchQuerry = computed(() => store.getters["searchQuerry"]);
+
+
 const paginationState = reactive({
   dataFetched: true,
   per_page: 10,
@@ -78,16 +81,15 @@ const fields = reactive({
   cat_id: "",
   magasin_id: "",
 });
-const searchText = computed(() => store.getters["searchQuery"]);
-// console.log(searchText.value);
-
-// onMounted(() => {
-//   filterData();
-// });
 
 const reload = computed(() => store.state["reload"]);
 
 watch(reload, (ret, sfs) => {
+  handleGetArticles();
+});
+const searchText = computed(() => store.getters["searchQuery"]);
+
+watch(searchText, (newTxs, oldTxs) => {
   handleGetArticles();
 });
 
@@ -104,6 +106,7 @@ const handleGetArticles = async () => {
     category: paginationState.category?.id ?? null,
     limit_date: paginationState.limit_date,
     type: paginationState.type ?? "",
+    search_value: searchText.value,
     // source_ref: props.source_ref ?? "",
     mode: paginationState.mode ?? "",
     // search_key: searchQuerry.value.search_key ?? "",
@@ -192,30 +195,30 @@ const details = computed(() => props.details);
 //       // console.log("erros", error);
 //     });
 // };
-const searchQuery = computed(() => filterData());
+// const searchQuery = computed(() => filterData());
 
-const filterData = () => {
-  // If searchQuery is empty, show all data
-  if (searchText.value == "") {
-    return props.details;
-  }
+// const filterData = () => {
+//   // If searchQuery is empty, show all data
+//   if (searchText.value == "") {
+//     return props.details;
+//   }
 
-  // If searchQuery is not empty, filter data based on the query
-  const searchTerm = searchText.value.toLowerCase();
-  return props.details.filter((item) => {
-    // Customize the fields you want to search for here
-    const searchableFields = [
-      item?.name.toString(),
-      item?.category?.name.toString(),
-      item?.qte.toString(),
-      item?.stock_alerte.toString(),
-      item?.stock_securite.toString(),
-    ];
-    return searchableFields.some((field) =>
-      field.toLowerCase().includes(searchTerm)
-    );
-  });
-};
+//   // If searchQuery is not empty, filter data based on the query
+//   const searchTerm = searchText.value.toLowerCase();
+//   return props.details.filter((item) => {
+//     // Customize the fields you want to search for here
+//     const searchableFields = [
+//       item?.name.toString(),
+//       item?.category?.name.toString(),
+//       item?.qte.toString(),
+//       item?.stock_alerte.toString(),
+//       item?.stock_securite.toString(),
+//     ];
+//     return searchableFields.some((field) =>
+//       field.toLowerCase().includes(searchTerm)
+//     );
+//   });
+// };
 const magasins = computed(() => store.getters["magasins/magasin"]);
 const cats = computed(() => store.getters["category/cat"]);
 const handleDelete = async () => {
