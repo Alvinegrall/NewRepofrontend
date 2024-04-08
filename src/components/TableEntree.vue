@@ -14,6 +14,7 @@ import FormDatePikerControl from "@/components/common/FormDatePikerControl.vue";
 import FormField from "@/components/common/FormField.vue";
 import FormControl from "@/components/common/FormControl.vue";
 import FormControlId from "@/components/common/FormControlId.vue";
+import getFormattedAmount from "@/helpers/getFormattedAmount";
 
 import ArticlesService from "@/services/ArticlesService";
 import { useStore } from "vuex";
@@ -145,9 +146,7 @@ const onLimitDate = () => {
 };
 
 const rowDatas = computed(() => {
-  return paginationState.entres.length
-    ? paginationState.entres
-    : props.details;
+  return paginationState.entres.length ? paginationState.entres : [];
 });
 
 const onBtFirst = () => {
@@ -294,6 +293,8 @@ const makeResearch = () => {
             <th>Article</th>
             <th>Marque</th>
             <th>Quantité</th>
+            <th>PU</th>
+            <th>PT</th>
             <th>Fournisseur</th>
             <!-- <th>Conforme</th> -->
             <!-- <th /> -->
@@ -320,12 +321,12 @@ const makeResearch = () => {
             </td>
             <td data-label="Quantité" class="lg:w-32">
               {{ client.qte }}
-              <!-- <progress
-            class="flex w-2/5 self-center lg:w-full "
-            max="100"
-            :value="60"
-          >
-        </progress> -->
+            </td>
+            <td data-label="PU" class="lg:w-32">
+              {{ getFormattedAmount(client.prix_u) }}
+            </td>
+            <td data-label="PT" class="lg:w-32">
+              {{ getFormattedAmount(client.prix_t) }}
             </td>
 
             <td data-label="Fournisseur">

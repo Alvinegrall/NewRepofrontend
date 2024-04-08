@@ -16,6 +16,7 @@ import BaseButton from "@/components/common/BaseButton.vue";
 import BaseButtons from "@/components/common/BaseButtons.vue";
 import ShareLinkSocialNetwork from "@/components/ShareLinkSocialNetwork.vue";
 import FormFileCropPicker from "@/components/common/FormFileCropPicker.vue";
+import getFormattedAmount from "@/helpers/getFormattedAmount";
 
 import TableEntree from "@/components/TableEntree.vue";
 
@@ -43,6 +44,8 @@ const fields = reactive({
   qte: "",
   is_conforme: false,
   date: "",
+  prix_t: "",
+  prix_u: "",
 });
 const isCreateTournoisModalActive = ref(false);
 
@@ -71,17 +74,19 @@ const createEntre = async () => {
     code_article: fields.code_article,
     fournisseur_id: fields.fournisseur_id.id,
     qte: fields.qte,
+    prix_u: fields.prix_u,
+    prix_t: fields.prix_t,
     is_conforme: true,
     date: fields.date,
   };
-
 
   // check fields
   if (
     fields.marque == "" ||
     fields.code_article == "" ||
     fields.fournisseur_id == "" ||
-    fields.qte == ""
+    fields.qte == "" ||
+    fields.prix_t == ""
   ) {
     isCreateTournoisModalActive.value = true;
     store.dispatch("setLoadingSpinner", false);
@@ -116,6 +121,14 @@ const createEntre = async () => {
     });
 
   // console.log(datas);
+};
+
+const calculatePrixTotal = () => {
+  if (fields.qte == "" || fields.prix_u == "") {
+    fields.prix_t = 0;
+  } else {
+    fields.prix_t = Number(fields.qte) * Number(fields.prix_u);
+  }
 };
 </script>
 
@@ -155,6 +168,16 @@ const createEntre = async () => {
             type="number"
             icon="edit-3"
             placeholder="Quantité"
+            @input="calculatePrixTotal()"
+          />
+        </FormField>
+        <FormField label="Prix unitaire">
+          <FormControl
+            v-model="fields.prix_u"
+            type="number"
+            icon="edit-3"
+            placeholder="Prix unitaire"
+            @input="calculatePrixTotal()"
           />
         </FormField>
 
@@ -174,15 +197,20 @@ const createEntre = async () => {
             placeholder="Date de l'opération"
           />
         </FormField>
-        <!-- <div class="mt-5">
-  <CheckBoxWithLabel
-    id="is_conforme"
-    label="Artiles conformes"
-    v-model="fields.is_conforme"
-  />
-
-</div> -->
       </div>
+
+      <CardBox class="w-full p-1 mt-10 flex items-center" has-table>
+        <div
+          class="flex items-center gap-4 justify-center border pr-3-t px-2 bg-gray-200 border-opacity-10 text-black"
+        >
+          <div class="text-base font-semibold">
+            {{ $t("loans.resume.total_to_back") }}:
+          </div>
+          <div class="text-lg text-primary font-bold border-4">
+            {{ getFormattedAmount(fields.prix_t) }} F
+          </div>
+        </div>
+      </CardBox>
     </CardBoxModal>
 
     <HeaderBreadcrumbs :links="breadcrumbItems" title="Toutes vos livraisons" />
@@ -194,7 +222,7 @@ const createEntre = async () => {
       @makeResearch="searchTournois($event.target.value)"
       @btnClick="createMembre"
     />
-    <CardBox class="mb-6" has-table>
+    <CardBox class="mb-6">
       <TableEntree :details="entre" />
     </CardBox>
 
