@@ -102,7 +102,8 @@ const createEntre = async () => {
     .then(async (response) => {
       //   console.log("response", response);f
       if (!response.data.error) {
-        await store.dispatch("entre/getAllEntre");
+        // await store.dispatch("entre/getAllEntre");
+        store.dispatch("setReloading", Math.random());
         isCreateTournoisModalActive.value = false;
         store.dispatch("setLoadingSpinner", false);
         snackbar.add({

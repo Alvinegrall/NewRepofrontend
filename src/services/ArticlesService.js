@@ -44,6 +44,7 @@ export default {
     end_date,
     fournisseur_id,
     article_id,
+    show_report,
     mode,
     search_value,
   }) {
@@ -53,7 +54,34 @@ export default {
         category ?? ""
       }&start_date=${start_date ?? ""}&end_date=${end_date ?? ""}&start=${start ?? ""}&end=${end ?? ""}&fournisseur_id=${fournisseur_id ?? ""}&article_id=${article_id ?? ""}&limit_date=${limit_date}&type=${
         type ?? ""
-      }&search_value=${search_value}`
+      }&search_value=${search_value}&show_report=${show_report}`
+    );
+    
+  },
+  handleGetAllEntrePdf({
+    page,
+    per_page,
+    category = null,
+    start = null,
+    end = null,
+    limit_date,
+    type,
+    start_date,
+    end_date,
+    fournisseur_id,
+    article_id,
+    show_report,
+    title,
+    mode,
+    search_value,
+  }) {
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return axios.get(
+      `/entre/${cycle_code}/all-genarate-pdf?page=${page}&per_page=${per_page}&category=${
+        category ?? ""
+      }&start_date=${start_date ?? ""}&end_date=${end_date ?? ""}&start=${start ?? ""}&end=${end ?? ""}&fournisseur_id=${fournisseur_id ?? ""}&article_id=${article_id ?? ""}&limit_date=${limit_date}&type=${
+        type ?? ""
+      }&search_value=${search_value}&show_report=${show_report}&title=${title}`
     );
     
   },

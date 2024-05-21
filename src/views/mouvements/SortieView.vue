@@ -93,7 +93,8 @@ const createSortie = async () => {
     .then(async (response) => {
       //   console.log("response", response);f
       if (!response.data.error) {
-        await store.dispatch("sortie/getAllSortie");
+        // await store.dispatch("sortie/getAllSortie");
+        store.dispatch("setReloading", Math.random());
         store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           type: "success",

@@ -61,15 +61,24 @@ const fields = reactive({
   fournisseur_id: "",
   start_date: "",
   end_date: "",
+  title: "",
 });
 const store = useStore();
 const router = useRouter();
 
 const isModalActive = ref(false);
+const canShowReport = ref(false);
 
 const isModalDangerActive = ref(false);
+const isShowTitleModalActive = ref(false);
 
 const searchText = computed(() => store.getters["searchQuery"]);
+
+const reload = computed(() => store.state["reload"]);
+
+watch(reload, (ret, sfs) => {
+  handleGetSortie();
+});
 
 watch(searchText, (newTxs, oldTxs) => {
   handleGetSortie();
@@ -113,6 +122,7 @@ const handleGetSortie = async () => {
     end_date: paginationState.end_date,
     fournisseur_id: paginationState.fournisseur_id?.id ?? null,
     article_id: paginationState.article_id?.id ?? null,
+    show_report: canShowReport.value,
     // source_ref: props.source_ref ?? "",
     search_value: searchText.value,
     mode: paginationState.mode ?? "",
@@ -182,6 +192,61 @@ const makeResearch = () => {
   fields.fournisseur_id = "";
   fields.article_id = "";
 };
+
+const getcorrespondedPdf = async () => {
+  canShowReport.value = true;
+  isShowTitleModalActive.value = false;
+  loading.value = true;
+  await ArticlesService.handleGetAllEntrePdf({
+    page: paginationState.page ?? 1,
+    per_page: paginationState.per_page ?? 5,
+    start: paginationState.start,
+    category: paginationState.category?.id ?? null,
+    limit_date: paginationState.limit_date,
+    type: paginationState.type ?? "",
+    start_date: paginationState.start_date,
+    end_date: paginationState.end_date,
+    fournisseur_id: paginationState.fournisseur_id?.id ?? null,
+    article_id: paginationState.article_id?.id ?? null,
+    show_report: canShowReport.value,
+    title: fields.title,
+    // source_ref: props.source_ref ?? "",
+    search_value: searchText.value,
+    mode: paginationState.mode ?? "",
+    end: paginationState.end,
+  })
+    .then(async (res) => {
+      if (!res.data.error) {
+        // const data = res.data.data;
+        // paginationState.page = data.current_page;
+        // paginationState.total = data.total;
+        // paginationState.first_page = data.first_page;
+        // paginationState.last_page = data.last_page;
+        // paginationState.current_page = data.current_page;
+        // paginationState.has_more_pages = data.has_more_pages;
+        // paginationState.is_empty = data.is_empty;
+        // paginationState.entres = data.entres;
+
+        fields.title = "";
+
+        const link = document.createElement("a");
+        link.href = res.data.fileName;
+        link.target = "_blank";
+        link.click();
+        // store.dispatch("setLoadingSpinner", false);
+      }
+    })
+    .finally(() => {
+      loading.value = false;
+      isShowTitleModalActive.value = false;
+      // setTimeout(() => {
+      // }, 2000);
+    });
+};
+
+const showTitleModal = () => {
+  isShowTitleModalActive.value = true;
+};
 </script>
 
 <template>
@@ -192,13 +257,19 @@ const makeResearch = () => {
     </CardBoxModal>
 
     <CardBoxModal
-      v-model="isModalDangerActive"
-      title="Please confirm"
-      button="danger"
+      v-model="isShowTitleModalActive"
+      title="Entrez le titre a afficher"
+      button="info"
       has-cancel
+      @confirm="getcorrespondedPdf"
     >
-      <p>Lorem ipsum dolor sit amet <b>adipiscing elit</b></p>
-      <p>This is sample modal</p>
+      <FormField label="Titre">
+        <FormControlId
+          v-model="fields.title"
+          icon="edit-3"
+          placeholder="Entrez le titre"
+        />
+      </FormField>
     </CardBoxModal>
 
     <div>
@@ -206,14 +277,12 @@ const makeResearch = () => {
         <FormField label="Date de début">
           <FormDatePikerControl
             @getDate="fields.start_date = $event"
-            showHour
             placeholder="Date de début"
           />
         </FormField>
         <FormField label="Date de fin">
           <FormDatePikerControl
             @getDate="fields.end_date = $event"
-            showHour
             placeholder="Date de fin"
           />
         </FormField>
@@ -265,24 +334,17 @@ const makeResearch = () => {
           </div>
         </div>
 
-        <!-- <div>
+        <div>
           <BaseButtons type="justify-start" class="flex gap-2" no-wrap>
-            <BaseButton
-              color="danger"
-              :icon="'file-text'"
-              label="Liste des articles en alerte"
-              small
-              @click="showPdfFile(1)"
-            />
             <BaseButton
               color="info"
               icon="file-text"
               label="Touts les articles"
               small
-              @click="showPdfFile(3)"
+              @click="showTitleModal()"
             />
           </BaseButtons>
-        </div> -->
+        </div>
       </div>
       <table>
         <thead>
