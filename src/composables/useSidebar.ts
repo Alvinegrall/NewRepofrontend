@@ -65,13 +65,13 @@ const sideMenuItems = ref([
       },
     ],
   },
-  {
-    title: "Statistiques",
-    isOpen: false,
-    icon: "activity",
-    isMenu: false,
-    link: "statistiques",
-  },
+  // {
+  //   title: "Statistiques",
+  //   isOpen: false,
+  //   icon: "activity",
+  //   isMenu: false,
+  //   link: "statistiques",
+  // },
 ]);
 
 export function useSidebar() {

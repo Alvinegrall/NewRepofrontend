@@ -32,6 +32,35 @@ export default {
     );
     
   },
+
+
+  handleGetAllSortiPdf({
+    page,
+    per_page,
+    category = null,
+    start = null,
+    end = null,
+    limit_date,
+    type,
+    start_date,
+    end_date,
+    beneficiaire_id,
+    article_id,
+    title,
+    // source_name,
+    // source_ref,
+    mode,
+    search_value,
+  }){
+    const cycle_code = store.getters["cycles/cycle_code"];
+    return axios.get(
+      `/sortie/${cycle_code}/all-sortie-pdf?page=${page}&per_page=${per_page}&category=${
+        category ?? ""
+      }&start_date=${start_date ?? ""}&end_date=${end_date ?? ""}&start=${start ?? ""}&end=${end ?? ""}&beneficiaire_id=${beneficiaire_id ?? ""}&article_id=${article_id ?? ""}&limit_date=${limit_date}&type=${
+        type ?? ""
+      }&search_value=${search_value}&title=${title}`
+    );
+  },
   handleGetAllEntre({
     page,
     per_page,

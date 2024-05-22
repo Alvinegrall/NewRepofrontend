@@ -88,19 +88,19 @@ const handleSelectPage = async (item) => {
         class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0 h-full"
       >
         <div
-          class="flex items-center gap-2 w-64 cursor-pointer overflow-ellipsis my-2 px-4 max-h-24 p-3 border-b pb-2"
+          class="flex items-center gap-2 w-64 overflow-ellipsis my-2 px-4 max-h-24 p-3 border-b pb-2"
           @click="showAssociations"
         >
           <div class="p-1 text-sm w-64 overflow-hidden font-[500]">
             {{ current_cycle.code }}
           </div>
           <div class="">
-            <vue-feather class="h-3" type="chevron-right"></vue-feather>
+            <!-- <vue-feather class="h-3" type="chevron-right"></vue-feather> -->
           </div>
         </div>
 
         <div
-          v-if="isMenuAssociationsOpen"
+          v-if="isMenuAssociationsOpen1"
           class="absolute w-64 -right-[268px] h-[80vh] overflow-y-auto top-5 bg-white z-50 shadow-lg rounded-lg p-2"
         >
           <div
