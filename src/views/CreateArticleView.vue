@@ -71,21 +71,21 @@ const createArticles = () => {
   };
 
   // check fields
-  if (
-    fields.name == "" ||
-    fields.stock_alerte == "" ||
-    fields.stock_securite == "" ||
-    fields.cat_id == "" ||
-    fields.magasin_id == ""
-  ) {
-    store.dispatch("setLoadingSpinner", false);
-    isCreateTournoisModalActive.value = true;
-    snackbar.add({
-      type: "error",
-      text: "Veuillez remplir tous les champs",
-    });
-    return;
-  }
+  // if (
+  //   fields.name == "" ||
+  //   fields.stock_alerte == "" ||
+  //   fields.stock_securite == "" ||
+  //   fields.cat_id == "" ||
+  //   fields.magasin_id == ""
+  // ) {
+  //   store.dispatch("setLoadingSpinner", false);
+  //   isCreateTournoisModalActive.value = true;
+  //   snackbar.add({
+  //     type: "error",
+  //     text: "Veuillez remplir tous les champs",
+  //   });
+  //   return;
+  // }
 
   store
     .dispatch("articles/createArticle", datas)
@@ -109,7 +109,7 @@ const createArticles = () => {
       isCreateTournoisModalActive.value = true;
       snackbar.add({
         type: "error",
-        text: "Une erreur est survenue",
+        text: error.response.data.message,
       });
 
       console.log("error", error);
