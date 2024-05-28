@@ -87,7 +87,7 @@ const handleSelectPage = async (item) => {
       <div
         class="relative flex-1 flex flex-col min-h-0 border-r border-gray-200 bg-white pt-0 h-full"
       >
-        <div
+        <!-- <div
           class="flex items-center gap-2 w-64 overflow-ellipsis my-2 px-4 max-h-24 p-3 border-b pb-2"
           @click="showAssociations"
         >
@@ -95,9 +95,8 @@ const handleSelectPage = async (item) => {
             {{ current_cycle.code }}
           </div>
           <div class="">
-            <!-- <vue-feather class="h-3" type="chevron-right"></vue-feather> -->
           </div>
-        </div>
+        </div> -->
 
         <div
           v-if="isMenuAssociationsOpen1"

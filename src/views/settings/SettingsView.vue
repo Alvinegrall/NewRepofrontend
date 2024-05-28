@@ -39,6 +39,7 @@ const all_users = ref([]);
 const currentUser = computed(() => store.getters["auth/currentUser"]);
 const isCreateUserModalActive = ref(false);
 
+
 const fields = reactive({
   name: "",
   email: "",
@@ -82,12 +83,20 @@ const handleCreateUser = async () => {
     email: fields.email,
     phone: fields.phone,
     password: fields.password,
-    role: fields.role?.id.toString(),
+    role: fields.role?.id,
   };
   await AuthService.createUser(datas)
     .then(async (res) => {
       await handleGetUsers();
   
+    }).catch((error)=>{
+      store.dispatch("setLoadingSpinner", false);
+      isCreateUserModalActive.value = true;
+      snackbar.add({
+        type: "error",
+        text: error.response.data.message,
+      });
+
     })
     .finally(() => {});
 };
@@ -214,7 +223,7 @@ const handleCreateUser = async () => {
         <template v-slot:2>
           <div class="flex flex-col gap-6">
             <CardBox>
-              <div class="flex justify-end mb-5">
+              <div v-if="currentUser.role=='1'" class="flex justify-end mb-5">
                 <BaseButton
                   color="success"
                   type="submit"

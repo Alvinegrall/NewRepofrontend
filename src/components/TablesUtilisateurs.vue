@@ -134,7 +134,8 @@ const deleteUser = async (id) => {
           <th>Crée le</th>
           <th>Nom</th>
           <th>Téléphone</th>
-          <th>email</th>
+          <th>Email</th>
+          <th>Role</th>
 
           <th />
         </tr>
@@ -157,6 +158,9 @@ const deleteUser = async (id) => {
           </td>
           <td data-label="Email">
             {{ client.email }}
+          </td>
+          <td data-label="Email">
+            {{ client.role == "1" ? "Admin" : "Utilisateur" }}
           </td>
           <td data-label="Action">
             <BaseButton
