@@ -274,16 +274,16 @@ const showTitleModal = () => {
 
     <div>
       <div class="grid grid-cols-4 gap-4 mb-10">
-        <FormField label="Date de début">
+        <FormField label="Date min">
           <FormDatePikerControl
             @getDate="fields.start_date = $event"
-            placeholder="Date de début"
+            placeholder="Date min"
           />
         </FormField>
-        <FormField label="Date de fin">
+        <FormField label="Date max">
           <FormDatePikerControl
             @getDate="fields.end_date = $event"
-            placeholder="Date de fin"
+            placeholder="Date max"
           />
         </FormField>
         <FormField label="Choisir le fournisseur">
@@ -339,7 +339,7 @@ const showTitleModal = () => {
             <BaseButton
               color="info"
               icon="file-text"
-              label="Touts les articles"
+              label="Générer le pdf"
               small
               @click="showTitleModal()"
             />

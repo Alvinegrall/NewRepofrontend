@@ -23,6 +23,10 @@ import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 // import PlanetChart from "@/components/PlanetChart.vue";
 
+import { useSnackbar } from "vue3-snackbar";
+
+const snackbar = useSnackbar();
+
 const router = useRouter();
 const store = useStore();
 onMounted(async()=>{
@@ -72,6 +76,10 @@ const createCat = async () => {
       //   text: "Error" + error,
       //   type: "error",
       // });
+      snackbar.add({
+        type: "error",
+        text: error.response.data.message,
+      });
 
       console.log("error", error);
     });

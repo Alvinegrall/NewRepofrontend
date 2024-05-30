@@ -73,7 +73,6 @@ onMounted(() => {
 const dateTimeConfig = computed(() => {
   let base = {
     dateFormat: "d/m/Y",
-    minDate: "today",
   };
   if (props.showHour) {
     base = {

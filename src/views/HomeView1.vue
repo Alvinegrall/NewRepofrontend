@@ -202,7 +202,7 @@ const options = reactive({
       <div class="grid grid-cols-1 gap-4">
         <div class="flex flex-col md:grid md:grid-cols-2 gap-4">
           <CardBox class="flex-1">
-            <CompteHeader title="Informations sur le cycle courant" noicon />
+            <CompteHeader title="Récapitulatif" noicon />
             <table>
               <thead>
                 <tr>

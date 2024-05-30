@@ -420,7 +420,7 @@ const getcorrespondedPdf = async () => {
             <BaseButton
               color="info"
               icon="file-text"
-              label="Touts les articles"
+              label="Générer le pdf"
               small
               @click="showTitleModal()"
             />
