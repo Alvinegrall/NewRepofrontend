@@ -150,13 +150,13 @@ const handleDelete = async () => {
                   </div>
                 </td>
                 <td data-label="Status">
-                  <BaseButton
+                  <!-- <BaseButton
                     color="danger"
                     :icon="'trash-2'"
                     outline
                     small
                     @click="onDelete(item.id)"
-                  />
+                  /> -->
                 </td>
               </tr>
             </tbody>

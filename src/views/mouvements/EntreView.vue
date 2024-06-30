@@ -205,7 +205,7 @@ const calculatePrixTotal = () => {
           class="flex items-center gap-4 justify-center border pr-3-t px-2 bg-gray-200 border-opacity-10 text-black"
         >
           <div class="text-base font-semibold">
-            {{ $t("loans.resume.total_to_back") }}:
+            Total:
           </div>
           <div class="text-lg text-primary font-bold border-4">
             {{ getFormattedAmount(fields.prix_t) }} F
