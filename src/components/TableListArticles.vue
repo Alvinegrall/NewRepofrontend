@@ -227,8 +227,9 @@ const handleDelete = async () => {
     .dispatch("articles/deleteArticle", current_item.value)
     .then(async (response) => {
       if (!response.data.error) {
-        await store.dispatch("articles/getAllArticles");
+        // await store.dispatch("articles/getAllArticles");
         store.dispatch("setLoadingSpinner", false);
+      await  handleGetArticles()
         snackbar.add({
           text: "Supprimé avec success",
           type: "success",
@@ -266,7 +267,8 @@ const handleUpdateArticles = async () => {
     })
     .then(async (response) => {
       if (!response.data.error) {
-        await store.dispatch("articles/getAllArticles");
+        // await store.dispatch("articles/getAllArticles");
+        await  handleGetArticles()
         store.dispatch("setLoadingSpinner", false);
         snackbar.add({
           text: "Modifié avec success",

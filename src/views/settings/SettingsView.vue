@@ -166,7 +166,7 @@ const handleCreateUser = async () => {
                     class="flex items-center justify-between p-1 px-3 bg-[#f9fafb] border rounded-lg w-full"
                   >
                     <div class="font-bold w-[90%]">{{ currentUser.name }}</div>
-                    <button
+                    <!-- <button
                       class="w-[10%] flex justify-end"
                       @click="updateValue('first_name', 'forms.membre.name')"
                     >
@@ -174,7 +174,7 @@ const handleCreateUser = async () => {
                         class="h-4 md:h-6"
                         type="edit-3"
                       ></vue-feather>
-                    </button>
+                    </button> -->
                   </div>
                 </div>
                 <div class="flex flex-col gap-2">
@@ -185,7 +185,7 @@ const handleCreateUser = async () => {
                     class="flex items-center justify-between p-1 px-3 bg-[#f9fafb] border rounded-lg w-full"
                   >
                     <div class="font-bold w-[90%]">{{ currentUser.email }}</div>
-                    <button
+                    <!-- <button
                       class="w-[10%] flex justify-end"
                       @click="updateValue('email', 'details_membre.email')"
                     >
@@ -193,7 +193,7 @@ const handleCreateUser = async () => {
                         class="h-4 md:h-6"
                         type="edit-3"
                       ></vue-feather>
-                    </button>
+                    </button> -->
                   </div>
                 </div>
                 <div class="flex flex-col gap-2">
@@ -204,7 +204,7 @@ const handleCreateUser = async () => {
                     class="flex items-center justify-between p-1 px-3 bg-[#f9fafb] border rounded-lg w-full"
                   >
                     <div class="font-bold w-[90%]">{{ currentUser.phone }}</div>
-                    <button
+                    <!-- <button
                       class="w-[10%] flex justify-end"
                       @click="updateValue('email', 'details_membre.email')"
                     >
@@ -212,7 +212,7 @@ const handleCreateUser = async () => {
                         class="h-4 md:h-6"
                         type="edit-3"
                       ></vue-feather>
-                    </button>
+                    </button> -->
                   </div>
                 </div>
               </div>
