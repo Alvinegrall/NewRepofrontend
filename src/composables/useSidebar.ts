@@ -29,7 +29,7 @@ const sideMenuItems = ref([
         title: "Non conforme",
         isOpen: false,
         isMenu: false,
-        link: "mvt.conformite"
+        link: "mvt.conformite",
       },
     ],
   },
@@ -46,7 +46,7 @@ const sideMenuItems = ref([
         link: "admin.addcategory",
       },
       {
-        title: "Fornisseur",
+        title: "Fournisseur",
         isOpen: false,
         isMenu: false,
         link: "admin.addfournisseur",
